@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GhostNet"
+run/main_scene="res://scenes/desktop/Desktop.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalSignals="*res://scripts/systems/global_signals.gd"
+NetworkManager="*res://scripts/systems/network_manager.gd"
+CountermeasureManager="*res://scripts/systems/countermeasure_manager.gd"
+LocalMachineSetup="*res://scripts/systems/local_machine_setup.gd"
+TestMachineSetup="*res://scripts/systems/test_machine_setup.gd"
+WindowManager="*res://scripts/systems/window_manager.gd"
+
+[gui]
+
+theme/custom="res://resources/themes/ghostnet_theme.tres"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+
+[run]
+
+main_scene="res://scenes/desktop/Desktop.tscn"

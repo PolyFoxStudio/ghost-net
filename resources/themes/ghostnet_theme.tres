@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ysqgq"]
+bg_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_w5lcl"]
+font_names = PackedStringArray("JetBrains Mono", "Courier New", "Consolas", "monospace")
+
+[resource]
+default_font = SubResource("SystemFont_w5lcl")
+default_font_size = 13
+Panel/styles/panel = SubResource("StyleBoxFlat_ysqgq")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ysqgq")

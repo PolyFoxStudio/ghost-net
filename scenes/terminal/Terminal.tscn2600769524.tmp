@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cxab3kx6m7d8b"]
+
+[ext_resource type="Script" uid="uid://dkt2ceqoyvdg1" path="res://scripts/terminal/terminal.gd" id="1_term"]
+
+[node name="Terminal" type="Control" unique_id=2141761310]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_term")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1302841998]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1041350922]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OutputContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=785359871]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OutputLabel" type="RichTextLabel" parent="VBoxContainer/OutputContainer" unique_id=144464270]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_constants/line_separation = 2
+bbcode_enabled = true
+scroll_following = true
+
+[node name="TraceBar" type="HBoxContainer" parent="VBoxContainer" unique_id=1694300441]
+layout_mode = 2
+
+[node name="TraceLabel" type="Label" parent="VBoxContainer/TraceBar" unique_id=15788233]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+text = "[!!] TRACE IN PROGRESS"
+
+[node name="TraceProgress" type="ProgressBar" parent="VBoxContainer/TraceBar" unique_id=1954874835]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="InputContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=873896333]
+layout_mode = 2
+
+[node name="PromptLabel" type="Label" parent="VBoxContainer/InputContainer" unique_id=1716177320]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.254902, 1)
+text = "ghost@local:~$"
+
+[node name="InputField" type="LineEdit" parent="VBoxContainer/InputContainer" unique_id=982700002]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_colors/caret_color = Color(0, 1, 0.254902, 1)
+flat = true
+caret_blink = true

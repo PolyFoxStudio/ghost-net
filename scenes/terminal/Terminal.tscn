@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxab3kx6m7d8b"]
+
+[ext_resource type="Script" uid="uid://dkt2ceqoyvdg1" path="res://scripts/terminal/terminal.gd" id="1_term"]
+
+[node name="Terminal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_term")
+
+[node name="BGColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 1)
+
+[node name="OutputScroll" type="ScrollContainer" parent="BGColor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OutputLabel" type="RichTextLabel" parent="BGColor/OutputScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.752941, 0.752941, 0.752941, 1)
+theme_override_constants/line_separation = 2
+bbcode_enabled = true
+scroll_following = true
+
+[node name="HiddenInput" type="LineEdit" parent="BGColor"]
+layout_mode = 0
+offset_left = -1000.0
+offset_top = -1000.0
+offset_right = -1000.0
+offset_bottom = -1000.0
+focus_mode = 2
+flat = true
+
+[node name="TraceBar" type="HBoxContainer" parent="BGColor"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -25.0
+offset_right = -10.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TraceLabel" type="Label" parent="BGColor/TraceBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+text = "[!!] TRACE IN PROGRESS"
+
+[node name="TraceProgress" type="ProgressBar" parent="BGColor/TraceBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="CursorTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true

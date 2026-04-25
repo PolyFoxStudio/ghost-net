@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxxxx"]
+	
+	[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxxxx"]
+	[ext_resource type="Script" path="res://scripts/desktop/notes_window.gd" id="2_xxxxx"]
+	
+	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_bg"]
+	bg_color = Color(0.06666, 0.06666, 0.06666, 1)
+	
+	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_content"]
+	bg_color = Color(0.03921, 0.03921, 0.03921, 1)
+	
+	[node name="NotesWindow" instance=ExtResource("1_xxxxx")]
+	script = ExtResource("2_xxxxx")
+	app_name = "NOTES"
+	default_size = Vector2(700, 500)
+	
+	[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
+	text = "NOTES"
+	
+	[node name="TabContainer" type="TabContainer" parent="VBoxContainer/AppContainer" index="0"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	theme_override_styles/panel = SubResource("StyleBoxFlat_tab_content")
+	
+	[node name="Notes" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
+	layout_mode = 2
+	
+	[node name="TextEdit" type="TextEdit" parent="VBoxContainer/AppContainer/TabContainer/Notes"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
+	theme_override_colors/caret_color = Color(0, 1, 0.2549, 1)
+	theme_override_font_sizes/font_size = 13
+	
+	[node name="Hosts" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
+	visible = false
+	layout_mode = 2
+	
+	[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AppContainer/TabContainer/Hosts"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	offset_left = 10.0
+	offset_top = 10.0
+	offset_right = -10.0
+	offset_bottom = -10.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	bbcode_enabled = true
+	
+	[node name="Credentials" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
+	visible = false
+	layout_mode = 2
+	
+	[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AppContainer/TabContainer/Credentials"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	offset_left = 10.0
+	offset_top = 10.0
+	offset_right = -10.0
+	offset_bottom = -10.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	bbcode_enabled = true
+	
+	[node name="Downloads" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
+	visible = false
+	layout_mode = 2
+	
+	[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AppContainer/TabContainer/Downloads"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	offset_left = 10.0
+	offset_top = 10.0
+	offset_right = -10.0
+	offset_bottom = -10.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	bbcode_enabled = true
+	

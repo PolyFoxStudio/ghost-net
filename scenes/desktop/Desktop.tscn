@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://fxxxx"]
+	
+	[ext_resource type="Script" path="res://scripts/desktop/desktop.gd" id="1_xxxxx"]
+	[ext_resource type="PackedScene" uid="uid://exxxx" path="res://scenes/desktop/Taskbar.tscn" id="2_xxxxx"]
+	
+	[node name="Desktop" type="Control"]
+	layout_mode = 3
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	script = ExtResource("1_xxxxx")
+	
+	[node name="Wallpaper" type="ColorRect" parent="."]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	color = Color(0.0392, 0.0392, 0.0392, 1)
+	
+	[node name="HiddenFocusTrap" type="Control" parent="."]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	offset_top = 32.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	
+	[node name="WindowLayer" type="Control" parent="."]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	offset_top = 32.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	mouse_filter = 2
+	
+	[node name="Taskbar" parent="." instance=ExtResource("2_xxxxx")]
+	layout_mode = 1
+	
+	[connection signal="gui_input" from="HiddenFocusTrap" to="." method="_on_hidden_focus_trap_gui_input"]
+	
