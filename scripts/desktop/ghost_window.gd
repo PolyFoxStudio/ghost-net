@@ -13,7 +13,6 @@ var _resize_dir: Vector2 = Vector2.ZERO
 var _resize_start_global_pos: Vector2
 var _resize_start_pos: Vector2
 var _resize_start_size: Vector2
-var _resize_overlay: Control
 
 @onready var title_label = $VBoxContainer/TitleBar/HBoxContainer/WindowTitle
 @onready var app_container = $VBoxContainer/AppContainer
@@ -39,20 +38,6 @@ func _ready():
 	
 	var title_bar = $VBoxContainer/TitleBar
 	title_bar.gui_input.connect(_on_title_bar_gui_input)
-	gui_input.connect(_on_window_gui_input)
-
-	# Create resize overlay — full window size, sits on top, catches edge/corner input
-	_resize_overlay = Control.new()
-	_resize_overlay.name = "ResizeOverlay"
-	_resize_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	_resize_overlay.mouse_filter = Control.MOUSE_FILTER_PASS
-	_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_ARROW
-	_resize_overlay.gui_input.connect(_on_resize_overlay_gui_input)
-	_resize_overlay.mouse_entered.connect(func():
-		if not _is_dragging:
-			_update_cursor_shape(_resize_overlay.get_local_mouse_position())
-	)
-	add_child(_resize_overlay)
 	
 func _on_close():
 	WindowManager.close_window(app_name)
@@ -82,10 +67,6 @@ func _on_title_bar_gui_input(event: InputEvent):
 			_is_dragging = false
 	elif event is InputEventMouseMotion and _is_dragging and not _is_maximised:
 		position += event.relative
-		
-func _on_window_gui_input(event: InputEvent):
-	if event is InputEventMouseButton and event.pressed:
-		WindowManager.bring_to_front(self)
 
 func grab_focus_internal():
 	pass
@@ -103,42 +84,42 @@ func _get_resize_dir(local_pos: Vector2) -> Vector2:
 		dir.y = 1
 	return dir
 
-func _update_cursor_shape(local_pos: Vector2):
-	var dir = _get_resize_dir(local_pos)
-	if dir == Vector2(-1, -1) or dir == Vector2(1, 1):
-		_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
-	elif dir == Vector2(1, -1) or dir == Vector2(-1, 1):
-		_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_BDIAGSIZE
-	elif dir.x != 0:
-		_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_HSIZE
-	elif dir.y != 0:
-		_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_VSIZE
-	else:
-		_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_ARROW
-
-func _on_resize_overlay_gui_input(event: InputEvent):
+func _gui_input(event: InputEvent):
+	# Only handle edge resize — centre of window passes through normally
 	if _is_maximised:
-		_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_ARROW
 		return
-		
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var dir = _get_resize_dir(get_local_mouse_position())
+			if dir != Vector2.ZERO:
+				_is_resizing = true
+				_resize_dir = dir
+				_resize_start_global_pos = get_global_mouse_position()
+				_resize_start_pos = position
+				_resize_start_size = size
+				get_viewport().set_input_as_handled()
+				return
+			# Not on edge — bring to front but don't consume event
+			WindowManager.bring_to_front(self)
+		else:
+			if _is_resizing:
+				_is_resizing = false
+				get_viewport().set_input_as_handled()
+	elif event is InputEventMouseMotion:
 		if _is_resizing:
 			var delta = get_global_mouse_position() - _resize_start_global_pos
 			var new_pos = _resize_start_pos
 			var new_size = _resize_start_size
-			
 			if _resize_dir.x == 1:
 				new_size.x += delta.x
 			elif _resize_dir.x == -1:
 				new_size.x -= delta.x
 				new_pos.x += delta.x
-				
 			if _resize_dir.y == 1:
 				new_size.y += delta.y
 			elif _resize_dir.y == -1:
 				new_size.y -= delta.y
 				new_pos.y += delta.y
-				
 			var min_sz = Vector2(400, 300)
 			if new_size.x < min_sz.x:
 				if _resize_dir.x == -1:
@@ -148,28 +129,25 @@ func _on_resize_overlay_gui_input(event: InputEvent):
 				if _resize_dir.y == -1:
 					new_pos.y -= (min_sz.y - new_size.y)
 				new_size.y = min_sz.y
-				
 			position = new_pos
 			size = new_size
+			get_viewport().set_input_as_handled()
 		else:
-			var dir = _get_resize_dir(event.position)
+			# Update cursor shape based on edge proximity
+			var dir = _get_resize_dir(get_local_mouse_position())
 			if dir != Vector2.ZERO:
-				_update_cursor_shape(event.position)
+				_update_cursor_for_dir(dir)
 			else:
-				_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_ARROW
-	elif event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				var dir = _get_resize_dir(event.position)
-				if dir != Vector2.ZERO:
-					_is_resizing = true
-					_resize_dir = dir
-					_resize_start_global_pos = get_global_mouse_position()
-					_resize_start_pos = position
-					_resize_start_size = size
-					WindowManager.bring_to_front(self)
-					get_viewport().set_input_as_handled()
-			else:
-				if _is_resizing:
-					_is_resizing = false
-					get_viewport().set_input_as_handled()
+				mouse_default_cursor_shape = Control.CURSOR_ARROW
+
+func _update_cursor_for_dir(dir: Vector2):
+	if dir == Vector2(-1, -1) or dir == Vector2(1, 1):
+		mouse_default_cursor_shape = Control.CURSOR_FDIAGSIZE
+	elif dir == Vector2(1, -1) or dir == Vector2(-1, 1):
+		mouse_default_cursor_shape = Control.CURSOR_BDIAGSIZE
+	elif dir.x != 0:
+		mouse_default_cursor_shape = Control.CURSOR_HSIZE
+	elif dir.y != 0:
+		mouse_default_cursor_shape = Control.CURSOR_VSIZE
+	else:
+		mouse_default_cursor_shape = Control.CURSOR_ARROW

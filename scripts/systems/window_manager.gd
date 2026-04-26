@@ -25,6 +25,11 @@ func open_window(window_scene: PackedScene, app_name: String) -> Control:
 	var offset = _windows.size() * 20
 	window.position = Vector2(100 + offset, 100 + offset)
 	
+	# Clamp so window never spawns behind taskbar (36px) or off screen
+	var vp = _window_layer.get_viewport_rect().size
+	window.position.x = clamp(window.position.x, 0, max(0, vp.x - window.default_size.x))
+	window.position.y = clamp(window.position.y, 44, max(44, vp.y - window.default_size.y))
+	
 	bring_to_front(window)
 	window.call_deferred("grab_focus_internal")
 	return window
@@ -62,3 +67,6 @@ func get_app_window(app_name: String) -> Control:
 	if _windows.has(app_name) and is_instance_valid(_windows[app_name]):
 		return _windows[app_name]
 	return null
+
+func get_window_layer() -> Control:
+	return _window_layer

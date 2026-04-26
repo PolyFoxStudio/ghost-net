@@ -39,7 +39,7 @@ func _populate_sidebar():
 	local_btn.pressed.connect(func(): _switch_machine("127.0.0.1"))
 	locations_list.add_child(local_btn)
 	
-	for ip in NetworkManager.discovered_machines:
+	for ip in NetworkManager._machines:
 		if ip == "127.0.0.1": continue
 		var machine = NetworkManager.get_machine(ip)
 		var btn = Button.new()
@@ -106,22 +106,39 @@ func _on_forward():
 		history_index += 1
 		_navigate_to(history[history_index], false)
 
+func _get_node_at_path(path: String) -> FileNode:
+	var root = current_machine.filesystem
+	if path == "/" or path == "":
+		return root
+	var parts = path.strip_edges().split("/", false)
+	var current = root
+	for part in parts:
+		var found = false
+		for child in current.children:
+			if child.name == part:
+				current = child
+				found = true
+				break
+		if not found:
+			return null
+	return current
+
 func _render_files():
 	for child in file_grid.get_children():
 		child.queue_free()
 	
 	if current_machine == null: return
-	var dir_node = current_machine.filesystem.get_node_at_path(current_path)
-	if not dir_node or not dir_node.is_directory: return
+	var dir_node = _get_node_at_path(current_path)
+	if not dir_node or not dir_node.type == FileNode.DIRECTORY: return
 	
-	for name in dir_node.children:
-		var node = dir_node.children[name]
+	for node in dir_node.children:
+		var name = node.name
 		var hbox = HBoxContainer.new()
 		
 		var icon_lbl = Label.new()
-		icon_lbl.text = "📁" if node.is_directory else "📄"
+		icon_lbl.text = "📁" if node.type == FileNode.DIRECTORY else "📄"
 		icon_lbl.add_theme_font_size_override("font_size", 12)
-		if node.is_directory: icon_lbl.add_theme_color_override("font_color", Color("#00ff41"))
+		if node.type == FileNode.DIRECTORY: icon_lbl.add_theme_color_override("font_color", Color("#00ff41"))
 		
 		var name_btn = Button.new()
 		name_btn.text = name
@@ -141,19 +158,21 @@ func _render_files():
 		name_btn.add_theme_stylebox_override("pressed", sb)
 		name_btn.add_theme_stylebox_override("focus", sb)
 		
-		if node.is_directory:
-			name_btn.pressed.connect(func(): _navigate_to(current_path.path_join(name).simplify_path()))
+		var captured_name = name
+		var captured_node = node
+		if node.type == FileNode.DIRECTORY:
+			name_btn.pressed.connect(func(): _navigate_to(current_path.path_join(captured_name).simplify_path()))
 		else:
-			name_btn.pressed.connect(func(): _open_viewer(node))
+			name_btn.pressed.connect(func(): _open_viewer(captured_node))
 		
 		var type_lbl = Label.new()
-		type_lbl.text = "DIR" if node.is_directory else "FILE"
+		type_lbl.text = "DIR" if node.type == FileNode.DIRECTORY else "FILE"
 		type_lbl.custom_minimum_size = Vector2(50, 0)
 		type_lbl.add_theme_font_size_override("font_size", 12)
 		type_lbl.add_theme_color_override("font_color", Color("#4a4a4a"))
 		
 		var size_lbl = Label.new()
-		size_lbl.text = "—" if node.is_directory else "%.1f KB" % (node.content.length() / 1024.0 + 0.1)
+		size_lbl.text = "—" if node.type == FileNode.DIRECTORY else "%.1f KB" % (node.content.length() / 1024.0 + 0.1)
 		size_lbl.custom_minimum_size = Vector2(60, 0)
 		size_lbl.add_theme_font_size_override("font_size", 12)
 		size_lbl.add_theme_color_override("font_color", Color("#4a4a4a"))
@@ -165,8 +184,20 @@ func _render_files():
 		
 		file_grid.add_child(hbox)
 
-func _open_viewer(node):
+func _open_viewer(node: FileNode):
 	var viewer = viewer_scene.instantiate()
-	WindowManager.get_window_layer().add_child(viewer)
-	viewer.setup(node, current_machine, current_path.path_join(node.name).simplify_path())
+	viewer.app_name = "VIEWER_" + node.name
+	# Store data before adding to scene
+	viewer.file_node = node
+	viewer.machine = current_machine
+	viewer.full_path = current_path.path_join(node.name).simplify_path()
+	# Use WindowManager so close/minimise work correctly
+	var win = WindowManager.get_window_layer()
+	win.add_child(viewer)
+	WindowManager._windows["VIEWER_" + node.name] = viewer
+	var vp = get_viewport_rect().size
+	viewer.position = Vector2(
+		clamp((vp.x - viewer.default_size.x) / 2.0, 0, vp.x),
+		clamp((vp.y - viewer.default_size.y) / 2.0, 44, vp.y)
+	)
 	WindowManager.bring_to_front(viewer)
