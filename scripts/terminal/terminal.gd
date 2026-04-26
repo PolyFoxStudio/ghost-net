@@ -25,6 +25,7 @@ var current_prompt: String = ""
 var cursor_visible: bool = true
 
 func _ready() -> void:
+	output_container.follow_focus = false
 	command_registry = CommandRegistry.new()
 	navigator = FilesystemNavigator.new()
 	
@@ -101,6 +102,10 @@ func get_colored_prompt() -> String:
 		return "[color=#00ff41]" + current_prompt + "[/color] "
 
 func _redraw_terminal() -> void:
+	var scrollbar = output_container.get_v_scroll_bar()
+	var was_at_bottom = scrollbar == null or scrollbar.value >= scrollbar.max_value - 10
+	var saved_scroll = scrollbar.value if scrollbar else 0.0
+
 	var cursor_char = "█" if cursor_visible else ""
 	var prompt_color = get_colored_prompt()
 	
@@ -116,6 +121,12 @@ func _redraw_terminal() -> void:
 		output_label.text = active_line
 	else:
 		output_label.text = static_history + "\n" + active_line
+
+	if scrollbar:
+		if was_at_bottom:
+			scrollbar.value = scrollbar.max_value
+		else:
+			scrollbar.value = saved_scroll
 
 func freeze_current_line() -> void:
 	var input_display = current_input
