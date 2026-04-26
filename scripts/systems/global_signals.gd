@@ -20,3 +20,7 @@ signal window_closed(app_name: String)
 signal command_executed(command: String, args: Array)
 signal file_downloaded(file_node: FileNode, source_machine: String, source_path: String)
 signal credential_found(username: String, password: String, ip: String)
+
+# Navigator
+signal tor_state_changed(active: bool)
+signal navigator_navigate(url: String)
