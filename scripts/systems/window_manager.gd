@@ -45,6 +45,18 @@ func bring_to_front(window: Control):
 		if window.has_method("grab_focus_internal"):
 			window.grab_focus_internal()
 
+func reposition_windows():
+	if not is_instance_valid(_window_layer): return
+	var parent_size = _window_layer.size
+	for app_name in _windows:
+		var window = _windows[app_name]
+		if is_instance_valid(window):
+			var w_size = window.size
+			var w_pos = window.position
+			var new_x = clamp(w_pos.x, 0, max(0, parent_size.x - w_size.x))
+			var new_y = clamp(w_pos.y, 0, max(0, parent_size.y - w_size.y))
+			window.position = Vector2(new_x, new_y)
+
 func get_app_window(app_name: String) -> Control:
 	if _windows.has(app_name) and is_instance_valid(_windows[app_name]):
 		return _windows[app_name]

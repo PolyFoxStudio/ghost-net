@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://fvwin"]
+
+[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxx"]
+[ext_resource type="Script" path="res://scripts/desktop/apps/file_viewer_window.gd" id="2_xxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.0392, 0.0392, 0.0392, 1)
+
+[node name="FileViewerWindow" instance=ExtResource("1_xxx")]
+script = ExtResource("2_xxx")
+app_name = "VIEWER"
+default_size = Vector2(600, 400)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AppContainer" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="RichTextLabel" parent="VBoxContainer/AppContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.75294, 0.75294, 0.75294, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_bg")
+
+[node name="DownloadBtn" type="Button" parent="VBoxContainer/AppContainer/VBoxContainer"]
+layout_mode = 2
+text = "DOWNLOAD"

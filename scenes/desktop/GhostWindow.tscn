@@ -1,5 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://df727x"]
-	
+[gd_scene load_steps=6 format=3 uid="uid://df727x"]
 	[ext_resource type="Script" path="res://scripts/desktop/ghost_window.gd" id="1_xxx"]
 	
 	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_window"]
@@ -17,6 +16,8 @@
 	
 	[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
 	
+	[sub_resource type="SystemFont" id="SystemFont_icons"]
+	
 	[node name="GhostWindow" type="PanelContainer"]
 	offset_right = 900.0
 	offset_bottom = 600.0
@@ -28,7 +29,7 @@
 	theme_override_constants/separation = 0
 	
 	[node name="TitleBar" type="PanelContainer" parent="VBoxContainer"]
-	custom_minimum_size = Vector2(0, 28)
+	custom_minimum_size = Vector2(0, 30)
 	layout_mode = 2
 	mouse_default_cursor_shape = 13
 	theme_override_styles/panel = SubResource("StyleBoxFlat_title")
@@ -47,6 +48,7 @@
 	[node name="CloseBtn" type="Button" parent="VBoxContainer/TitleBar/HBoxContainer/TrafficLights"]
 	layout_mode = 2
 	theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+	theme_override_colors/font_hover_color = Color(1, 0.4, 0.4, 1)
 	theme_override_font_sizes/font_size = 12
 	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
 	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
@@ -57,6 +59,7 @@
 	[node name="MinimiseBtn" type="Button" parent="VBoxContainer/TitleBar/HBoxContainer/TrafficLights"]
 	layout_mode = 2
 	theme_override_colors/font_color = Color(1, 0.6666, 0, 1)
+	theme_override_colors/font_hover_color = Color(1, 0.8, 0.2, 1)
 	theme_override_font_sizes/font_size = 12
 	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
 	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
@@ -67,6 +70,7 @@
 	[node name="MaximiseBtn" type="Button" parent="VBoxContainer/TitleBar/HBoxContainer/TrafficLights"]
 	layout_mode = 2
 	theme_override_colors/font_color = Color(0, 1, 0.2549, 1)
+	theme_override_colors/font_hover_color = Color(0.2, 1, 0.4, 1)
 	theme_override_font_sizes/font_size = 12
 	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
 	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
@@ -78,10 +82,12 @@
 	layout_mode = 2
 	size_flags_horizontal = 3
 	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_font_sizes/font_size = 12
+	theme_override_font_sizes/font_size = 11
+	theme_override_constants/line_spacing = 2
 	text = "APP"
 	horizontal_alignment = 1
 	vertical_alignment = 1
+	uppercase = true
 	
 	[node name="Spacer" type="Control" parent="VBoxContainer/TitleBar/HBoxContainer"]
 	custom_minimum_size = Vector2(60, 0)
@@ -90,4 +96,20 @@
 	[node name="AppContainer" type="Control" parent="VBoxContainer"]
 	layout_mode = 2
 	size_flags_vertical = 3
+	
+	[node name="ResizeHandle" type="Control" parent="."]
+	custom_minimum_size = Vector2(15, 15)
+	layout_mode = 2
+	size_flags_horizontal = 8
+	size_flags_vertical = 8
+	mouse_default_cursor_shape = 12
+	
+	[node name="ColorRect" type="ColorRect" parent="ResizeHandle"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	color = Color(0.2902, 0.2902, 0.2902, 0.5)
 	

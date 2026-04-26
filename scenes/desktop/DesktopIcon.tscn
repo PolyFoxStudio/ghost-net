@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://desktopicon"]
+
+[ext_resource type="Script" path="res://scripts/desktop/desktop_icon.gd" id="1_dicon"]
+
+[node name="DesktopIcon" type="VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 80.0
+offset_bottom = 80.0
+script = ExtResource("1_dicon")
+
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 1, 0.2549, 0.15)
+
+[node name="IconVisual" type="Label" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.2549, 1)
+theme_override_font_sizes/font_size = 24
+text = "⬛"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_font_sizes/font_size = 11
+text = "App"
+horizontal_alignment = 1

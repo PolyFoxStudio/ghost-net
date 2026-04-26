@@ -3,14 +3,14 @@
 	[ext_resource type="Script" path="res://scripts/desktop/taskbar.gd" id="1_xxxxx"]
 	
 	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taskbar"]
-	bg_color = Color(0.06666, 0.06666, 0.06666, 1)
+	bg_color = Color(0.05098, 0.05098, 0.05098, 1)
 	border_width_bottom = 1
-	border_color = Color(0.10196, 0.10196, 0.10196, 1)
+	border_color = Color(0, 1, 0.2549, 0.3)
 	
 	[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
 	
 	[node name="Taskbar" type="PanelContainer"]
-	custom_minimum_size = Vector2(0, 32)
+	custom_minimum_size = Vector2(0, 36)
 	anchors_preset = 10
 	anchor_right = 1.0
 	grow_horizontal = 2
@@ -26,10 +26,13 @@
 	layout_mode = 2
 	
 	[node name="BrandLabel" type="Label" parent="HBoxContainer"]
+	custom_minimum_size = Vector2(90, 0)
 	layout_mode = 2
 	theme_override_colors/font_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 12
-	text = "GHOSTNET v2.3.1"
+	theme_override_font_sizes/font_size = 13
+	text = "[G] GHOSTNET
+v2.3.1"
+	autowrap_mode = 0
 	
 	[node name="Separator" type="VSeparator" parent="HBoxContainer"]
 	layout_mode = 2
@@ -71,6 +74,17 @@
 	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
 	text = "📋 NOTES"
 	
+	[node name="FilesBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
+	layout_mode = 2
+	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
+	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
+	theme_override_font_sizes/font_size = 12
+	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
+	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
+	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
+	text = "📁 FILES"
+	
 	[node name="Spacer" type="Control" parent="HBoxContainer"]
 	layout_mode = 2
 	size_flags_horizontal = 3
@@ -78,6 +92,21 @@
 	[node name="StatusIndicators" type="HBoxContainer" parent="HBoxContainer"]
 	layout_mode = 2
 	theme_override_constants/separation = 16
+	
+	[node name="CPULabel" type="Label" parent="HBoxContainer/StatusIndicators"]
+	layout_mode = 2
+	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
+	theme_override_font_sizes/font_size = 12
+	text = "CPU 12%"
+	
+	[node name="RAMLabel" type="Label" parent="HBoxContainer/StatusIndicators"]
+	layout_mode = 2
+	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
+	theme_override_font_sizes/font_size = 12
+	text = "RAM 1.2GB"
+	
+	[node name="Sep1" type="VSeparator" parent="HBoxContainer/StatusIndicators"]
+	layout_mode = 2
 	
 	[node name="TraceIndicator" type="Label" parent="HBoxContainer/StatusIndicators"]
 	visible = false
@@ -92,10 +121,19 @@
 	theme_override_font_sizes/font_size = 12
 	text = "◉ LOCAL"
 	
+	[node name="Sep2" type="VSeparator" parent="HBoxContainer/StatusIndicators"]
+	layout_mode = 2
+	
+	[node name="DateLabel" type="Label" parent="HBoxContainer/StatusIndicators"]
+	layout_mode = 2
+	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
+	theme_override_font_sizes/font_size = 11
+	text = "SAT 25 APR"
+	
 	[node name="ClockLabel" type="Label" parent="HBoxContainer/StatusIndicators"]
 	layout_mode = 2
 	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_font_sizes/font_size = 12
+	theme_override_font_sizes/font_size = 13
 	text = "00:00:00"
 	
 	[node name="SpacerEnd" type="Control" parent="HBoxContainer"]

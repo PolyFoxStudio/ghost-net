@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://fileswin"]
+
+[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxx"]
+[ext_resource type="Script" path="res://scripts/desktop/apps/files_window.gd" id="2_xxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sidebar"]
+bg_color = Color(0.05098, 0.05098, 0.05098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pathbar"]
+bg_color = Color(0.06666, 0.06666, 0.06666, 1)
+
+[node name="FilesWindow" instance=ExtResource("1_xxx")]
+script = ExtResource("2_xxx")
+app_name = "FILES"
+default_size = Vector2(800, 550)
+
+[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
+text = "FILES"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/AppContainer" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 180
+
+[node name="Sidebar" type="PanelContainer" parent="VBoxContainer/AppContainer/HSplitContainer" index="0"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sidebar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/AppContainer/HSplitContainer/Sidebar"]
+layout_mode = 2
+
+[node name="SidebarHeader" type="Label" parent="VBoxContainer/AppContainer/HSplitContainer/Sidebar/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
+theme_override_font_sizes/font_size = 10
+text = "LOCATIONS"
+
+[node name="LocationsList" type="VBoxContainer" parent="VBoxContainer/AppContainer/HSplitContainer/Sidebar/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainPanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/HSplitContainer" index="1"]
+layout_mode = 2
+
+[node name="PathBar" type="PanelContainer" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel" index="0"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pathbar")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel/PathBar"]
+layout_mode = 2
+
+[node name="BackBtn" type="Button" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel/PathBar/HBoxContainer"]
+layout_mode = 2
+text = "←"
+
+[node name="ForwardBtn" type="Button" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel/PathBar/HBoxContainer"]
+layout_mode = 2
+text = "→"
+
+[node name="PathLabel" type="Label" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel/PathBar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel" index="1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FileGrid" type="VBoxContainer" parent="VBoxContainer/AppContainer/HSplitContainer/MainPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
