@@ -160,10 +160,17 @@ func _render_files():
 		
 		var captured_name = name
 		var captured_node = node
-		if node.type == FileNode.DIRECTORY:
-			name_btn.pressed.connect(func(): _navigate_to(current_path.path_join(captured_name).simplify_path()))
-		else:
-			name_btn.pressed.connect(func(): _open_viewer(captured_node))
+		
+		var cn = captured_name
+		var cnode = captured_node
+		name_btn.gui_input.connect(func(event: InputEvent):
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				if event.double_click:
+					if cnode.type == FileNode.DIRECTORY:
+						_navigate_to(current_path.path_join(cn).simplify_path())
+					else:
+						_open_viewer(cnode)
+		)
 		
 		var type_lbl = Label.new()
 		type_lbl.text = "DIR" if node.type == FileNode.DIRECTORY else "FILE"
@@ -185,8 +192,9 @@ func _render_files():
 		file_grid.add_child(hbox)
 
 func _open_viewer(node: FileNode):
+	var unique_id = "VIEWER_" + node.name + "_" + str(Time.get_ticks_msec())
 	var viewer = viewer_scene.instantiate()
-	viewer.app_name = "VIEWER_" + node.name
+	viewer.app_name = unique_id
 	# Store data before adding to scene
 	viewer.file_node = node
 	viewer.machine = current_machine
@@ -194,7 +202,7 @@ func _open_viewer(node: FileNode):
 	# Use WindowManager so close/minimise work correctly
 	var win = WindowManager.get_window_layer()
 	win.add_child(viewer)
-	WindowManager._windows["VIEWER_" + node.name] = viewer
+	WindowManager._windows[unique_id] = viewer
 	var vp = get_viewport_rect().size
 	viewer.position = Vector2(
 		clamp((vp.x - viewer.default_size.x) / 2.0, 0, vp.x),
