@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
-[node name="OutputScroll" type="ScrollContainer" parent="BGColor"]
+[node name="OutputLabel" type="RichTextLabel" parent="BGColor"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,15 +31,14 @@ offset_right = -10.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="OutputLabel" type="RichTextLabel" parent="BGColor/OutputScroll"]
-layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.752941, 0.752941, 0.752941, 1)
 theme_override_constants/line_separation = 2
 bbcode_enabled = true
-scroll_following = true
+scroll_active = true
+scroll_following = false
+fit_content = false
 
 [node name="HiddenInput" type="LineEdit" parent="BGColor"]
 layout_mode = 0

@@ -1,9 +1,8 @@
 class_name Terminal
 extends Control
 
-@onready var output_label: RichTextLabel = $BGColor/OutputScroll/OutputLabel
+@onready var output_label: RichTextLabel = $BGColor/OutputLabel
 @onready var input_field: LineEdit = $BGColor/HiddenInput
-@onready var output_container: ScrollContainer = $BGColor/OutputScroll
 @onready var trace_bar: HBoxContainer = $BGColor/TraceBar
 @onready var trace_progress: ProgressBar = $BGColor/TraceBar/TraceProgress
 @onready var cursor_timer: Timer = $CursorTimer
@@ -25,7 +24,6 @@ var current_prompt: String = ""
 var cursor_visible: bool = true
 
 func _ready() -> void:
-	output_container.follow_focus = false
 	command_registry = CommandRegistry.new()
 	navigator = FilesystemNavigator.new()
 	
@@ -54,9 +52,7 @@ func _ready() -> void:
 
 func _scroll_to_bottom() -> void:
 	await get_tree().process_frame
-	var scrollbar = output_container.get_v_scroll_bar()
-	if scrollbar:
-		scrollbar.value = scrollbar.max_value
+	output_label.scroll_to_line(output_label.get_line_count() - 1)
 
 func print_output(text: String, is_error: bool = false) -> void:
 	if text == "": return
@@ -102,10 +98,6 @@ func get_colored_prompt() -> String:
 		return "[color=#00ff41]" + current_prompt + "[/color] "
 
 func _redraw_terminal() -> void:
-	var scrollbar = output_container.get_v_scroll_bar()
-	var was_at_bottom = scrollbar == null or scrollbar.value >= scrollbar.max_value - 10
-	var saved_scroll = scrollbar.value if scrollbar else 0.0
-
 	var cursor_char = "█" if cursor_visible else ""
 	var prompt_color = get_colored_prompt()
 	
@@ -121,12 +113,6 @@ func _redraw_terminal() -> void:
 		output_label.text = active_line
 	else:
 		output_label.text = static_history + "\n" + active_line
-
-	if scrollbar:
-		if was_at_bottom:
-			scrollbar.value = scrollbar.max_value
-		else:
-			scrollbar.value = saved_scroll
 
 func freeze_current_line() -> void:
 	var input_display = current_input
