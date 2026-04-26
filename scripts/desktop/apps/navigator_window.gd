@@ -114,7 +114,7 @@ func _resolve_page(url: String) -> Callable:
 		"companyregistry.gov/company/11884762":   return _page_helix_filing
 		"companyregistry.gov/company/09941123":   return _page_holtvane_filing
 		"pulse.social/nadia_webb":                return _page_pulse_nadia
-		_:                                        return null
+		_:                                        return Callable()
 
 # ── Tor state ──────────────────────────────────
 func _on_tor_state_changed(active: bool) -> void:
