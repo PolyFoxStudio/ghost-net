@@ -28,6 +28,17 @@ func _init():
 	register_command("hydra", "res://scripts/terminal/commands/cmd_hydra.gd")
 	register_command("sqlmap", "res://scripts/terminal/commands/cmd_sqlmap.gd")
 	register_command("phantom", "res://scripts/terminal/commands/cmd_phantom.gd")
+	register_command("pwd", "res://scripts/terminal/commands/cmd_pwd.gd")
+	register_command("echo", "res://scripts/terminal/commands/cmd_echo.gd")
+	register_command("mkdir", "res://scripts/terminal/commands/cmd_mkdir.gd")
+	register_command("touch", "res://scripts/terminal/commands/cmd_touch.gd")
+	register_command("rm", "res://scripts/terminal/commands/cmd_rm.gd")
+	register_command("cp", "res://scripts/terminal/commands/cmd_cp.gd")
+	register_command("mv", "res://scripts/terminal/commands/cmd_mv.gd")
+	register_command("head", "res://scripts/terminal/commands/cmd_head.gd")
+	register_command("tail", "res://scripts/terminal/commands/cmd_tail.gd")
+	register_command("uname", "res://scripts/terminal/commands/cmd_uname.gd")
+	register_command("history", "res://scripts/terminal/commands/cmd_history.gd")
 
 func execute(command_name: String, args: Array, context: Dictionary) -> CommandResult:
 	if commands.has(command_name):
