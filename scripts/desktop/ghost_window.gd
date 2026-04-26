@@ -40,6 +40,19 @@ func _ready():
 	var title_bar = $VBoxContainer/TitleBar
 	title_bar.gui_input.connect(_on_title_bar_gui_input)
 	gui_input.connect(_on_window_gui_input)
+
+	# Create resize overlay — full window size, sits on top, catches edge/corner input
+	_resize_overlay = Control.new()
+	_resize_overlay.name = "ResizeOverlay"
+	_resize_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_resize_overlay.mouse_filter = Control.MOUSE_FILTER_PASS
+	_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_ARROW
+	_resize_overlay.gui_input.connect(_on_resize_overlay_gui_input)
+	_resize_overlay.mouse_entered.connect(func():
+		if not _is_dragging:
+			_update_cursor_shape(_resize_overlay.get_local_mouse_position())
+	)
+	add_child(_resize_overlay)
 	
 func _on_close():
 	WindowManager.close_window(app_name)
@@ -139,7 +152,11 @@ func _on_resize_overlay_gui_input(event: InputEvent):
 			position = new_pos
 			size = new_size
 		else:
-			_update_cursor_shape(event.position)
+			var dir = _get_resize_dir(event.position)
+			if dir != Vector2.ZERO:
+				_update_cursor_shape(event.position)
+			else:
+				_resize_overlay.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:

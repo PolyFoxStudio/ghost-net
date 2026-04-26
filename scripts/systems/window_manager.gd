@@ -26,6 +26,7 @@ func open_window(window_scene: PackedScene, app_name: String) -> Control:
 	window.position = Vector2(100 + offset, 100 + offset)
 	
 	bring_to_front(window)
+	window.call_deferred("grab_focus_internal")
 	return window
 
 func close_window(app_name: String):
