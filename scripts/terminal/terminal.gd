@@ -51,7 +51,8 @@ func _ready() -> void:
 	_update_prompt()
 	input_field.grab_focus()
 
-func _process(_delta: float) -> void:
+func _scroll_to_bottom() -> void:
+	await get_tree().process_frame
 	var scrollbar = output_container.get_v_scroll_bar()
 	if scrollbar:
 		scrollbar.value = scrollbar.max_value
@@ -69,6 +70,7 @@ func print_output(text: String, is_error: bool = false) -> void:
 		else:
 			static_history += "\n" + text
 	_redraw_terminal()
+	_scroll_to_bottom()
 
 func _update_prompt() -> void:
 	if input_mode == "password" or input_mode == "input":
