@@ -32,8 +32,13 @@ offset_bottom = 600.0
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 1, 0.2549, 1)
 theme_override_font_sizes/normal_font_size = 13
-bbcode_enabled = false
+bbcode_enabled = true
 fit_content = true
+
+[node name="LoadingBar" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.2549, 1)
+theme_override_font_sizes/font_size = 13
 
 [node name="Cursor" type="Label" parent="VBoxContainer"]
 layout_mode = 2

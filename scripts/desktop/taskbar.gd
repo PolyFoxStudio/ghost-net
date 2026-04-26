@@ -7,6 +7,7 @@ extends PanelContainer
 @onready var term_btn = $HBoxContainer/AppLaunchers/TerminalBtn
 @onready var nav_btn = $HBoxContainer/AppLaunchers/NavigatorBtn
 @onready var notes_btn = $HBoxContainer/AppLaunchers/NotesBtn
+@onready var files_btn = $HBoxContainer/AppLaunchers/FilesBtn
 
 @onready var min_tray = $HBoxContainer/MinimisedTray
 
@@ -15,6 +16,7 @@ var _min_buttons: Dictionary = {}
 var term_scene = preload("res://scenes/desktop/apps/TerminalWindow.tscn")
 var nav_scene = preload("res://scenes/desktop/apps/NavigatorWindow.tscn")
 var notes_scene = preload("res://scenes/desktop/apps/NotesWindow.tscn")
+var files_scene = preload("res://scenes/desktop/apps/FilesWindow.tscn")
 
 func _ready():
 	var timer = Timer.new()
@@ -34,6 +36,7 @@ func _ready():
 	term_btn.pressed.connect(func(): WindowManager.open_window(term_scene, "TERMINAL"))
 	nav_btn.pressed.connect(func(): WindowManager.open_window(nav_scene, "NAVIGATOR"))
 	notes_btn.pressed.connect(func(): WindowManager.open_window(notes_scene, "NOTES"))
+	files_btn.pressed.connect(func(): WindowManager.open_window(files_scene, "FILES"))
 
 	GlobalSignals.window_minimised.connect(_on_window_minimised)
 	GlobalSignals.window_restored.connect(_on_window_restored)
