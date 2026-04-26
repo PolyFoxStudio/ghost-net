@@ -8,6 +8,10 @@ extends PanelContainer
 @onready var nav_btn = $HBoxContainer/AppLaunchers/NavigatorBtn
 @onready var notes_btn = $HBoxContainer/AppLaunchers/NotesBtn
 
+@onready var min_tray = $HBoxContainer/MinimisedTray
+
+var _min_buttons: Dictionary = {}
+
 var term_scene = preload("res://scenes/desktop/apps/TerminalWindow.tscn")
 var nav_scene = preload("res://scenes/desktop/apps/NavigatorWindow.tscn")
 var notes_scene = preload("res://scenes/desktop/apps/NotesWindow.tscn")
@@ -30,6 +34,36 @@ func _ready():
 	term_btn.pressed.connect(func(): WindowManager.open_window(term_scene, "TERMINAL"))
 	nav_btn.pressed.connect(func(): WindowManager.open_window(nav_scene, "NAVIGATOR"))
 	notes_btn.pressed.connect(func(): WindowManager.open_window(notes_scene, "NOTES"))
+
+	GlobalSignals.window_minimised.connect(_on_window_minimised)
+	GlobalSignals.window_restored.connect(_on_window_restored)
+	GlobalSignals.window_closed.connect(_on_window_closed)
+
+func _on_window_minimised(app_name: String):
+	if _min_buttons.has(app_name): return
+	var btn = Button.new()
+	btn.text = "[ %s ]" % app_name.to_upper()
+	btn.add_theme_font_size_override("font_size", 11)
+	btn.add_theme_color_override("font_color", Color("#c0c0c0"))
+	btn.add_theme_color_override("font_hover_color", Color("#00ff41"))
+	var sb = StyleBoxEmpty.new()
+	btn.add_theme_stylebox_override("normal", sb)
+	btn.add_theme_stylebox_override("hover", sb)
+	btn.add_theme_stylebox_override("pressed", sb)
+	btn.add_theme_stylebox_override("focus", sb)
+	btn.pressed.connect(func(): WindowManager.restore_window(app_name))
+	min_tray.add_child(btn)
+	_min_buttons[app_name] = btn
+
+func _on_window_restored(app_name: String):
+	if _min_buttons.has(app_name):
+		_min_buttons[app_name].queue_free()
+		_min_buttons.erase(app_name)
+
+func _on_window_closed(app_name: String):
+	if _min_buttons.has(app_name):
+		_min_buttons[app_name].queue_free()
+		_min_buttons.erase(app_name)
 
 func _update_clock():
 	var time = Time.get_time_dict_from_system()

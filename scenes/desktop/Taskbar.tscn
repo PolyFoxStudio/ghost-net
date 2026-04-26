@@ -85,6 +85,10 @@ v2.3.1"
 	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
 	text = "📁 FILES"
 	
+	[node name="MinimisedTray" type="HBoxContainer" parent="HBoxContainer"]
+	layout_mode = 2
+	size_flags_horizontal = 3
+	
 	[node name="Spacer" type="Control" parent="HBoxContainer"]
 	layout_mode = 2
 	size_flags_horizontal = 3

@@ -1,6 +1,6 @@
 extends "res://scripts/desktop/ghost_window.gd"
 
-@onready var content_rtf = $VBoxContainer/AppContainer/VBoxContainer/Content
+@onready var content_rtf = $VBoxContainer/AppContainer/VBoxContainer/ScrollContainer/Content
 @onready var dl_btn = $VBoxContainer/AppContainer/VBoxContainer/DownloadBtn
 
 var file_node: FileNode

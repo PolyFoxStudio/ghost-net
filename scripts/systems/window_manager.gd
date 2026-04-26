@@ -39,15 +39,33 @@ func close_window(app_name: String):
 		var window = _windows[app_name]
 		window.queue_free()
 		_windows.erase(app_name)
+		GlobalSignals.window_closed.emit(app_name)
 
 func minimise_window(app_name: String):
 	if _windows.has(app_name) and is_instance_valid(_windows[app_name]):
 		_windows[app_name].hide()
+		GlobalSignals.window_minimised.emit(app_name)
+
+func restore_window(app_name: String):
+	if _windows.has(app_name) and is_instance_valid(_windows[app_name]):
+		bring_to_front(_windows[app_name])
+		GlobalSignals.window_restored.emit(app_name)
 
 func bring_to_front(window: Control):
 	if _window_layer and is_instance_valid(window) and window.get_parent() == _window_layer:
+		# Dim all windows
+		for app_name in _windows:
+			var w = _windows[app_name]
+			if is_instance_valid(w) and w.has_method("set_focused"):
+				w.set_focused(false)
+		# Also dim any viewer windows not in _windows dict
+		for child in _window_layer.get_children():
+			if child.has_method("set_focused"):
+				child.set_focused(false)
 		_window_layer.move_child(window, _window_layer.get_child_count() - 1)
 		window.show()
+		if window.has_method("set_focused"):
+			window.set_focused(true)
 		if window.has_method("grab_focus_internal"):
 			window.grab_focus_internal()
 
@@ -57,10 +75,8 @@ func reposition_windows():
 	for app_name in _windows:
 		var window = _windows[app_name]
 		if is_instance_valid(window):
-			var w_size = window.size
-			var w_pos = window.position
-			var new_x = clamp(w_pos.x, 0, max(0, parent_size.x - w_size.x))
-			var new_y = clamp(w_pos.y, 0, max(0, parent_size.y - w_size.y))
+			var new_x = clamp(window.position.x, 0, max(0, parent_size.x - window.size.x))
+			var new_y = clamp(window.position.y, 44, max(44, parent_size.y - window.size.y))
 			window.position = Vector2(new_x, new_y)
 
 func get_app_window(app_name: String) -> Control:

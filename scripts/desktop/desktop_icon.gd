@@ -29,3 +29,16 @@ func _on_gui_input(event: InputEvent):
 func set_selected(selected: bool):
 	is_selected = selected
 	highlight.visible = selected
+
+func set_running(running: bool):
+	var dot = get_node_or_null("RunningDot")
+	if running and not dot:
+		var lbl = Label.new()
+		lbl.name = "RunningDot"
+		lbl.text = "●"
+		lbl.add_theme_font_size_override("font_size", 8)
+		lbl.add_theme_color_override("font_color", Color("#00ff41"))
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		add_child(lbl)
+	elif not running and dot:
+		dot.queue_free()

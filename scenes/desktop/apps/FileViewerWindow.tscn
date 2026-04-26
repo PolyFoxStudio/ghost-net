@@ -19,9 +19,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Content" type="RichTextLabel" parent="VBoxContainer/AppContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/AppContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Content" type="RichTextLabel" parent="VBoxContainer/AppContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+fit_content = false
 theme_override_colors/default_color = Color(0.75294, 0.75294, 0.75294, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_bg")
 

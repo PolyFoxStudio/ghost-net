@@ -71,6 +71,15 @@ func _on_title_bar_gui_input(event: InputEvent):
 func grab_focus_internal():
 	pass
 
+func set_focused(focused: bool):
+	var title_bar = $VBoxContainer/TitleBar
+	if focused:
+		title_bar.modulate = Color(1, 1, 1, 1)
+		modulate = Color(1, 1, 1, 1)
+	else:
+		title_bar.modulate = Color(0.5, 0.5, 0.5, 1)
+		modulate = Color(0.85, 0.85, 0.85, 1)
+
 func _get_resize_dir(local_pos: Vector2) -> Vector2:
 	var dir = Vector2.ZERO
 	var margin = 6.0
