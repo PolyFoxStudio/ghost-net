@@ -46,8 +46,6 @@ func _ready():
 	_play_boot()
 
 func _play_boot():
-	for line in BOOT_LINES:
-		await get_tree().create_timer(line["delay"] if line == BOOT_LINES[0] else 0.0).timeout
 	# Actually sequence them properly
 	output.clear()
 	var last_delay = 0.0
