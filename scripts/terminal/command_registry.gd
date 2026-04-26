@@ -48,6 +48,9 @@ func _init():
 	register_command("tail", "res://scripts/terminal/commands/cmd_tail.gd")
 	register_command("uname", "res://scripts/terminal/commands/cmd_uname.gd")
 	register_command("history", "res://scripts/terminal/commands/cmd_history.gd")
+	register_command("proxychains", "res://scripts/terminal/commands/cmd_proxychains.gd")
+	register_command("tor", "res://scripts/terminal/commands/cmd_tor.gd")
+	register_command("bleachbit", "res://scripts/terminal/commands/cmd_bleachbit.gd")
 
 func execute(command_name: String, args: Array, context: Dictionary) -> CommandResult:
 	if commands.has(command_name):
