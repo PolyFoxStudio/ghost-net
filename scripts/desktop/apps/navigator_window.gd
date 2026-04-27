@@ -571,7 +571,19 @@ func _load_page(url: String, update_bar: bool) -> void:
 	_on_page_loaded(url)
 	page_view.scroll_to_line(0)
 
+func _apply_page_background(url: String) -> void:
+	var style = StyleBoxFlat.new()
+	if url.begins_with("pronet.io"):
+		style.bg_color = Color("#f3f2ef")
+		page_view.add_theme_stylebox_override("normal", style)
+		page_view.add_theme_color_override("default_color", Color("#000000"))
+	else:
+		style.bg_color = Color("#0d0d0d")
+		page_view.add_theme_stylebox_override("normal", style)
+		page_view.add_theme_color_override("default_color", Color("#00ff41"))
+
 func _on_page_loaded(url: String) -> void:
+	_apply_page_background(url)
 	if url == "pronet.io/in/nadia-webb" and not GameState.get_flag("E01_discovered"):
 		GameState.set_flag("E01_discovered", true)
 		if GameState.cipher_relationship >= 5:
@@ -697,7 +709,6 @@ func _page_pronet_nadia() -> String:
 		+ _dim("  Last active: 47 days ago  ·  No recent posts")
 		+ "\n"
 		+ _divider()
-		+ _dim("  [E01 — Nadia's professional background, Diane Marsh connection]")
 	)
 
 func _page_pronet_diane() -> String:
@@ -722,7 +733,6 @@ func _page_pronet_diane() -> String:
 		+ _dim("  Requires GhostWire identity to message external contacts.")
 		+ "\n"
 		+ _divider()
-		+ _dim("  [E08 — Diane as a contact, corroborates Nadia's role]")
 	)
 
 const PAGE_PRONET_HELIX_COMPANY = """
