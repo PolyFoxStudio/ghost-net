@@ -510,8 +510,12 @@ func _refresh_log() -> void:
 		var entry := log_entries[i]
 		log_list.add_item(_status_display(entry["outcome"]) + "  →  " + entry["to"])
 	if log_list.item_count > 0:
+		log_placeholder.hide()
 		log_list.select(0)
 		_on_log_selected(0)
+	else:
+		log_placeholder.show()
+		log_detail.text = ""
 
 func _on_log_selected(index: int) -> void:
 	var real_index := (log_entries.size() - 1) - index

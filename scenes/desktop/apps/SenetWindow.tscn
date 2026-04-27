@@ -1,171 +1,179 @@
 [gd_scene load_steps=3 format=3 uid="uid://senet_win_001"]
-
-[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_senet"]
-[ext_resource type="Script" path="res://scripts/desktop/apps/senet_window.gd" id="2_senet"]
-
-[node name="SenetWindow" instance=ExtResource("1_senet")]
-script = ExtResource("2_senet")
-app_name = "SENET"
-default_size = Vector2(1100, 700)
-
-[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
-text = "SENET"
-
-[node name="SenetLayout" type="HBoxContainer" parent="VBoxContainer/AppContainer"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TemplatePanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout"]
-layout_mode = 2
-custom_minimum_size = Vector2(220, 0)
-size_flags_horizontal = 0
-
-[node name="TemplatePanelHeader" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/TemplatePanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 28)
-text = "  TEMPLATES"
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
-theme_override_font_sizes/font_size = 11
-
-[node name="TemplateList" type="ItemList" parent="VBoxContainer/AppContainer/SenetLayout/TemplatePanel"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_colors/font_selected_color = Color(0.0, 0.0, 0.0, 1)
-theme_override_colors/guide_color = Color(0.0, 0.4, 0.1, 0.5)
-theme_override_font_sizes/font_size = 12
-
-[node name="VSeparator1" type="VSeparator" parent="VBoxContainer/AppContainer/SenetLayout"]
-layout_mode = 2
-theme_override_colors/color = Color(0.0, 0.4, 0.1, 1)
-
-[node name="ComposePanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ComposePanelHeader" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 28)
-text = "  COMPOSE"
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
-theme_override_font_sizes/font_size = 11
-
-[node name="Fields" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
-layout_mode = 2
-
-[node name="ToRow" type="HBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields"]
-layout_mode = 2
-
-[node name="ToLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/ToRow"]
-layout_mode = 2
-custom_minimum_size = Vector2(70, 0)
-text = "TO:"
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 12
-
-[node name="ToField" type="LineEdit" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/ToRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "recipient email address"
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_colors/font_placeholder_color = Color(0.35, 0.35, 0.35, 1)
-theme_override_colors/caret_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 12
-
-[node name="FromRow" type="HBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields"]
-layout_mode = 2
-
-[node name="FromLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/FromRow"]
-layout_mode = 2
-custom_minimum_size = Vector2(70, 0)
-text = "FROM:"
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 12
-
-[node name="FromField" type="LineEdit" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/FromRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "GhostWire identity (run 'ghostwire --list')"
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_colors/font_placeholder_color = Color(0.35, 0.35, 0.35, 1)
-theme_override_colors/caret_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 12
-
-[node name="SubjectRow" type="HBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields"]
-layout_mode = 2
-
-[node name="SubjectLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/SubjectRow"]
-layout_mode = 2
-custom_minimum_size = Vector2(70, 0)
-text = "SUBJECT:"
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 12
-
-[node name="SubjectField" type="LineEdit" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/SubjectRow"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "auto-filled from template"
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_colors/font_placeholder_color = Color(0.35, 0.35, 0.35, 1)
-theme_override_colors/caret_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 12
-
-[node name="BodyContainer" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ValidationLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 20)
-text = ""
-theme_override_font_sizes/font_size = 12
-
-[node name="SendBtn" type="Button" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 36)
-text = "SEND"
-disabled = true
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
-theme_override_font_sizes/font_size = 14
-
-[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/AppContainer/SenetLayout"]
-layout_mode = 2
-theme_override_colors/color = Color(0.0, 0.4, 0.1, 1)
-
-[node name="LogPanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout"]
-layout_mode = 2
-custom_minimum_size = Vector2(300, 0)
-size_flags_horizontal = 0
-
-[node name="LogPanelHeader" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 28)
-text = "  ENGAGEMENT LOG"
-theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
-theme_override_font_sizes/font_size = 11
-
-[node name="LogList" type="ItemList" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 180)
-size_flags_vertical = 0
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_font_sizes/font_size = 11
-
-[node name="LogSep" type="HSeparator" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
-layout_mode = 2
-theme_override_colors/color = Color(0.0, 0.4, 0.1, 0.5)
-
-[node name="LogDetail" type="RichTextLabel" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
-layout_mode = 2
-size_flags_vertical = 3
-bbcode_enabled = true
-scroll_active = true
-scroll_following = false
-selection_enabled = true
-theme_override_colors/default_color = Color(0.8, 0.8, 0.8, 1)
-theme_override_font_sizes/font_size = 12
-text = ""
+	
+	[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_senet"]
+	[ext_resource type="Script" path="res://scripts/desktop/apps/senet_window.gd" id="2_senet"]
+	
+	[node name="SenetWindow" instance=ExtResource("1_senet")]
+	script = ExtResource("2_senet")
+	app_name = "SENET"
+	default_size = Vector2(1100, 700)
+	
+	[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
+	text = "SENET"
+	
+	[node name="SenetLayout" type="HBoxContainer" parent="VBoxContainer/AppContainer"]
+	layout_mode = 1
+	anchors_preset = 15
+	anchor_right = 1.0
+	anchor_bottom = 1.0
+	grow_horizontal = 2
+	grow_vertical = 2
+	
+	[node name="TemplatePanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(270, 0)
+	size_flags_horizontal = 0
+	
+	[node name="TemplatePanelHeader" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/TemplatePanel"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(0, 28)
+	text = "  TEMPLATES"
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
+	theme_override_font_sizes/font_size = 11
+	
+	[node name="TemplateList" type="ItemList" parent="VBoxContainer/AppContainer/SenetLayout/TemplatePanel"]
+	layout_mode = 2
+	size_flags_vertical = 3
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_colors/font_selected_color = Color(0.0, 0.0, 0.0, 1)
+	theme_override_colors/guide_color = Color(0.0, 0.4, 0.1, 0.5)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="VSeparator1" type="VSeparator" parent="VBoxContainer/AppContainer/SenetLayout"]
+	layout_mode = 2
+	theme_override_colors/color = Color(0.0, 0.4, 0.1, 1)
+	
+	[node name="ComposePanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout"]
+	layout_mode = 2
+	size_flags_horizontal = 3
+	size_flags_vertical = 3
+	
+	[node name="ComposePanelHeader" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(0, 28)
+	text = "  COMPOSE"
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
+	theme_override_font_sizes/font_size = 11
+	
+	[node name="Fields" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
+	layout_mode = 2
+	
+	[node name="ToRow" type="HBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields"]
+	layout_mode = 2
+	
+	[node name="ToLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/ToRow"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(70, 0)
+	text = "TO:"
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="ToField" type="LineEdit" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/ToRow"]
+	layout_mode = 2
+	size_flags_horizontal = 3
+	placeholder_text = "recipient email address"
+	theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+	theme_override_colors/font_placeholder_color = Color(0.35, 0.35, 0.35, 1)
+	theme_override_colors/caret_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="FromRow" type="HBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields"]
+	layout_mode = 2
+	
+	[node name="FromLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/FromRow"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(70, 0)
+	text = "FROM:"
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="FromField" type="LineEdit" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/FromRow"]
+	layout_mode = 2
+	size_flags_horizontal = 3
+	placeholder_text = "GhostWire identity (run 'ghostwire --list')"
+	theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+	theme_override_colors/font_placeholder_color = Color(0.35, 0.35, 0.35, 1)
+	theme_override_colors/caret_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="SubjectRow" type="HBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields"]
+	layout_mode = 2
+	
+	[node name="SubjectLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/SubjectRow"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(70, 0)
+	text = "SUBJECT:"
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="SubjectField" type="LineEdit" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel/Fields/SubjectRow"]
+	layout_mode = 2
+	size_flags_horizontal = 3
+	placeholder_text = "auto-filled from template"
+	theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+	theme_override_colors/font_placeholder_color = Color(0.35, 0.35, 0.35, 1)
+	theme_override_colors/caret_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="BodyContainer" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
+	layout_mode = 2
+	size_flags_vertical = 3
+	
+	[node name="ValidationLabel" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(0, 20)
+	text = ""
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="SendBtn" type="Button" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(0, 36)
+	text = "SEND"
+	disabled = true
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_font_sizes/font_size = 14
+	
+	[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/AppContainer/SenetLayout"]
+	layout_mode = 2
+	theme_override_colors/color = Color(0.0, 0.4, 0.1, 1)
+	
+	[node name="LogPanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(320, 0)
+	size_flags_horizontal = 0
+	
+	[node name="LogPanelHeader" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(0, 28)
+	text = "  ENGAGEMENT LOG"
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
+	theme_override_font_sizes/font_size = 11
+	
+	[node name="LogPlaceholder" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
+	layout_mode = 2
+	text = "  No engagements yet."
+	theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+	theme_override_font_sizes/font_size = 12
+	
+	[node name="LogList" type="ItemList" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
+	layout_mode = 2
+	custom_minimum_size = Vector2(0, 180)
+	size_flags_vertical = 0
+	theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+	theme_override_font_sizes/font_size = 11
+	
+	[node name="LogSep" type="HSeparator" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
+	layout_mode = 2
+	theme_override_colors/color = Color(0.0, 0.4, 0.1, 0.5)
+	
+	[node name="LogDetail" type="RichTextLabel" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
+	layout_mode = 2
+	size_flags_vertical = 3
+	bbcode_enabled = true
+	scroll_active = true
+	scroll_following = false
+	selection_enabled = true
+	theme_override_colors/default_color = Color(0.8, 0.8, 0.8, 1)
+	theme_override_font_sizes/font_size = 12
+	text = ""
+	
