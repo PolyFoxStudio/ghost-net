@@ -278,7 +278,7 @@ func request_input(prompt_text: String) -> String:
 func enter_ftp_mode() -> void:
 	in_ftp_mode = true
 
-func _on_trace_updated(machine: MachineResource, progress: float) -> void:
+func _on_trace_updated(_machine: MachineResource, progress: float) -> void:
 	trace_bar.show()
 	trace_progress.value = progress * 100.0
 
