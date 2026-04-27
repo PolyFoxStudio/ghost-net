@@ -68,7 +68,7 @@ func _setup_desktop_icons():
 		"symbol": "✉"
 	}
 	_senet_icon = _create_icon(icons_container, senet_app, i)
-	# _senet_icon.hide()
+	# TODO: restore _senet_icon.hide() before release — hidden until senet_unlocked fires
 
 func _create_icon(icons_container: Node, app: Dictionary, index: int) -> Node:
 	var icon = desktop_icon_scn.instantiate()

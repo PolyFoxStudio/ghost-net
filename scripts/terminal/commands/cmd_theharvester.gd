@@ -30,5 +30,6 @@ func execute(args: Array, context: Dictionary) -> CommandResult:
     185.220.101.48
 
 [!] internal.helixsolutions.com — not publicly indexed. Possible intranet portal."""
+		GlobalSignals.senet_unlocked.emit()
 		return CommandResult.new(out, true)
 	return CommandResult.new("[*] Searching across all sources...\n[*] No results found for '%s'" % domain, false)

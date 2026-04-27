@@ -23,6 +23,7 @@ extends "res://scripts/desktop/ghost_window.gd"
 @onready var validation_label: Label         = $VBoxContainer/AppContainer/SenetLayout/ComposePanel/ValidationLabel
 @onready var log_list:         ItemList      = $VBoxContainer/AppContainer/SenetLayout/LogPanel/LogList
 @onready var log_detail:       RichTextLabel = $VBoxContainer/AppContainer/SenetLayout/LogPanel/LogDetail
+@onready var log_placeholder:   Label         = $VBoxContainer/AppContainer/SenetLayout/LogPanel/LogPlaceholder
 
 # ── Template definitions ───────────────────────
 const TEMPLATES := [
@@ -555,7 +556,7 @@ func _show_placeholder() -> void:
 	blank_fields.clear()
 	var lbl := Label.new()
 	lbl.text = "← Select a template to begin."
-	lbl.add_theme_color_override("font_color", Color(0.3, 0.3, 0.3, 1))
+	lbl.add_theme_color_override("font_color", Color(0.45, 0.45, 0.45, 1))
 	lbl.add_theme_font_size_override("font_size", 13)
 	body_container.add_child(lbl)
 

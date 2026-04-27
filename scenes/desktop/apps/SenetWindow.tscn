@@ -28,7 +28,7 @@
 	layout_mode = 2
 	custom_minimum_size = Vector2(0, 28)
 	text = "  TEMPLATES"
-	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
 	theme_override_font_sizes/font_size = 11
 	
 	[node name="TemplateList" type="ItemList" parent="VBoxContainer/AppContainer/SenetLayout/TemplatePanel"]
@@ -52,7 +52,7 @@
 	layout_mode = 2
 	custom_minimum_size = Vector2(0, 28)
 	text = "  COMPOSE"
-	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
 	theme_override_font_sizes/font_size = 11
 	
 	[node name="Fields" type="VBoxContainer" parent="VBoxContainer/AppContainer/SenetLayout/ComposePanel"]
@@ -131,6 +131,7 @@
 	text = "SEND"
 	disabled = true
 	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
+	theme_override_colors/font_disabled_color = Color(0.0, 0.6, 0.15, 1)
 	theme_override_font_sizes/font_size = 14
 	
 	[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/AppContainer/SenetLayout"]
@@ -146,13 +147,13 @@
 	layout_mode = 2
 	custom_minimum_size = Vector2(0, 28)
 	text = "  ENGAGEMENT LOG"
-	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 0.7)
+	theme_override_colors/font_color = Color(0.0, 1.0, 0.255, 1)
 	theme_override_font_sizes/font_size = 11
 	
 	[node name="LogPlaceholder" type="Label" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
 	layout_mode = 2
 	text = "  No engagements yet."
-	theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+	theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
 	theme_override_font_sizes/font_size = 12
 	
 	[node name="LogList" type="ItemList" parent="VBoxContainer/AppContainer/SenetLayout/LogPanel"]
