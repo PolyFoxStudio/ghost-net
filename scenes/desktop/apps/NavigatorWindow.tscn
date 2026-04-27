@@ -8,7 +8,9 @@
 	border_width_bottom = 1
 	border_color = Color(0.0, 0.4, 0.1, 1)
 	
-	[node name="NavigatorWindow" instance=ExtResource("1_xxxxx")]
+	[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_navigator"]
+
+[node name="NavigatorWindow" instance=ExtResource("1_xxxxx")]
 	script = ExtResource("2_xxxxx")
 	app_name = "NAVIGATOR"
 	default_size = Vector2(1000, 680)
@@ -64,17 +66,11 @@
 	theme_override_font_sizes/font_size = 13
 	text = "GO"
 	
-	[node name="PageView" type="RichTextLabel" parent="VBoxContainer/AppContainer/BrowserLayout"]
+	[node name="PageContainer" type="PanelContainer" parent="VBoxContainer/AppContainer/BrowserLayout"]
 	layout_mode = 2
+	size_flags_horizontal = 3
 	size_flags_vertical = 3
-	custom_minimum_size = Vector2(0, 400)
-	theme_override_colors/default_color = Color(0.8, 0.8, 0.8, 1)
-	theme_override_font_sizes/font_size = 13
-	bbcode_enabled = true
-	scroll_active = true
-	scroll_following = false
-	selection_enabled = true
-	text = ""
+	theme_override_styles/panel = SubResource("StyleBoxEmpty_navigator")
 	
 	[node name="StatusBar" type="Label" parent="VBoxContainer/AppContainer/BrowserLayout"]
 	layout_mode = 2
