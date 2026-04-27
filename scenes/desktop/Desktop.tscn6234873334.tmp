@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://fxxxx"]
+
+[ext_resource type="Script" uid="uid://dx1s0chtu7sw0" path="res://scripts/desktop/desktop.gd" id="1_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://exxxx" path="res://scenes/desktop/Taskbar.tscn" id="2_xxxxx"]
+[ext_resource type="Texture2D" uid="uid://tyjer3i45j7w" path="res://assets/wallpaper/ghostnet_wallpaper.png" id="3_wp"]
+[ext_resource type="Script" uid="uid://bdeo3e7y1rowu" path="res://scripts/desktop/scanline_overlay.gd" id="4_scanline"]
+
+[node name="Desktop" type="Control" unique_id=365128143]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxxxx")
+
+[node name="Wallpaper" type="TextureRect" parent="." unique_id=857325304]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_wp")
+expand_mode = 1
+
+[node name="ScanlineOverlay" type="Control" parent="." unique_id=968647382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_scanline")
+
+[node name="DesktopIcons" type="Control" parent="." unique_id=1808039758]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="WindowLayer" type="Control" parent="." unique_id=404956311]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Taskbar" parent="." unique_id=307605407 instance=ExtResource("2_xxxxx")]
+layout_mode = 1
+offset_bottom = 36.0
