@@ -24,3 +24,9 @@ signal credential_found(username: String, password: String, ip: String)
 # Navigator
 signal tor_state_changed(active: bool)
 signal navigator_navigate(url: String)
+
+# SENET
+signal senet_unlocked()
+signal senet_engagement_sent(to: String, template_id: int)
+signal senet_response_received(to: String, outcome: String)
+signal senet_contact_flagged(email: String)
