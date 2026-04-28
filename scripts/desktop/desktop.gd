@@ -39,7 +39,7 @@ func _setup_desktop():
 	_setup_desktop_icons()
 
 	# Listen for SENET unlock signal
-	GlobalSignals.senet_unlocked.connect(_on_senet_unlocked)
+#	GlobalSignals.senet_unlocked.connect(_on_senet_unlocked)
 
 	WindowManager.open_window(term_scene, "TERMINAL")
 
@@ -100,6 +100,6 @@ func _create_icon(icons_container: Node, app: Dictionary, index: int) -> Node:
 
 	return icon
 
-func _on_senet_unlocked() -> void:
-	if _senet_icon and not _senet_icon.visible:
-		_senet_icon.show()
+#func _on_senet_unlocked() -> void:
+#	if _senet_icon and not _senet_icon.visible:
+#		_senet_icon.show()
