@@ -49,13 +49,45 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 15
 text = "HELIX SOLUTIONS"
 
-[node name="Label2" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+[node name="NavButtons" type="HBoxContainer" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 2
+
+[node name="NavHome" type="Button" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer/NavButtons"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
 theme_override_font_sizes/font_size = 12
-text = "Home   About   Services   Team   Contact"
-horizontal_alignment = 2
+text = "Home"
+flat = true
+
+[node name="NavAbout" type="Button" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer/NavButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "About"
+flat = true
+
+[node name="NavServices" type="Button" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer/NavButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "Services"
+flat = true
+
+[node name="NavTeam" type="Button" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer/NavButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "Team"
+flat = true
+
+[node name="NavContact" type="Button" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer/NavButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "Contact"
+flat = true
 
 [node name="PageHeader" type="PanelContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
