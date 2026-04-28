@@ -23,10 +23,10 @@ func _ready():
 	back_btn.pressed.connect(_on_back)
 	fwd_btn.pressed.connect(_on_forward)
 	
-	GlobalSignals.machine_discovered.connect(func(m): _populate_sidebar())
-	GlobalSignals.machine_scanned.connect(func(m): _populate_sidebar())
-	GlobalSignals.machine_connected.connect(func(m): _populate_sidebar())
-	GlobalSignals.machine_disconnected.connect(func(m): _populate_sidebar())
+	GlobalSignals.machine_discovered.connect(func(_m): _populate_sidebar())
+	GlobalSignals.machine_scanned.connect(func(_m): _populate_sidebar())
+	GlobalSignals.machine_connected.connect(func(_m): _populate_sidebar())
+	GlobalSignals.machine_disconnected.connect(func(_m): _populate_sidebar())
 
 func _populate_sidebar():
 	for child in locations_list.get_children():
@@ -132,7 +132,7 @@ func _render_files():
 	if not dir_node or not dir_node.type == FileNode.DIRECTORY: return
 	
 	for node in dir_node.children:
-		var name = node.name
+		var node_name = node.name
 		var hbox = HBoxContainer.new()
 		
 		var icon_lbl = Label.new()
@@ -141,7 +141,7 @@ func _render_files():
 		if node.type == FileNode.DIRECTORY: icon_lbl.add_theme_color_override("font_color", Color("#00ff41"))
 		
 		var name_btn = Button.new()
-		name_btn.text = name
+		name_btn.text = node_name
 		name_btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		name_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		name_btn.add_theme_font_size_override("font_size", 12)
@@ -158,7 +158,7 @@ func _render_files():
 		name_btn.add_theme_stylebox_override("pressed", sb)
 		name_btn.add_theme_stylebox_override("focus", sb)
 		
-		var captured_name = name
+		var captured_name = node_name
 		var captured_node = node
 		
 		var cn = captured_name

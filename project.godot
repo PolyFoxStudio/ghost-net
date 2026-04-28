@@ -23,7 +23,7 @@ CountermeasureManager="*res://scripts/systems/countermeasure_manager.gd"
 LocalMachineSetup="*res://scripts/systems/local_machine_setup.gd"
 TestMachineSetup="*res://scripts/systems/test_machine_setup.gd"
 WindowManager="*res://scripts/systems/window_manager.gd"
-GameState="*res://scripts/systems/game_state.gd"
+GameState="*res://scripts/singletons/game_state.gd"
 
 [display]
 
