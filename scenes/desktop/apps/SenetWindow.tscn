@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3q08w9y0"]
+
+[ext_resource type="Script" path="res://scripts/desktop/apps/senet_window.gd" id="1_senet"]
+
+[node name="SenetWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_senet")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TitleBar" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+color = Color(0.1, 0.2, 0.1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TitleBar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+
+[node name="Title" type="Label" parent="VBoxContainer/TitleBar/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+text = "SENET — Social Engineering Toolkit"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/TitleBar/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+text = "X"
+flat = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ContentVBox" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ToField" type="LineEdit" parent="VBoxContainer/MarginContainer/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+placeholder_text = "To: — target email address"
+
+[node name="FromField" type="LineEdit" parent="VBoxContainer/MarginContainer/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+placeholder_text = "From: — spoofed sender identity"
+
+[node name="SubjectField" type="LineEdit" parent="VBoxContainer/MarginContainer/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+placeholder_text = "Subject: — email subject line"
+
+[node name="BodyField" type="TextEdit" parent="VBoxContainer/MarginContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+placeholder_text = "Body: — message body"
+
+[node name="ContextField" type="LineEdit" parent="VBoxContainer/MarginContainer/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+placeholder_text = "Context: — additional context/pretext"
+
+[node name="SendButton" type="Button" parent="VBoxContainer/MarginContainer/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+text = "Send"
+flat = true
+
+[node name="LogLabel" type="Label" parent="VBoxContainer/MarginContainer/ContentVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.8, 0.2, 1)
+text = "// engagement log"
+
+[node name="EngagementLog" type="RichTextLabel" parent="VBoxContainer/MarginContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.2, 0.8, 0.2, 1)
+scroll_following = true

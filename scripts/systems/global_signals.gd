@@ -1,6 +1,6 @@
 extends Node
 
-var senet_unlocked: bool = false
+signal senet_unlocked
 
 signal machine_connected(machine: MachineResource)
 signal machine_disconnected(machine: MachineResource)
