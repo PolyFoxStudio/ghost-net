@@ -1,0 +1,313 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/desktop/apps/helix_team.gd" id="1_hxbt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.972549, 0.976471, 0.980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_navy"]
+bg_color = Color(0.101961, 0.227451, 0.360784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_white"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avatar"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="HelixTeam" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+script = ExtResource("1_hxbt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Navbar" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_navy")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Navbar"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Navbar/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "HELIX SOLUTIONS"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "Home   About   Services   Team   Contact"
+horizontal_alignment = 2
+
+[node name="PageHeader" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_navy")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PageHeader"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/PageHeader/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Our Team"
+
+[node name="Leadership" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Leadership"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Leadership/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 15
+text = "Leadership"
+
+[node name="CardRichardHolt" type="PanelContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Avatar" type="PanelContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_avatar")
+
+[node name="Label" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer/HBoxContainer/Avatar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+text = "RH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 14
+text = "Richard Holt"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.164706, 0.478431, 0.886275, 1)
+theme_override_font_sizes/font_size = 12
+text = "Director of Operations  ·  Co-Founder"
+
+[node name="Label3" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardRichardHolt/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_font_sizes/font_size = 12
+text = "Richard oversees day-to-day operations and client delivery across all service lines. A founding partner with over 20 years in financial services."
+autowrap_mode = 2
+
+[node name="CardSarahChen" type="PanelContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Avatar" type="PanelContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_avatar")
+
+[node name="Label" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer/HBoxContainer/Avatar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+text = "SC"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 14
+text = "Sarah Chen"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.164706, 0.478431, 0.886275, 1)
+theme_override_font_sizes/font_size = 12
+text = "Chief Technology Officer"
+
+[node name="Label3" type="Label" parent="VBoxContainer/Leadership/MarginContainer/VBoxContainer/CardSarahChen/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_font_sizes/font_size = 12
+text = "Sarah leads our technology and product development teams, driving innovation in our compliance data platform."
+autowrap_mode = 2
+
+[node name="ComplianceAudit" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ComplianceAudit"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ComplianceAudit/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 15
+text = "Compliance & Audit"
+
+[node name="CardDianeMarsh" type="PanelContainer" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Avatar" type="PanelContainer" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_avatar")
+
+[node name="Label" type="Label" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer/HBoxContainer/Avatar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+text = "DM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 14
+text = "Diane Marsh"
+
+[node name="Label2" type="Label" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.164706, 0.478431, 0.886275, 1)
+theme_override_font_sizes/font_size = 12
+text = "Head of Compliance"
+
+[node name="Label3" type="Label" parent="VBoxContainer/ComplianceAudit/MarginContainer/VBoxContainer/CardDianeMarsh/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_font_sizes/font_size = 12
+text = "Diane leads our compliance function, working with clients and regulators to ensure obligations are met and governance standards are maintained."
+autowrap_mode = 2
+
+[node name="OperationsSecurity" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/OperationsSecurity"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OperationsSecurity/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/OperationsSecurity/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 15
+text = "Operations & Security"
+
+[node name="Label2" type="Label" parent="VBoxContainer/OperationsSecurity/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 13
+text = "Details for this department are not publicly listed. Please contact us directly for more information."
+autowrap_mode = 2
+
+[node name="Footer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_navy")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Footer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="Label" parent="VBoxContainer/Footer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 11
+text = "© 2024 Helix Solutions Ltd. · London, United Kingdom · helixsolutions.com"
+vertical_alignment = 1

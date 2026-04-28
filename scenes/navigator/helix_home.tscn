@@ -1,0 +1,255 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/desktop/apps/helix_home.gd" id="1_hxhome"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.972549, 0.976471, 0.980392, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_navy"]
+bg_color = Color(0.101961, 0.227451, 0.360784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_white"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_accent"]
+bg_color = Color(0.164706, 0.478431, 0.886275, 1)
+
+[node name="HelixHome" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+script = ExtResource("1_hxhome")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Navbar" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_navy")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Navbar"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Navbar/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "HELIX SOLUTIONS"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "Home   About   Services   Team   Contact"
+horizontal_alignment = 2
+
+[node name="Hero" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_navy")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Hero"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Hero/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="VBoxContainer/Hero/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Compliance Technology for Modern Finance"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Hero/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 13
+text = "We help financial institutions meet their regulatory obligations with confidence — combining deep compliance expertise with intelligent data management."
+autowrap_mode = 2
+
+[node name="ServicesStrip" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ServicesStrip"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ServicesStrip/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="VBoxContainer/ServicesStrip/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 16
+text = "What We Do"
+
+[node name="Label2" type="Label" parent="VBoxContainer/ServicesStrip/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Helix Solutions delivers end-to-end compliance and audit technology services. From regulatory reporting to data governance, we work with mid-market financial firms to reduce risk and improve transparency."
+autowrap_mode = 2
+
+[node name="CardsMargin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CardsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Card1" type="PanelContainer" parent="VBoxContainer/CardsMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CardsMargin/HBoxContainer/Card1"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CardsMargin/HBoxContainer/Card1/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CardsMargin/HBoxContainer/Card1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Audit Data Management"
+
+[node name="Label2" type="Label" parent="VBoxContainer/CardsMargin/HBoxContainer/Card1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_font_sizes/font_size = 12
+text = "Structured archiving and retrieval systems for financial audit trails."
+autowrap_mode = 2
+
+[node name="Card2" type="PanelContainer" parent="VBoxContainer/CardsMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CardsMargin/HBoxContainer/Card2"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CardsMargin/HBoxContainer/Card2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CardsMargin/HBoxContainer/Card2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Regulatory Reporting"
+
+[node name="Label2" type="Label" parent="VBoxContainer/CardsMargin/HBoxContainer/Card2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_font_sizes/font_size = 12
+text = "Automated compliance reporting aligned with FCA and industry standards."
+autowrap_mode = 2
+
+[node name="Card3" type="PanelContainer" parent="VBoxContainer/CardsMargin/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CardsMargin/HBoxContainer/Card3"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CardsMargin/HBoxContainer/Card3/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CardsMargin/HBoxContainer/Card3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.227451, 0.360784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Compliance Governance"
+
+[node name="Label2" type="Label" parent="VBoxContainer/CardsMargin/HBoxContainer/Card3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333333, 0.333333, 0.333333, 1)
+theme_override_font_sizes/font_size = 12
+text = "Policy frameworks and governance tooling for financial services firms."
+autowrap_mode = 2
+
+[node name="CTA" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_accent")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CTA"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CTA/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/CTA/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "Ready to simplify your compliance?"
+
+[node name="Label2" type="Label" parent="VBoxContainer/CTA/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.878431, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Get in touch with our team today."
+
+[node name="Footer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_navy")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Footer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="Label" parent="VBoxContainer/Footer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.666667, 0.768627, 0.878431, 1)
+theme_override_font_sizes/font_size = 11
+text = "© 2024 Helix Solutions Ltd. · London, United Kingdom · helixsolutions.com"
+vertical_alignment = 1

@@ -1,0 +1,287 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/desktop/apps/pronet_helix_company.gd" id="1_helix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6q1v"]
+bg_color = Color(0.0392157, 0.4, 0.760784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1a2b"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_banner"]
+bg_color = Color(0.10196, 0.22745, 0.36078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_logo"]
+bg_color = Color(0.039215, 0.4, 0.76078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_white"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_footer"]
+bg_color = Color(0.913725, 0.898039, 0.87451, 1)
+
+[node name="PronetHelixCompany" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_helix")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Navbar" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n6q1v")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Navbar"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Navbar/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "ProNet"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Navbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.8, 0.878431, 0.960784, 1)
+text = "Home   My Network   Jobs   Messaging"
+horizontal_alignment = 2
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1a2b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Header"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Banner" type="PanelContainer" parent="VBoxContainer/Header/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_banner")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Header/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Logo" type="PanelContainer" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_logo")
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer/Logo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "H"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Helix Solutions Ltd."
+
+[node name="Label2" type="Label" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Financial Compliance & Audit Technology"
+
+[node name="Label3" type="Label" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "London, United Kingdom  ·  Financial Services"
+
+[node name="Label4" type="Label" parent="VBoxContainer/Header/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "142 employees  ·  83 followers"
+
+[node name="About" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/About"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/About/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "About"
+
+[node name="Label2" type="Label" parent="VBoxContainer/About/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Helix Solutions Ltd. provides specialist compliance and audit technology services to mid-market financial institutions across the United Kingdom. Founded in 2014, we combine deep regulatory expertise with proprietary data management tools to help clients meet their obligations with confidence. Our team works across audit, compliance, and data governance to deliver end-to-end solutions."
+autowrap_mode = 2
+
+[node name="Details" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Details"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Details/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Company Details"
+
+[node name="Label2" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Website: helixsolutions.com"
+
+[node name="Label3" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Industry: Financial Services"
+
+[node name="Label4" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Company size: 51–200 employees"
+
+[node name="Label5" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Headquarters: London, United Kingdom"
+
+[node name="Label6" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Founded: 2014"
+
+[node name="Label7" type="Label" parent="VBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 13
+text = "Specialities: Compliance Technology, Audit Data Management, Regulatory Reporting, Financial Governance"
+autowrap_mode = 2
+
+[node name="People" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_white")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/People"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/People/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "People"
+
+[node name="DianeMarchBtn" type="Button" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_colors/font_hover_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_colors/font_pressed_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Diane Marsh →"
+flat = true
+
+[node name="Label2" type="Label" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "Head of Compliance"
+
+[node name="NadiaWebbBtn" type="Button" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_colors/font_hover_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_colors/font_pressed_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Nadia Webb →"
+flat = true
+
+[node name="Label3" type="Label" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "Data Analyst"
+
+[node name="Footer" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_footer")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Footer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="Label" type="Label" parent="VBoxContainer/Footer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 11
+text = "© 2024 ProNet Corporation"
+vertical_alignment = 1
