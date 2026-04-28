@@ -1,5 +1,7 @@
 extends Node
 
+var senet_unlocked: bool = false
+
 signal machine_connected(machine: MachineResource)
 signal machine_disconnected(machine: MachineResource)
 signal machine_discovered(machine: MachineResource)
