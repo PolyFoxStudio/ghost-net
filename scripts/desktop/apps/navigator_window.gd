@@ -111,6 +111,22 @@ func _load_page(url: String) -> void:
 
 	var page = packed.instantiate()
 	page_container.add_child(page)
+
+	# Evidence flags — set when player visits key pages
+	match url:
+		"pronet.io/in/nadia-webb":
+			GameState.set_flag("viewed_nadia_pronet")
+		"pronet.io/in/diane-marsh":
+			GameState.set_flag("viewed_diane_pronet")
+		"pronet.io/company/helix-solutions":
+			GameState.set_flag("viewed_helix_pronet")
+		"helixsolutions.com":
+			GameState.set_flag("viewed_helix_home")
+		"helixsolutions.com/team":
+			GameState.set_flag("viewed_helix_team")
+		"helixsolutions.com/services":
+			GameState.set_flag("viewed_helix_services")
+
 	status_bar.text = url
 	_on_page_loaded(url)
 

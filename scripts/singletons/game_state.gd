@@ -1,6 +1,8 @@
 class_name GameStateSingleton
 extends Node
 
+signal flag_set(flag_name: String)
+
 var flags: Dictionary = {}
 
 var cipher_score: int = 0
@@ -12,9 +14,13 @@ var current_act: int = 1
 
 func set_flag(key: String, value: Variant = true) -> void:
 	flags[key] = value
+	emit_signal("flag_set", key)
 
 func get_flag(key: String, default: Variant = false) -> Variant:
 	return flags.get(key, default)
+
+func has_flag(flag_name: String) -> bool:
+	return flags.get(flag_name, false) == true
 
 func modify_cipher(amount: int) -> void:
 	cipher_score = clampi(cipher_score + amount, -3, 3)
