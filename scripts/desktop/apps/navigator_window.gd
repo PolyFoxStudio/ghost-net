@@ -38,6 +38,7 @@ func _ready() -> void:
 	address_bar.text_submitted.connect(_on_address_submitted)
 
 	GlobalSignals.tor_state_changed.connect(_on_tor_state_changed)
+	GlobalSignals.navigator_navigate.connect(_navigate_to)
 
 	_navigate_to("ghostnet://home")
 
