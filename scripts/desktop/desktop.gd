@@ -4,7 +4,7 @@ var term_scene  = preload("res://scenes/desktop/apps/TerminalWindow.tscn")
 var nav_scene   = preload("res://scenes/desktop/apps/NavigatorWindow.tscn")
 var notes_scene = preload("res://scenes/desktop/apps/NotesWindow.tscn")
 var files_scene = preload("res://scenes/desktop/apps/FilesWindow.tscn")
-var senet_scene = preload("res://scenes/desktop/apps/SenetWindow.tscn")
+# var senet_scene = preload("res://scenes/desktop/apps/SenetWindow.tscn")
 
 var desktop_icon_scn = preload("res://scenes/desktop/DesktopIcon.tscn")
 
@@ -61,13 +61,13 @@ func _setup_desktop_icons():
 		i += 1
 
 	# SENET — hidden at boot, revealed on senet_unlocked signal
-	var senet_app = {
-		"name":   "SENET",
-		"scene":  senet_scene,
-		"app_id": "SENET",
-		"symbol": "✉"
-	}
-	_senet_icon = _create_icon(icons_container, senet_app, i)
+#	var senet_app = {
+#		"name":   "SENET",
+#		"scene":  senet_scene,
+#		"app_id": "SENET",
+#		"symbol": "✉"
+#	}
+#	_senet_icon = _create_icon(icons_container, senet_app, i)
 	# TODO: restore _senet_icon.hide() before release — hidden until senet_unlocked fires
 
 func _create_icon(icons_container: Node, app: Dictionary, index: int) -> Node:
