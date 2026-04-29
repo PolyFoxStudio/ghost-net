@@ -1,6 +1,6 @@
 extends RefCounted
 
-func execute(args: Array, context: Dictionary) -> CommandResult:
+func execute(_args: Array, _context: Dictionary) -> CommandResult:
 	var machine = NetworkManager.get_local_machine()
 	var out = "eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\n"
 	if machine:

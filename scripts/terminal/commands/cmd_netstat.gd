@@ -1,6 +1,6 @@
 extends RefCounted
 
-func execute(args: Array, context: Dictionary) -> CommandResult:
+func execute(_args: Array, _context: Dictionary) -> CommandResult:
 	var machine = NetworkManager.get_current_machine()
 	if not machine or machine.hostname == "localhost":
 		var out = """Active connections on: localhost

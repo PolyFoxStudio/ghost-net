@@ -73,10 +73,10 @@ Known aliases: none confirmed
 		return CommandResult.new("[color=#ffaa00][!] target machine flagged — 3 minute cooldown before re-engaging[/color]", true)
 
 	elif flag == "--map":
-		var out = "phantom v0.9.7 — by Cipher\n[*] Quick network map:\n\n"
+		var out_map = "phantom v0.9.7 — by Cipher\n[*] Quick network map:\n\n"
 		for ip in NetworkManager._machines:
 			var m: MachineResource = NetworkManager._machines[ip]
-			out += "  %s  —  %s\n" % [ip, m.hostname]
-		return CommandResult.new(out.strip_edges(), true)
+			out_map += "  %s  —  %s\n" % [ip, m.hostname]
+		return CommandResult.new(out_map.strip_edges(), true)
 
 	return CommandResult.new("phantom: unknown flag '%s'\nAvailable: --trace --wipe --ping --cloak --map" % flag, false)

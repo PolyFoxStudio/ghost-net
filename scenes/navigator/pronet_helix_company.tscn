@@ -269,6 +269,22 @@ theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
 theme_override_font_sizes/font_size = 12
 text = "Data Analyst"
 
+[node name="RichardHoltBtn" type="Button" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_colors/font_hover_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_colors/font_pressed_color = Color(0.0392157, 0.4, 0.760784, 1)
+theme_override_font_sizes/font_size = 13
+text = "Richard Holt →"
+flat = true
+
+[node name="Label4" type="Label" parent="VBoxContainer/People/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "Director of Operations"
+
 [node name="Footer" type="PanelContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2

@@ -1,6 +1,6 @@
 extends RefCounted
 
-func execute(args: Array, context: Dictionary) -> CommandResult:
+func execute(_args: Array, context: Dictionary) -> CommandResult:
 	var hist = context.terminal.command_history
 	if hist.is_empty():
 		return CommandResult.new("", true)

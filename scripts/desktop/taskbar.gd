@@ -76,13 +76,13 @@ func _on_connected(machine):
 	conn_indicator.text = "◉ %s" % machine.hostname
 	conn_indicator.add_theme_color_override("font_color", Color("#00ff41"))
 
-func _on_disconnected(machine):
+func _on_disconnected(_machine):
 	conn_indicator.text = "◉ LOCAL"
 	conn_indicator.add_theme_color_override("font_color", Color("#4a4a4a"))
 
-func _on_trace_triggered(machine):
+func _on_trace_triggered(_machine):
 	trace_indicator.show()
 
-func _on_trace_ended(machine):
+func _on_trace_ended(_machine):
 	trace_indicator.hide()
 	

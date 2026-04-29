@@ -28,8 +28,9 @@ Available identities:
 	if identity == "":
 		return CommandResult.new("ghostwire: missing --spoof [identity]", false)
 
+	var out = ""
 	if "sarah" in identity.to_lower() or "sarah_chen" in identity.to_lower():
-		var out = """ghostwire v1.2 — by Cipher
+		out = """ghostwire v1.2 — by Cipher
 [*] Loading identity: employee_sarah_chen
     Name:        Sarah Chen  |  Role: Junior Data Analyst
     Employee ID: HX-4471     |  Email: s.chen@helixsolutions.com
@@ -40,7 +41,7 @@ Available identities:
 		return CommandResult.new(out, true)
 
 	if "lee" in identity.to_lower() or "morgan" in identity.to_lower():
-		var out = """ghostwire v1.2 — by Cipher
+		out = """ghostwire v1.2 — by Cipher
 [*] Loading identity: contractor_lee_morgan
     Name:        Lee Morgan  |  Role: IT Contractor
     Contractor ID: EXT-0293  |  Email: l.morgan.ext@helixsolutions.com

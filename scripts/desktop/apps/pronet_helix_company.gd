@@ -7,9 +7,15 @@ func _ready() -> void:
 	var nadia_btn = find_child("NadiaWebbBtn", true, false)
 	if nadia_btn:
 		nadia_btn.pressed.connect(_on_nadia_webb_pressed)
+	var richard_btn = find_child("RichardHoltBtn", true, false)
+	if richard_btn:
+		richard_btn.pressed.connect(_on_richard_holt_pressed)
 
 func _on_diane_marsh_pressed() -> void:
 	GlobalSignals.navigator_navigate.emit("pronet.io/in/diane-marsh")
 
 func _on_nadia_webb_pressed() -> void:
 	GlobalSignals.navigator_navigate.emit("pronet.io/in/nadia-webb")
+
+func _on_richard_holt_pressed() -> void:
+	GlobalSignals.navigator_navigate.emit("pronet.io/in/richard-holt-helix")

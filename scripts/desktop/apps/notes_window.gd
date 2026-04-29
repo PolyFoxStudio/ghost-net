@@ -1,1 +1,51 @@
-extends "res://scripts/desktop/ghost_window.gd"\n\n@onready var notes_text: TextEdit = $VBoxContainer/AppContainer/TabContainer/Notes/TextEdit\n@onready var hosts_label: RichTextLabel = $VBoxContainer/AppContainer/TabContainer/Hosts/VBoxContainer/RichTextLabel\n@onready var creds_label: RichTextLabel = $VBoxContainer/AppContainer/TabContainer/Credentials/VBoxContainer/RichTextLabel\n@onready var down_label: RichTextLabel = $VBoxContainer/AppContainer/TabContainer/Downloads/VBoxContainer/RichTextLabel\n\nvar notes_content: String = "// your notes...\\n"\nvar discovered_hosts: Dictionary = {}\n\nfunc _ready() -> void:\n\tapp_name = "NOTES"\n\tsuper._ready()\n\tnotes_text.text = notes_content\n\tnotes_text.text_changed.connect(_on_notes_changed)\n\tGlobalSignals.machine_discovered.connect(_on_machine_discovered)\n\tGlobalSignals.machine_scanned.connect(_on_machine_scanned)\n\tGlobalSignals.machine_connected.connect(_on_machine_connected)\n\tGlobalSignals.credential_found.connect(_on_credential_found)\n\tGlobalSignals.file_downloaded.connect(_on_file_downloaded)\n\t_refresh_hosts()\n\nfunc _on_notes_changed() -> void:\n\tnotes_content = notes_text.text\n\nfunc _on_machine_discovered(machine) -> void:\n\tdiscovered_hosts[machine.ip] = {"host": machine.hostname, "zone": machine.network_zone, "status": "discovered"}\n\t_refresh_hosts()\n\nfunc _on_machine_scanned(machine) -> void:\n\tif discovered_hosts.has(machine.ip) and discovered_hosts[machine.ip]["status"] != "connected":\n\t\tdiscovered_hosts[machine.ip]["status"] = "scanned"\n\t\t_refresh_hosts()\n\nfunc _on_machine_connected(machine) -> void:\n\tif discovered_hosts.has(machine.ip):\n\t\tdiscovered_hosts[machine.ip]["status"] = "connected"\n\t\t_refresh_hosts()\n\nfunc _refresh_hosts() -> void:\n\tvar text = ""\n\tfor ip in discovered_hosts.keys():\n\t\tvar h = discovered_hosts[ip]\n\t\ttext += "[color=#00ff41]■[/color]  %-15s %-15s %-12s %s\\n" % [ip, h["host"], h["zone"], h["status"]]\n\thosts_label.text = text\n\nfunc _on_credential_found(username: String, password: String, ip: String) -> void:\n\tcreds_label.text += "[color=#00ff41]■[/color]  %-15s %-15s %s\\n" % [username, password, ip]\n\nfunc _on_file_downloaded(file_node, source_machine: String, source_path: String) -> void:\n\tdown_label.text += "[color=#00ff41]■[/color]  %-15s %-15s %s\\n" % [file_node.name, source_machine, source_path]\n
+extends "res://scripts/desktop/ghost_window.gd"
+
+@onready var notes_text: TextEdit = $VBoxContainer/AppContainer/TabContainer/Notes/TextEdit
+@onready var hosts_label: RichTextLabel = $VBoxContainer/AppContainer/TabContainer/Hosts/VBoxContainer/RichTextLabel
+@onready var creds_label: RichTextLabel = $VBoxContainer/AppContainer/TabContainer/Credentials/VBoxContainer/RichTextLabel
+@onready var down_label: RichTextLabel = $VBoxContainer/AppContainer/TabContainer/Downloads/VBoxContainer/RichTextLabel
+
+var notes_content: String = "// your notes...\\n"
+var discovered_hosts: Dictionary = {}
+
+func _ready() -> void:
+	app_name = "NOTES"
+	super._ready()
+	notes_text.text = notes_content
+	notes_text.text_changed.connect(_on_notes_changed)
+	GlobalSignals.machine_discovered.connect(_on_machine_discovered)
+	GlobalSignals.machine_scanned.connect(_on_machine_scanned)
+	GlobalSignals.machine_connected.connect(_on_machine_connected)
+	GlobalSignals.credential_found.connect(_on_credential_found)
+	GlobalSignals.file_downloaded.connect(_on_file_downloaded)
+	_refresh_hosts()
+
+func _on_notes_changed() -> void:
+	notes_content = notes_text.text
+
+func _on_machine_discovered(machine) -> void:
+	discovered_hosts[machine.ip] = {"host": machine.hostname, "zone": machine.network_zone, "status": "discovered"}
+	_refresh_hosts()
+
+func _on_machine_scanned(machine) -> void:
+	if discovered_hosts.has(machine.ip) and discovered_hosts[machine.ip]["status"] != "connected":
+		discovered_hosts[machine.ip]["status"] = "scanned"
+		_refresh_hosts()
+
+func _on_machine_connected(machine) -> void:
+	if discovered_hosts.has(machine.ip):
+		discovered_hosts[machine.ip]["status"] = "connected"
+		_refresh_hosts()
+
+func _refresh_hosts() -> void:
+	var text = ""
+	for ip in discovered_hosts.keys():
+		var h = discovered_hosts[ip]
+		text += "[color=#00ff41]■[/color]  %-15s %-15s %-12s %s\\n" % [ip, h["host"], h["zone"], h["status"]]
+	hosts_label.text = text
+
+func _on_credential_found(username: String, password: String, ip: String) -> void:
+	creds_label.text += "[color=#00ff41]■[/color]  %-15s %-15s %s\\n" % [username, password, ip]
+
+func _on_file_downloaded(file_node, source_machine: String, source_path: String) -> void:
+	down_label.text += "[color=#00ff41]■[/color]  %-15s %-15s %s\\n" % [file_node.name, source_machine, source_path]

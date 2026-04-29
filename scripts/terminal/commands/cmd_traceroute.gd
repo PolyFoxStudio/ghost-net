@@ -1,6 +1,6 @@
 extends RefCounted
 
-func execute(args: Array, context: Dictionary) -> CommandResult:
+func execute(args: Array, _context: Dictionary) -> CommandResult:
     if args.is_empty():
         return CommandResult.new("traceroute: missing target", false)
     var target = args[0]

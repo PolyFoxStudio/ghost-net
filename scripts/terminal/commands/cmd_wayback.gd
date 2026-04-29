@@ -1,6 +1,6 @@
 extends RefCounted
 
-func execute(args: Array, context: Dictionary) -> CommandResult:
+func execute(args: Array, _context: Dictionary) -> CommandResult:
 	if args.is_empty():
 		return CommandResult.new("wayback: missing URL", false)
 	var url = args[0]

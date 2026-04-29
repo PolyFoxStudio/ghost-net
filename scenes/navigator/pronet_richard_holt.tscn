@@ -1,0 +1,155 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/desktop/apps/pronet_richard_holt.gd" id="1_q1w2e"]
+
+[node name="PronetRichardHolt" type="ScrollContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_q1w2e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f3f2ef][color=#000000]
+
+[table=2]
+[cell][bgcolor=#0a66c2][color=#ffffff][b]  ProNet  [/b][/color][/bgcolor]  [color=#666666]Home   My Network   Jobs   Messaging[/color][/cell]
+[cell][color=#666666]                                         [url=pronet.io/in/nadia-webb][color=#0a66c2]Nadia[/color][/url] Webb ▾[/color][/cell]
+[/table]
+
+[indent]
+[table=2]
+[cell=2]
+[bgcolor=#2c4a6e][color=#2c4a6e]............................................................[/color][/bgcolor]
+[/cell]
+[cell]
+[color=#555555][b][ photo ][/b][/color]
+[b][font_size=18]Richard Holt[/font_size][/b]
+[color=#333333]Director of Operations & Co-Founder | Helix Solutions Ltd.[/color]
+[color=#666666]London, United Kingdom · [url=pronet.io/company/helix-solutions][color=#0a66c2]Helix[/color][/url] Solutions Ltd.[/color]
+
+[color=#555555]487 connections[/color]
+
+[bgcolor=#0a66c2][color=#ffffff]  [url=msg_ghostwire_check] Message [/url]  [/color][/bgcolor]   [bgcolor=#ffffff][color=#0a66c2]  More ▾  [/color][/bgcolor]
+
+[color=#888888][font_size=10]→ GhostWire identity required to send messages[/font_size][/color]
+[/cell]
+[cell]
+[/cell]
+[/table]
+[/indent]
+
+[indent]
+─────────────────────────────────────────────────
+
+[b]About[/b]
+
+[color=#333333]Twenty years in financial services. Co-founded Helix Solutions in 2019 with a clear belief: that small and mid-sized businesses deserve the same quality of compliance infrastructure as the major players.
+
+I'm proud of what we've built — a team that takes its work seriously, treats clients with integrity, and delivers results that hold up under scrutiny.
+
+Outside of work: weekend cyclist, occasional cook, committed fan of terrible weather.[/color]
+
+─────────────────────────────────────────────────
+
+[b]Activity[/b]
+
+[color=#888888]487 followers[/color]
+
+[bgcolor=#fff3cd][color=#856404]  Last active: 19 days ago · Activity significantly reduced over the past month.  [/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Experience[/b]
+
+[b]Director of Operations & Co-Founder[/b]
+[url=pronet.io/company/helix-solutions][color=#0a66c2]Helix[/color][/url] Solutions Ltd. · Full-time
+[color=#666666]Jan 2019 – Present · 5 yrs 4 mos · London, United Kingdom[/color]
+
+[color=#444444]Co-founded Helix Solutions alongside the company's executive team. Responsible for day-to-day operations, team leadership, client delivery, and strategic oversight of the compliance and data management division.[/color]
+
+[color=#888888]──────[/color]
+
+[b]Head of Financial Compliance[/b]
+[color=#333333]Ashdown Infrastructure[/color] · Full-time
+[color=#666666]Mar 2018 – Dec 2018 · 10 mos · London, United Kingdom[/color]
+
+[color=#444444]Short-term senior engagement overseeing regulatory compliance ahead of a major audit review. Left to pursue the founding of Helix Solutions.[/color]
+
+[color=#888888]──────[/color]
+
+[b]Senior Compliance Officer[/b]
+[color=#333333]Pinnacle Risk Advisory[/color] · Full-time
+[color=#666666]Jun 2009 – Feb 2016 · 6 yrs 8 mos · London, United Kingdom[/color]
+
+[color=#444444]Senior compliance and risk advisory role across a portfolio of UK financial services clients. Specialist focus on audit data integrity and regulatory reporting frameworks.[/color]
+
+[color=#888888]──────[/color]
+
+[b]Compliance Analyst[/b]
+[color=#333333]Carver Financial Services[/color] · Full-time
+[color=#666666]Aug 2004 – May 2009 · 4 yrs 9 mos[/color]
+
+─────────────────────────────────────────────────
+
+[b]Education[/b]
+
+[b]University of Exeter[/b]
+[color=#444444]BSc Business Administration · 2001 – 2004[/color]
+
+─────────────────────────────────────────────────
+
+[b]Skills[/b]
+
+[bgcolor=#e8f0fe][color=#1a73e8]  Financial Compliance  [/color][/bgcolor]   [bgcolor=#e8f0fe][color=#1a73e8]  Regulatory Frameworks  [/color][/bgcolor]   [bgcolor=#e8f0fe][color=#1a73e8]  Operations Management  [/color][/bgcolor]
+
+[bgcolor=#e8f0fe][color=#1a73e8]  Data Governance  [/color][/bgcolor]   [bgcolor=#e8f0fe][color=#1a73e8]  Team Leadership  [/color][/bgcolor]   [bgcolor=#e8f0fe][color=#1a73e8]  Audit Strategy  [/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Recommendations received (2)[/b]
+
+[bgcolor=#f9f9f9]
+[b][url=pronet.io/in/sandra-vane-helix][color=#0a66c2]Sandra[/color][/url] Vane[/b] · Director of Business Development, Helix Solutions Ltd.
+[color=#666666]Colleague · co-founder[/color]
+
+[color=#333333][i]\"Richard is the reason Helix runs as well as it does. He's the kind of operator who sees problems before they become problems — and deals with them quietly and effectively. I couldn't ask for a better partner in building this business.\"[/i][/color]
+[/bgcolor]
+
+[color=#888888]──────[/color]
+
+[bgcolor=#f9f9f9]
+[b][color=#444444]M. Dalton[/color][/b] · Partner, Dalton & Reeves Consulting
+[color=#666666]Client · 2021–2023[/color]
+
+[color=#333333][i]\"Richard led our compliance overhaul from start to finish. Thorough, discreet, and completely reliable. Exactly what we needed.\"[/i][/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]People also viewed[/b]
+
+[url=pronet.io/in/diane-marsh-helix][color=#0a66c2]Diane[/color][/url] Marsh · Senior Data Analyst · Helix Solutions Ltd.
+[color=#888888]Colleague[/color]
+
+[url=pronet.io/in/nadia-webb][color=#0a66c2]Nadia[/color][/url] Webb · Data Analyst · Helix Solutions Ltd.
+[color=#888888][color=#e8a000]Last active 47 days ago[/color][/color]
+
+[/indent]
+
+[color=#aaaaaa][font_size=10]ProNet · About · Accessibility · Privacy Policy · Terms · © 2024[/font_size][/color]
+
+[/color][/bgcolor]
+"

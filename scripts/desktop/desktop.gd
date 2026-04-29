@@ -79,8 +79,8 @@ func _create_icon(icons_container: Node, app: Dictionary, index: int) -> Node:
 
 	var captured_app_id = app["app_id"]
 	var captured_icon   = icon
-	GlobalSignals.window_closed.connect(func(name):
-		if name == captured_app_id:
+	GlobalSignals.window_closed.connect(func(window_name):
+		if window_name == captured_app_id:
 			captured_icon.set_running(false)
 	)
 

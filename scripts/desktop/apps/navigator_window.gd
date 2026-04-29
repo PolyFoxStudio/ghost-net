@@ -118,6 +118,8 @@ func _load_page(url: String) -> void:
 			GameState.set_flag("viewed_nadia_pronet")
 		"pronet.io/in/diane-marsh":
 			GameState.set_flag("viewed_diane_pronet")
+		"pronet.io/in/richard-holt-helix":
+			GameState.set_flag("holt_pronet_visited", true)
 		"pronet.io/company/helix-solutions":
 			GameState.set_flag("viewed_helix_pronet")
 		"helixsolutions.com":
@@ -135,6 +137,7 @@ func _resolve_scene(url: String) -> String:
 		"pronet.io/in/nadia-webb": "res://scenes/navigator/pronet_nadia_webb.tscn",
 		"pronet.io/in/diane-marsh": "res://scenes/navigator/pronet_diane_marsh.tscn",
 		"pronet.io/in/diane-marsh-helix": "res://scenes/navigator/pronet_diane_marsh.tscn",
+		"pronet.io/in/richard-holt-helix": "res://scenes/navigator/pronet_richard_holt.tscn",
 		"pronet.io/company/helix-solutions": "res://scenes/navigator/pronet_helix_company.tscn",
 		"helixsolutions.com": "res://scenes/navigator/helix_home.tscn",
 		"helixsolutions.com/about": "res://scenes/navigator/helix_about.tscn",
@@ -163,6 +166,11 @@ func _on_page_loaded(url: String) -> void:
 
 	if url == "pronet.io/in/diane-marsh-helix" and not GameState.get_flag("E08_contact_identified"):
 		GameState.set_flag("E08_contact_identified", true)
+
+	if url == "pronet.io/in/richard-holt-helix" and not GameState.get_flag("holt_pronet_cipher_fired"):
+		GameState.set_flag("holt_pronet_cipher_fired", true)
+		GlobalSignals.emit_signal("phantomlink_message", "cipher",
+			"Holt's been on ProNet recently — 19 days ago. Right around when things went sideways at Helix. And that gap in his CV between 2016 and 2018... two years of nothing. Worth digging.")
 
 	if url == "helixsolutions.com/team":
 		if GameState.get_flag("E04_kane_identified") and not GameState.get_flag("team_page_cipher_fired"):

@@ -1,4 +1,4 @@
 extends RefCounted
 
-func execute(args: Array, context: Dictionary) -> CommandResult:
+func execute(_args: Array, _context: Dictionary) -> CommandResult:
 	return CommandResult.new("ghost")
