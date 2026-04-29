@@ -1,93 +1,107 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxxxx"]
-	
-	[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxxxx"]
-	[ext_resource type="Script" path="res://scripts/desktop/notes_window.gd" id="2_xxxxx"]
-	
-	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_bg"]
-	bg_color = Color(0.06666, 0.06666, 0.06666, 1)
-	
-	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_content"]
-	bg_color = Color(0.03921, 0.03921, 0.03921, 1)
-	
-	[node name="NotesWindow" instance=ExtResource("1_xxxxx")]
-	script = ExtResource("2_xxxxx")
-	app_name = "NOTES"
-	default_size = Vector2(700, 500)
-	
-	[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
-	text = "NOTES"
-	
-	[node name="TabContainer" type="TabContainer" parent="VBoxContainer/AppContainer" index="0"]
-	layout_mode = 1
-	anchors_preset = 15
-	anchor_right = 1.0
-	anchor_bottom = 1.0
-	grow_horizontal = 2
-	grow_vertical = 2
-	theme_override_styles/panel = SubResource("StyleBoxFlat_tab_content")
-	
-	[node name="Notes" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
-	layout_mode = 2
-	
-	[node name="TextEdit" type="TextEdit" parent="VBoxContainer/AppContainer/TabContainer/Notes"]
-	layout_mode = 1
-	anchors_preset = 15
-	anchor_right = 1.0
-	anchor_bottom = 1.0
-	grow_horizontal = 2
-	grow_vertical = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_colors/caret_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 13
-	
-	[node name="Hosts" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
-	visible = false
-	layout_mode = 2
-	
-	[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AppContainer/TabContainer/Hosts"]
-	layout_mode = 1
-	anchors_preset = 15
-	anchor_right = 1.0
-	anchor_bottom = 1.0
-	offset_left = 10.0
-	offset_top = 10.0
-	offset_right = -10.0
-	offset_bottom = -10.0
-	grow_horizontal = 2
-	grow_vertical = 2
-	bbcode_enabled = true
-	
-	[node name="Credentials" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
-	visible = false
-	layout_mode = 2
-	
-	[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AppContainer/TabContainer/Credentials"]
-	layout_mode = 1
-	anchors_preset = 15
-	anchor_right = 1.0
-	anchor_bottom = 1.0
-	offset_left = 10.0
-	offset_top = 10.0
-	offset_right = -10.0
-	offset_bottom = -10.0
-	grow_horizontal = 2
-	grow_vertical = 2
-	bbcode_enabled = true
-	
-	[node name="Downloads" type="Control" parent="VBoxContainer/AppContainer/TabContainer"]
-	visible = false
-	layout_mode = 2
-	
-	[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/AppContainer/TabContainer/Downloads"]
-	layout_mode = 1
-	anchors_preset = 15
-	anchor_right = 1.0
-	anchor_bottom = 1.0
-	offset_left = 10.0
-	offset_top = 10.0
-	offset_right = -10.0
-	offset_bottom = -10.0
-	grow_horizontal = 2
-	grow_vertical = 2
-	bbcode_enabled = true
-	
+[gd_scene load_steps=6 format=3 uid="uid://dxxxx"]
+
+[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxxxx"]
+[ext_resource type="Script" path="res://scripts/desktop/notes_window.gd" id="2_xxxxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toolbar_bg"]
+bg_color = Color(0.0784, 0.0784, 0.1098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_content"]
+bg_color = Color(0.0549, 0.0549, 0.0706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_normal"]
+bg_color = Color(0, 0, 0, 0)
+
+[node name="NotesWindow" instance=ExtResource("1_xxxxx")]
+script = ExtResource("2_xxxxx")
+app_name = "NOTES"
+default_size = Vector2(700, 500)
+
+[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
+text = "NOTES"
+
+[node name="MainVBox" type="VBoxContainer" parent="VBoxContainer/AppContainer" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Toolbar" type="PanelContainer" parent="VBoxContainer/AppContainer/MainVBox"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_toolbar_bg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/AppContainer/MainVBox/Toolbar"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="NewTabButton" type="Button" parent="VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.5333, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.8, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_normal")
+text = "+"
+flat = true
+
+[node name="RenameTabButton" type="Button" parent="VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.5333, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.8, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_normal")
+text = "Rename"
+flat = true
+
+[node name="DeleteTabButton" type="Button" parent="VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.5333, 1)
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.8, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_normal")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_normal")
+text = "Delete"
+flat = true
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/AppContainer/MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tab_content")
+
+[node name="Notes" type="Control" parent="VBoxContainer/AppContainer/MainVBox/TabContainer"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer/AppContainer/MainVBox/TabContainer/Notes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/background_color = Color(0.0549, 0.0549, 0.0706, 1)
+theme_override_colors/font_color = Color(0.6667, 0.6667, 0.8, 1)
+theme_override_colors/caret_color = Color(0, 1, 0.2549, 1)
+theme_override_font_sizes/font_size = 13
+wrap_mode = 1
+
+[node name="RenameDialog" type="ConfirmationDialog" parent="." index="2"]
+title = "Rename Tab"
+size = Vector2i(300, 100)
+
+[node name="RenameLineEdit" type="LineEdit" parent="RenameDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 51.0

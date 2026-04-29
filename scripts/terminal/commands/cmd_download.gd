@@ -22,6 +22,4 @@ func execute(args: Array, context: Dictionary):
 	if context.has("terminal"):
 		await context.terminal.get_tree().create_timer(0.5).timeout
 		
-	GlobalSignals.file_downloaded.emit(file_node, current_machine.hostname, nav.get_current_path() + "/" + file_node.name)
-	
 	return CommandResult.new("downloaded: %s -> /evidence/%s" % [file_node.name, file_node.name], true)

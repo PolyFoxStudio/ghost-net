@@ -1,99 +1,137 @@
 extends "res://scripts/desktop/ghost_window.gd"
 
-@onready var notes_text = $VBoxContainer/AppContainer/TabContainer/Notes/TextEdit
-@onready var hosts_rtf = $VBoxContainer/AppContainer/TabContainer/Hosts/RichTextLabel
-@onready var creds_rtf = $VBoxContainer/AppContainer/TabContainer/Credentials/RichTextLabel
-@onready var dl_rtf = $VBoxContainer/AppContainer/TabContainer/Downloads/RichTextLabel
+@onready var tab_container: TabContainer = $VBoxContainer/AppContainer/MainVBox/TabContainer
+@onready var new_tab_btn: Button = $VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer/NewTabButton
+@onready var rename_tab_btn: Button = $VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer/RenameTabButton
+@onready var delete_tab_btn: Button = $VBoxContainer/AppContainer/MainVBox/Toolbar/HBoxContainer/DeleteTabButton
 
-var _saved_notes: String = "// your notes...\n"
-var _known_hosts: Dictionary = {}
+@onready var rename_dialog: ConfirmationDialog = $RenameDialog
+@onready var rename_line_edit: LineEdit = $RenameDialog/RenameLineEdit
 
-func _ready():
+var save_timer: Timer
+var notes_file_path: String = "user://notes.json"
+
+func _ready() -> void:
+	app_name = "NOTES"
 	super._ready()
 	
-	notes_text.text = _saved_notes
-	notes_text.text_changed.connect(func(): _saved_notes = notes_text.text)
+	new_tab_btn.pressed.connect(_on_new_tab_pressed)
+	rename_tab_btn.pressed.connect(_on_rename_tab_pressed)
+	delete_tab_btn.pressed.connect(_on_delete_tab_pressed)
 	
-	hosts_rtf.text = "[color=#4a4a4a]// no data captured yet[/color]"
-	creds_rtf.text = "[color=#4a4a4a]// no data captured yet[/color]"
-	dl_rtf.text = "[color=#4a4a4a]// no data captured yet[/color]"
+	rename_dialog.confirmed.connect(_on_rename_confirmed)
 	
-	_update_hosts_display()
+	# Auto-save timer
+	save_timer = Timer.new()
+	save_timer.wait_time = 2.0
+	save_timer.autostart = true
+	save_timer.timeout.connect(_save_notes)
+	add_child(save_timer)
 	
-	GlobalSignals.machine_discovered.connect(_on_machine_discovered)
-	GlobalSignals.machine_scanned.connect(_on_machine_scanned)
-	GlobalSignals.machine_connected.connect(_on_machine_connected)
-	GlobalSignals.credential_found.connect(_on_credential_found)
-	GlobalSignals.file_downloaded.connect(_on_file_downloaded)
+	# Initialize first
+	for child in tab_container.get_children():
+		tab_container.remove_child(child)
+		child.queue_free()
+	
+	_load_notes()
+	
+	if tab_container.get_child_count() == 0:
+		_add_tab("Notes", "")
 
-func _on_machine_discovered(machine):
-	_update_host_entry(machine)
-	
-func _on_machine_scanned(machine):
-	_update_host_entry(machine)
-
-func _on_machine_connected(machine):
-	_update_host_entry(machine)
-
-func _update_host_entry(machine):
-	var status = "discovered"
-	if machine.is_player_connected:
-		status = "connected"
-	elif machine.is_scanned:
-		status = "scanned"
+func _add_tab(tab_name: String = "", content: String = "") -> void:
+	if tab_name == "":
+		var count = tab_container.get_child_count() + 1
+		tab_name = "Note " + str(count)
 		
-	_known_hosts[machine.ip] = {
-		"hostname": machine.hostname,
-		"zone": machine.network_zone,
-		"status": status
-	}
-	_update_hosts_display()
+	var tab_control = Control.new()
+	tab_control.name = tab_name
+	
+	var text_edit = TextEdit.new()
+	text_edit.text = content
+	text_edit.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	text_edit.add_theme_color_override("background_color", Color(0.0549, 0.0549, 0.0706, 1))
+	text_edit.add_theme_color_override("font_color", Color(0.6667, 0.6667, 0.8, 1))
+	text_edit.add_theme_color_override("caret_color", Color(0, 1, 0.2549, 1))
+	text_edit.add_theme_font_size_override("font_size", 13)
+	text_edit.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY
+	
+	text_edit.text_changed.connect(func(): _save_notes())
+	
+	tab_control.add_child(text_edit)
+	tab_container.add_child(tab_control)
+	tab_container.current_tab = tab_container.get_child_count() - 1
+	
+	_save_notes()
 
-func _update_hosts_display():
-	var time = Time.get_time_dict_from_system()
-	var time_str = "%02d:%02d:%02d" % [time.hour, time.minute, time.second]
-	var bbcode = "[color=#4a4a4a]// GHOSTNET INTEL — auto-captured\n// last updated: %s\n\nIP             HOSTNAME        ZONE         STATUS[/color]\n\n" % time_str
-	if _known_hosts.is_empty():
-		bbcode = "[color=#4a4a4a]// no data captured yet[/color]"
-	else:
-		for ip in _known_hosts:
-			var h = _known_hosts[ip]
-			bbcode += "[color=#00ff41]■[/color]  %-14s %-15s %-12s %s\n" % [ip, h.hostname, h.zone, h.status]
-	hosts_rtf.text = bbcode
+func _on_new_tab_pressed() -> void:
+	_add_tab()
 
-func _on_credential_found(username, password, ip):
-	var current = creds_rtf.text
-	if current.is_empty() or "no data captured" in current:
-		var time = Time.get_time_dict_from_system()
-		var time_str = "%02d:%02d:%02d" % [time.hour, time.minute, time.second]
-		current = "[color=#4a4a4a]// GHOSTNET INTEL — auto-captured\n// last updated: %s\n\nUSERNAME        PASSWORD        HOST[/color]\n\n" % time_str
-	else:
-		var lines = current.split("\n")
-		var time = Time.get_time_dict_from_system()
-		var time_str = "%02d:%02d:%02d" % [time.hour, time.minute, time.second]
-		lines[1] = "[color=#4a4a4a]// last updated: %s" % time_str
-		current = "\n".join(lines)
+func _on_rename_tab_pressed() -> void:
+	if tab_container.get_child_count() == 0:
+		return
+	var current_idx = tab_container.current_tab
+	var current_tab = tab_container.get_child(current_idx)
+	rename_line_edit.text = current_tab.name
+	rename_dialog.popup_centered()
+	rename_line_edit.grab_focus()
+	rename_line_edit.select_all()
+
+func _on_rename_confirmed() -> void:
+	var new_name = rename_line_edit.text.strip_edges()
+	if new_name != "" and tab_container.get_child_count() > 0:
+		var current_idx = tab_container.current_tab
+		var current_tab = tab_container.get_child(current_idx)
+		current_tab.name = new_name
+		_save_notes()
+
+func _on_delete_tab_pressed() -> void:
+	if tab_container.get_child_count() > 1:
+		var current_idx = tab_container.current_tab
+		var current_tab = tab_container.get_child(current_idx)
+		tab_container.remove_child(current_tab)
+		current_tab.queue_free()
+		_save_notes()
+
+func _save_notes() -> void:
+	var data = []
+	for child in tab_container.get_children():
+		if child.is_queued_for_deletion():
+			continue
+		if child.get_child_count() > 0:
+			var text_edit = child.get_child(0) as TextEdit
+			if text_edit:
+				data.append({
+					"name": child.name,
+					"content": text_edit.text
+				})
+			
+	var file = FileAccess.open(notes_file_path, FileAccess.WRITE)
+	if file:
+		var json_string = JSON.stringify(data)
+		file.store_string(json_string)
+		file.close()
+
+func _load_notes() -> void:
+	if not FileAccess.file_exists(notes_file_path):
+		return
 		
-	var entry = "[color=#00ff41]■[/color]  %-15s %-15s %s\n" % [username, password, ip]
-	if not entry in current:
-		creds_rtf.text = current + entry
-
-func _on_file_downloaded(file_node, source_machine, source_path):
-	var current = dl_rtf.text
-	if current.is_empty() or "no data captured" in current:
-		var time = Time.get_time_dict_from_system()
-		var time_str = "%02d:%02d:%02d" % [time.hour, time.minute, time.second]
-		current = "[color=#4a4a4a]// GHOSTNET INTEL — auto-captured\n// last updated: %s\n\nFILENAME        SOURCE          PATH[/color]\n\n" % time_str
-	else:
-		var lines = current.split("\n")
-		var time = Time.get_time_dict_from_system()
-		var time_str = "%02d:%02d:%02d" % [time.hour, time.minute, time.second]
-		lines[1] = "[color=#4a4a4a]// last updated: %s" % time_str
-		current = "\n".join(lines)
+	var file = FileAccess.open(notes_file_path, FileAccess.READ)
+	if file:
+		var json_string = file.get_as_text()
+		file.close()
 		
-	var entry = "[color=#00ff41]■[/color]  %-15s %-15s %s\n" % [file_node.name, source_machine, source_path]
-	if not entry in current:
-		dl_rtf.text = current + entry
+		var json = JSON.new()
+		var error = json.parse(json_string)
+		if error == OK:
+			var data = json.data
+			if typeof(data) == TYPE_ARRAY:
+				for item in data:
+					if typeof(item) == TYPE_DICTIONARY and item.has("name") and item.has("content"):
+						_add_tab(item["name"], item["content"])
 
 func grab_focus_internal():
-	notes_text.grab_focus()
+	if tab_container.get_child_count() > 0:
+		var current_idx = tab_container.current_tab
+		var current_tab = tab_container.get_child(current_idx)
+		if current_tab and current_tab.get_child_count() > 0:
+			current_tab.get_child(0).grab_focus()

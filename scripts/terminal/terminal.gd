@@ -251,7 +251,6 @@ func _handle_ftp_command(text: String) -> void:
 				print_output("150 Opening BINARY mode data connection for " + f.name)
 				await get_tree().create_timer(1.0).timeout
 				print_output("226 Transfer complete.")
-				GlobalSignals.file_downloaded.emit(f, NetworkManager.get_current_machine().hostname, navigator.get_current_path() + "/" + f.name)
 			else:
 				print_output("550 Failed to open file.")
 	else:

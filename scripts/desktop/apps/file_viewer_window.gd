@@ -23,6 +23,5 @@ func _ready():
 
 func _on_download():
 	if machine.ip != "127.0.0.1":
-		GlobalSignals.file_downloaded.emit(file_node, machine.hostname, full_path)
 		dl_btn.disabled = true
 		dl_btn.text = "DOWNLOADED"

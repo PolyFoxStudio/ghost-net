@@ -86,7 +86,6 @@ func execute(args: Array, context: Dictionary):
 		
 		if match_found:
 			correct_cred.is_discovered = true
-			GlobalSignals.credential_found.emit(username, correct_cred.password, ip)
 			var success_msg = "[color=#00ff41][%s][%s] host: %s   login: %s   password: %s[/color]\n1 valid password found." % [str(target_port.port_number), protocol, ip, username, correct_cred.password]
 			return CommandResult.new(success_msg, true)
 		else:
