@@ -167,7 +167,7 @@ func _on_page_loaded(url: String) -> void:
 	if url == "pronet.io/in/diane-marsh-helix" and not GameState.get_flag("E08_contact_identified"):
 		GameState.set_flag("E08_contact_identified", true)
 
-	if url == "pronet.io/in/richard-holt-helix" and not GameState.get_flag("holt_pronet_cipher_fired"):
+	if GameState.get_flag("holt_pronet_visited") and not GameState.get_flag("holt_pronet_cipher_fired"):
 		GameState.set_flag("holt_pronet_cipher_fired", true)
 		GlobalSignals.emit_signal("phantomlink_message", "cipher",
 			"Holt's been on ProNet recently — 19 days ago. Right around when things went sideways at Helix. And that gap in his CV between 2016 and 2018... two years of nothing. Worth digging.")
