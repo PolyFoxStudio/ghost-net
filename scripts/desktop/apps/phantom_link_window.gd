@@ -270,24 +270,46 @@ func _get_beat_messages(beat_id: String) -> Array:
 			]
 		"beat_04":
 			return [
-				PLMessage.new("marcus", "i don't know if this is the right address", beat_id),
-				PLMessage.new("marcus", "i was told you might be able to help", beat_id),
-				PLMessage.new("marcus", "my wife has been missing for six days", beat_id),
-				PLMessage.new("marcus", "the police have a report but they're not doing anything", beat_id),
-				PLMessage.new("marcus", "i don't know where else to go", beat_id)
+				PLMessage.new("marcus", "i sent everything i have", beat_id),
+				PLMessage.new("marcus", "her photo, her employee ID from an old email, the name of her manager", beat_id),
+				PLMessage.new("marcus", "and a timeline i wrote out as best i could", beat_id),
+				PLMessage.new("marcus", "i don't know if any of it is useful", beat_id),
+				PLMessage.new("marcus", "i don't really know how this works", beat_id),
+				PLMessage.new("marcus", "i just wanted to say — thank you", beat_id),
+				PLMessage.new("marcus", "for saying yes", beat_id),
+				PLMessage.new("marcus", "i didn't know who else to call", beat_id)
 			]
 		"beat_04_A":
 			return [
-				PLMessage.new("marcus", "she works at a data consultancy called helix solutions. her boss is diane marsh.", beat_id),
-				PLMessage.new("marcus", "nadia was terrified of her. please find her.", beat_id)
+				PLMessage.new("marcus", "okay", beat_id),
+				PLMessage.new("marcus", "okay. that's good.", beat_id),
+				PLMessage.new("marcus", "she'd been anxious for weeks before she disappeared", beat_id),
+				PLMessage.new("marcus", "not sleeping. jumping at things.", beat_id),
+				PLMessage.new("marcus", "i kept asking her what was wrong and she kept saying work was stressful", beat_id),
+				PLMessage.new("marcus", "i should have pushed harder", beat_id),
+				PLMessage.new("marcus", "there was a woman she mentioned a few times. Diane Marsh.", beat_id),
+				PLMessage.new("marcus", "she said Diane was the only one at Helix she actually trusted", beat_id),
+				PLMessage.new("marcus", "i don't know if that means anything to you", beat_id),
+				PLMessage.new("marcus", "i hope it does", beat_id)
 			]
 		"beat_04_B":
 			return [
-				PLMessage.new("marcus", "her name is nadia webb. she worked for helix solutions.", beat_id)
+				PLMessage.new("marcus", "yes", beat_id),
+				PLMessage.new("marcus", "there was someone", beat_id),
+				PLMessage.new("marcus", "a woman called Diane Marsh", beat_id),
+				PLMessage.new("marcus", "she worked with Nadia. senior analyst or something like that.", beat_id),
+				PLMessage.new("marcus", "Nadia mentioned her a few times in the last few months", beat_id),
+				PLMessage.new("marcus", "said she was one of the good ones", beat_id),
+				PLMessage.new("marcus", "i don't know if she knows anything", beat_id),
+				PLMessage.new("marcus", "but she knew Nadia better than most people there did", beat_id)
 			]
 		"beat_04_C":
 			return [
-				PLMessage.new("marcus", "she works at helix solutions. please find her.", beat_id)
+				PLMessage.new("marcus", "i know", beat_id),
+				PLMessage.new("marcus", "i know you can't promise", beat_id),
+				PLMessage.new("marcus", "thank you for being straight with me", beat_id),
+				PLMessage.new("marcus", "i'll be here if you need anything", beat_id),
+				PLMessage.new("marcus", "anything at all", beat_id)
 			]
 		"beat_05":
 			return [
@@ -438,9 +460,9 @@ func _show_choices_for_beat(beat_id: String) -> void:
 		]
 	elif beat_id == "beat_04":
 		choices = [
-			{"text": "I'm looking into it. Start from the beginning.", "next": "beat_04_A", "score": 1, "target": "marcus"},
-			{"text": "I have your message. Give me the facts.", "next": "beat_04_B", "score": 0, "target": "marcus"},
-			{"text": "Calm down. Tell me what you know.", "next": "beat_04_C", "score": -1, "target": "marcus"}
+			{"text": "I got it. I'm already looking. I'll be in touch when there's something.", "next": "beat_04_A", "score": 1, "target": "marcus"},
+			{"text": "Got everything. One question — was there anyone at Helix she trusted? Anyone she talked about?", "next": "beat_04_B", "score": 0, "target": "marcus"},
+			{"text": "I'll be honest with you. I can't promise anything. But I'll look.", "next": "beat_04_C", "score": -1, "target": "marcus"}
 		]
 	elif beat_id == "beat_13":
 		choices = [
@@ -476,7 +498,7 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 	else:
 		GameState.adjust_marcus_state(choice["score"])
 	
-	if choice["next"] == "beat_04_A":
+	if choice["next"] == "beat_04_A" or choice["next"] == "beat_04_B":
 		GameState.set_flag("marcus_mentioned_diane", true)
 	if choice["next"] == "beat_13_B":
 		GameState.set_flag("marcus_warned_about_helix", true)
