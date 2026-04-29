@@ -8,6 +8,11 @@ var flags: Dictionary = {}
 var cipher_score: int = 0
 var marcus_score: int = 0
 
+var cipher_relationship: int = 0
+var cipher_relationship_score: int = 0   # range -10 to +10
+var marcus_emotional_state: int = 0      # range -5 to +5
+var navigator_pages_visited: int = 0
+
 var countermeasure_tiers: Dictionary = {}
 
 var current_act: int = 1
@@ -27,6 +32,18 @@ func modify_cipher(amount: int) -> void:
 
 func modify_marcus(amount: int) -> void:
 	marcus_score = clampi(marcus_score + amount, -3, 3)
+
+func adjust_cipher_score(delta: int) -> void:
+	cipher_relationship_score = clampi(cipher_relationship_score + delta, -10, 10)
+	cipher_relationship = cipher_relationship_score
+
+func adjust_marcus_state(delta: int) -> void:
+	marcus_emotional_state = clampi(marcus_emotional_state + delta, -5, 5)
+
+func get_cipher_threshold() -> String:
+	if cipher_relationship_score >= 5: return "high"
+	elif cipher_relationship_score >= -2: return "mid"
+	else: return "low"
 
 func get_tier(target_ip: String) -> int:
 	return countermeasure_tiers.get(target_ip, 0)

@@ -85,6 +85,17 @@ v2.3.1"
 	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
 	text = "📁 FILES"
 	
+	[node name="PhantomLinkBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
+	layout_mode = 2
+	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
+	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
+	theme_override_font_sizes/font_size = 12
+	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
+	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
+	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
+	text = "💬 PHANTOMLINK"
+	
 	[node name="MinimisedTray" type="HBoxContainer" parent="HBoxContainer"]
 	layout_mode = 2
 	size_flags_horizontal = 3

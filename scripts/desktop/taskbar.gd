@@ -8,6 +8,7 @@ extends PanelContainer
 @onready var nav_btn = $HBoxContainer/AppLaunchers/NavigatorBtn
 @onready var notes_btn = $HBoxContainer/AppLaunchers/NotesBtn
 @onready var files_btn = $HBoxContainer/AppLaunchers/FilesBtn
+@onready var pl_btn = $HBoxContainer/AppLaunchers/PhantomLinkBtn
 
 @onready var min_tray = $HBoxContainer/MinimisedTray
 
@@ -17,6 +18,7 @@ var term_scene = preload("res://scenes/desktop/apps/TerminalWindow.tscn")
 var nav_scene = preload("res://scenes/desktop/apps/NavigatorWindow.tscn")
 var notes_scene = preload("res://scenes/desktop/apps/NotesWindow.tscn")
 var files_scene = preload("res://scenes/desktop/apps/FilesWindow.tscn")
+var pl_scene = preload("res://scenes/desktop/apps/PhantomLinkWindow.tscn")
 
 func _ready():
 	var timer = Timer.new()
@@ -37,6 +39,10 @@ func _ready():
 	nav_btn.pressed.connect(func(): WindowManager.open_window(nav_scene, "NAVIGATOR"))
 	notes_btn.pressed.connect(func(): WindowManager.open_window(notes_scene, "NOTES"))
 	files_btn.pressed.connect(func(): WindowManager.open_window(files_scene, "FILES"))
+	pl_btn.pressed.connect(func(): WindowManager.open_window(pl_scene, "PHANTOMLINK"))
+	
+	if GlobalSignals.has_signal("phantomlink_message_received"):
+		GlobalSignals.phantomlink_message_received.connect(_on_pl_message)
 
 	GlobalSignals.window_minimised.connect(_on_window_minimised)
 	GlobalSignals.window_restored.connect(_on_window_restored)
@@ -59,6 +65,9 @@ func _on_window_minimised(app_name: String):
 	_min_buttons[app_name] = btn
 
 func _on_window_restored(app_name: String):
+	if app_name == "PHANTOMLINK":
+		pl_btn.text = pl_btn.text.replace("● ", "")
+	
 	if _min_buttons.has(app_name):
 		_min_buttons[app_name].queue_free()
 		_min_buttons.erase(app_name)
@@ -85,4 +94,8 @@ func _on_trace_triggered(_machine):
 
 func _on_trace_ended(_machine):
 	trace_indicator.hide()
+	
+func _on_pl_message(thread_id: String, beat_id: String):
+	if pl_btn.text.find("●") == -1:
+		pl_btn.text = "● " + pl_btn.text
 	

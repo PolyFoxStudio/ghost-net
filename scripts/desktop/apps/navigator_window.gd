@@ -203,6 +203,11 @@ func _load_error_page(url: String) -> void:
 	status_bar.text = "Error: page not found"
 
 func _on_page_loaded(url: String) -> void:
+	GameState.navigator_pages_visited += 1
+	if GameState.navigator_pages_visited == 3 and not GameState.get_flag("beat_13_triggered"):
+		GameState.set_flag("beat_13_triggered", true)
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_13")
+		
 	if url == "pronet.io/in/nadia-webb" and not GameState.get_flag("E01_discovered"):
 		GameState.set_flag("E01_discovered", true)
 		if GameState.cipher_relationship >= 5:
@@ -237,27 +242,32 @@ func _on_page_loaded(url: String) -> void:
 	if GameState.get_flag("helix_registry_visited") and not GameState.get_flag("helix_registry_cipher_fired"):
 		if GameState.cipher_relationship >= 5:
 			GameState.set_flag("helix_registry_cipher_fired", true)
-			GlobalSignals.emit_signal("phantomlink_message", "cipher", "a company owned entirely by another company with no named individuals. that's a structure designed to obscure.")
+			GlobalSignals.phantomlink_beat_trigger.emit("beat_11")
 
 	if GameState.get_flag("holtvane_registry_visited") and not GameState.get_flag("holtvane_registry_cipher_fired"):
 		GameState.set_flag("holtvane_registry_cipher_fired", true)
-		GlobalSignals.emit_signal("phantomlink_message", "cipher", "BVI registered. nominee director. no beneficial owner disclosed. this wasn't set up for tax efficiency — it was set up to hide who's really behind helix.")
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_06")
 
 	if GameState.get_flag("nadia_pulse_cache_found") and not GameState.get_flag("nadia_pulse_cache_cipher_fired"):
 		GameState.set_flag("nadia_pulse_cache_cipher_fired", true)
-		GlobalSignals.emit_signal("phantomlink_message", "cipher", "she deleted it. but she retweeted a whistleblower guide three days before she went quiet. she knew what she was sitting on.")
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_07")
 
 	if GameState.get_flag("sarah_okafor_found") and not GameState.get_flag("sarah_okafor_cipher_fired"):
 		GameState.set_flag("sarah_okafor_cipher_fired", true)
-		GlobalSignals.emit_signal("phantomlink_message", "cipher", "sarah okafor. she's the right person for this. read her data broker piece — she knows exactly what she's looking at.")
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_08")
 
 	if GameState.get_flag("archivst_found") and not GameState.get_flag("archivst_cipher_fired"):
 		GameState.set_flag("archivst_cipher_fired", true)
-		GlobalSignals.emit_signal("phantomlink_message", "cipher", "archivst. handle's too new to have a trail. but the data they're selling — the format matches helix's audit exports. this is an inside job or close to one.")
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_09")
 
 	if GameState.get_flag("vaultpay_found") and not GameState.get_flag("vaultpay_cipher_fired"):
 		GameState.set_flag("vaultpay_cipher_fired", true)
-		GlobalSignals.emit_signal("phantomlink_message", "cipher", "vaultpay processing. that's the money pipe. helix runs the data, vaultpay moves what it's worth. and both of them trace back to the same BVI box.")
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_10")
+		
+	if GameState.get_flag("E04_kane_identified") and not GameState.get_flag("vesper_intro_sent"):
+		GameState.set_flag("vesper_intro_sent", true)
+		GameState.set_flag("vesper_intro_received", true)
+		GlobalSignals.phantomlink_beat_trigger.emit("beat_12")
 
 # ── Tor state ──────────────────────────────────
 func _on_tor_state_changed(active: bool) -> void:

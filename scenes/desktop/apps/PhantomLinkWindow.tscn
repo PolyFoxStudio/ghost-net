@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://phantomlink"]
+
+[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxxxx"]
+[ext_resource type="Script" path="res://scripts/desktop/apps/phantom_link_window.gd" id="2_xxxxx"]
+
+[node name="PhantomLinkWindow" instance=ExtResource("1_xxxxx")]
+script = ExtResource("2_xxxxx")
+app_name = "PHANTOMLINK"
+
+[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
+text = "PHANTOMLINK"
+
+[node name="MainArea" type="HSplitContainer" parent="VBoxContainer/AppContainer" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 200
+theme_override_constants/separation = 0
+
+[node name="ThreadList" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Background" type="ColorRect" parent="VBoxContainer/AppContainer/MainArea/ThreadList"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.078, 0.078, 0.11, 1.0)
+
+[node name="VBox" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ThreadList/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="VBoxContainer/AppContainer/MainArea/ThreadList/Background/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ThreadListHeader" type="Label" parent="VBoxContainer/AppContainer/MainArea/ThreadList/Background/VBox/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.333, 0.333, 0.466, 1)
+text = "MESSAGES"
+
+[node name="ThreadItems" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ThreadList/Background/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ChatPanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Background" type="ColorRect" parent="VBoxContainer/AppContainer/MainArea/ChatPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.055, 0.055, 0.07, 1.0)
+
+[node name="VBox" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox2" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin"]
+layout_mode = 2
+
+[node name="ChatHeader" type="HBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2"]
+layout_mode = 2
+
+[node name="StatusDot" type="ColorRect" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2/ChatHeader"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0.4, 0.4, 0.8, 1)
+
+[node name="ContactName" type="Label" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2/ChatHeader"]
+layout_mode = 2
+text = "cipher"
+
+[node name="MessageHistory" type="RichTextLabel" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="ComposeArea" type="HBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2"]
+layout_mode = 2
+
+[node name="ComposeInput" type="LineEdit" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2/ComposeArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+placeholder_text = "End-to-end encrypted"
+
+[node name="SendButton" type="Button" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2/ComposeArea"]
+layout_mode = 2
+text = "Send"
+disabled = true
+
+[node name="ChoicePanel" type="VBoxContainer" parent="VBoxContainer/AppContainer/MainArea/ChatPanel/Background/VBox/Margin/VBox2"]
+visible = false
+layout_mode = 2

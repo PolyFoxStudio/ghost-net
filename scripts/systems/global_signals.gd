@@ -25,6 +25,8 @@ signal credential_found(username: String, password: String, ip: String)
 
 signal tor_state_changed(is_active: bool)
 signal phantomlink_message(sender: String, message: String)
+signal phantomlink_message_received(thread: String, beat_id: String)
+signal phantomlink_beat_trigger(beat_id: String)
 signal open_senet_compose(recipient_email: String, recipient_name: String)
 
 signal navigator_navigate(url: String)
