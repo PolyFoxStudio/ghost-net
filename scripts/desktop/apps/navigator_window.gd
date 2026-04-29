@@ -128,11 +128,38 @@ func _load_page(url: String) -> void:
 			GameState.set_flag("viewed_helix_team")
 		"helixsolutions.com/services":
 			GameState.set_flag("viewed_helix_services")
+		"companyregistry.gov/company/11884762":
+			GameState.set_flag("helix_registry_visited", true)
+		"companyregistry.gov/company/09941123":
+			GameState.set_flag("holtvane_registry_visited", true)
+		"pulse.social/nadia_webb/cached":
+			GameState.set_flag("nadia_pulse_cache_found", true)
+		"thesignal.press/team/sarah-okafor":
+			GameState.set_flag("sarah_okafor_found", true)
+		"datashadow7x3k.onion/seller/archivst":
+			GameState.set_flag("archivst_found", true)
+		"bvileak2023.onion/search?q=holt-vane":
+			GameState.set_flag("vaultpay_found", true)
+		"phantomboard4w9z.onion/thread/vesper/reply-dig":
+			GameState.set_flag("vesper_contacted", true)
+			GameState.set_flag("vesper_reply", "dig")
+		"phantomboard4w9z.onion/thread/vesper/reply-thanks":
+			GameState.set_flag("vesper_contacted", true)
+			GameState.set_flag("vesper_reply", "thanks")
 
 	status_bar.text = url
 	_on_page_loaded(url)
 
 func _resolve_scene(url: String) -> String:
+	if url.ends_with(".onion") and not tor_active:
+		url = "error://tor_required"
+	if url == "pulse.social/nadia_webb/cached" and not GameState.get_flag("wayback_pulse_run"):
+		url = "error://404"
+	if url == "openboard.net/r/corporatewatch/cached" and not GameState.get_flag("wayback_openboard_run"):
+		url = "error://404"
+	if url == "phantomboard4w9z.onion/thread/vesper" and not GameState.get_flag("vesper_intro_received"):
+		url = "phantomboard4w9z.onion"
+
 	var registry = {
 		"pronet.io/in/nadia-webb": "res://scenes/navigator/pronet_nadia_webb.tscn",
 		"pronet.io/in/diane-marsh": "res://scenes/navigator/pronet_diane_marsh.tscn",
@@ -144,6 +171,27 @@ func _resolve_scene(url: String) -> String:
 		"helixsolutions.com/team": "res://scenes/navigator/helix_team.tscn",
 		"helixsolutions.com/services": "res://scenes/navigator/helix_services.tscn",
 		"helixsolutions.com/contact": "res://scenes/navigator/helix_contact.tscn",
+		"companyregistry.gov": "res://scenes/navigator/pages/companyregistry_home.tscn",
+		"companyregistry.gov/search?q=helix+solutions": "res://scenes/navigator/pages/companyregistry_search.tscn",
+		"companyregistry.gov/company/11884762": "res://scenes/navigator/pages/companyregistry_helix.tscn",
+		"companyregistry.gov/company/09941123": "res://scenes/navigator/pages/companyregistry_holtvane.tscn",
+		"pulse.social/nadia_webb": "res://scenes/navigator/pages/pulse_nadia.tscn",
+		"pulse.social/nadia_webb/cached": "res://scenes/navigator/pages/pulse_nadia_cached.tscn",
+		"thesignal.press": "res://scenes/navigator/pages/signal_home.tscn",
+		"thesignal.press/team/sarah-okafor": "res://scenes/navigator/pages/signal_okafor.tscn",
+		"fca-securereport.gov.uk": "res://scenes/navigator/pages/fca_portal.tscn",
+		"openboard.net/r/corporatewatch": "res://scenes/navigator/pages/openboard_corpwatch.tscn",
+		"openboard.net/r/corporatewatch/cached": "res://scenes/navigator/pages/openboard_corpwatch_cached.tscn",
+		"datashadow7x3k.onion": "res://scenes/navigator/pages/datashadow_home.tscn",
+		"datashadow7x3k.onion/seller/archivst": "res://scenes/navigator/pages/datashadow_archivst.tscn",
+		"phantomboard4w9z.onion": "res://scenes/navigator/pages/phantomboard_home.tscn",
+		"phantomboard4w9z.onion/thread/vesper": "res://scenes/navigator/pages/phantomboard_vesper.tscn",
+		"phantomboard4w9z.onion/thread/vesper/reply-dig": "res://scenes/navigator/pages/phantomboard_vesper_dig.tscn",
+		"phantomboard4w9z.onion/thread/vesper/reply-thanks": "res://scenes/navigator/pages/phantomboard_vesper_thanks.tscn",
+		"bvileak2023.onion": "res://scenes/navigator/pages/bvileak_home.tscn",
+		"bvileak2023.onion/search?q=holt-vane": "res://scenes/navigator/pages/bvileak_search.tscn",
+		"error://tor_required": "res://scenes/navigator/pages/error_tor_required.tscn",
+		"error://404": "res://scenes/navigator/pages/error_404.tscn"
 	}
 	return registry.get(url, "")
 
@@ -185,6 +233,31 @@ func _on_page_loaded(url: String) -> void:
 	if url == "helixsolutions.com/contact":
 		if GameState.get_flag("E03_registry_visited") and not GameState.get_flag("E02_address_confirmed"):
 			GameState.set_flag("E02_address_confirmed", true)
+
+	if GameState.get_flag("helix_registry_visited") and not GameState.get_flag("helix_registry_cipher_fired"):
+		if GameState.cipher_relationship >= 5:
+			GameState.set_flag("helix_registry_cipher_fired", true)
+			GlobalSignals.emit_signal("phantomlink_message", "cipher", "a company owned entirely by another company with no named individuals. that's a structure designed to obscure.")
+
+	if GameState.get_flag("holtvane_registry_visited") and not GameState.get_flag("holtvane_registry_cipher_fired"):
+		GameState.set_flag("holtvane_registry_cipher_fired", true)
+		GlobalSignals.emit_signal("phantomlink_message", "cipher", "BVI registered. nominee director. no beneficial owner disclosed. this wasn't set up for tax efficiency — it was set up to hide who's really behind helix.")
+
+	if GameState.get_flag("nadia_pulse_cache_found") and not GameState.get_flag("nadia_pulse_cache_cipher_fired"):
+		GameState.set_flag("nadia_pulse_cache_cipher_fired", true)
+		GlobalSignals.emit_signal("phantomlink_message", "cipher", "she deleted it. but she retweeted a whistleblower guide three days before she went quiet. she knew what she was sitting on.")
+
+	if GameState.get_flag("sarah_okafor_found") and not GameState.get_flag("sarah_okafor_cipher_fired"):
+		GameState.set_flag("sarah_okafor_cipher_fired", true)
+		GlobalSignals.emit_signal("phantomlink_message", "cipher", "sarah okafor. she's the right person for this. read her data broker piece — she knows exactly what she's looking at.")
+
+	if GameState.get_flag("archivst_found") and not GameState.get_flag("archivst_cipher_fired"):
+		GameState.set_flag("archivst_cipher_fired", true)
+		GlobalSignals.emit_signal("phantomlink_message", "cipher", "archivst. handle's too new to have a trail. but the data they're selling — the format matches helix's audit exports. this is an inside job or close to one.")
+
+	if GameState.get_flag("vaultpay_found") and not GameState.get_flag("vaultpay_cipher_fired"):
+		GameState.set_flag("vaultpay_cipher_fired", true)
+		GlobalSignals.emit_signal("phantomlink_message", "cipher", "vaultpay processing. that's the money pipe. helix runs the data, vaultpay moves what it's worth. and both of them trace back to the same BVI box.")
 
 # ── Tor state ──────────────────────────────────
 func _on_tor_state_changed(active: bool) -> void:

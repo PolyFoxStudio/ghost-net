@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#fafaf8][color=#1a1814]
+
+[table=2]
+[cell][color=#1a1814][b]  THE SIGNAL  [/b][/color]  [color=#888880][font_size=11]Independent Investigative Journalism[/font_size][/color][/cell]
+[cell][color=#666660]  [url=thesignal.press]Home[/url]   Investigations   About   [url=thesignal.press/team/sarah-okafor]Contact[/url][/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#1a1814][color=#fafaf8]
+[font_size=11]  THE SIGNAL · INDEPENDENT · INVESTIGATIVE · ACCOUNTABILITY  [/font_size]
+[/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Latest investigations[/b]
+
+[bgcolor=#f0f0ec]
+[color=#888880][font_size=11]FINANCIAL CRIME[/font_size][/color]
+[b][font_size=15]Inside the offshore property empire of a UK pension fund[/font_size][/b]
+[color=#444440]How a network of BVI shell companies funnelled pension contributions into private development projects — with the knowledge of senior trustees.[/color]
+[color=#888880][font_size=11]By Marcus Adeyemi · 14 days ago[/font_size][/color]
+[/bgcolor]
+
+[color=#d0d0cc]──────[/color]
+
+[bgcolor=#f0f0ec]
+[color=#888880][font_size=11]CARE SECTOR[/font_size][/color]
+[b][font_size=15]The care home that couldn't account for £2 million[/font_size][/b]
+[color=#444440]A year-long investigation into financial irregularities at a chain of privately run care facilities. Residents paid. The money vanished.[/color]
+[color=#888880][font_size=11]By Priya Singh · 31 days ago[/font_size][/color]
+[/bgcolor]
+
+[color=#d0d0cc]──────[/color]
+
+[bgcolor=#f0f0ec]
+[color=#888880][font_size=11]DATA & PRIVACY[/font_size][/color]
+[b][font_size=15]Data brokers and the quiet trade in your medical history[/font_size][/b]
+[color=#444440]Your GP records. Your prescriptions. Your mental health referrals. Who's buying them — and how did they get them in the first place?[/color]
+[color=#888880][font_size=11]By [url=thesignal.press/team/sarah-okafor][color=#1a6bb5]Sarah Okafor[/color][/url] · 52 days ago[/font_size][/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[color=#444440][i]\"Good journalism makes the powerful uncomfortable. That's how you know it's working.\"[/i][/color]
+
+[bgcolor=#1a1814][color=#fafaf8][b]  [url=thesignal.press/team/sarah-okafor]Submit a tip securely →[/url]  [/b][/color][/bgcolor]
+
+[/indent]
+
+[color=#aaaaaa][font_size=10]The Signal · Independent journalism · Not affiliated with any government or corporate entity · © 2024[/font_size][/color]
+
+[/color][/bgcolor]"

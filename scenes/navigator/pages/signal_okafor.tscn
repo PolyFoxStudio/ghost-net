@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#fafaf8][color=#1a1814]
+
+[table=2]
+[cell][color=#1a1814][b]  THE SIGNAL  [/b][/color]  [color=#888880][font_size=11]Independent Investigative Journalism[/font_size][/color][/cell]
+[cell][color=#666660]  [url=thesignal.press]Home[/url]   Investigations   About   Contact[/color][/cell]
+[/table]
+
+[indent]
+[font_size=20][b]Sarah Okafor[/b][/font_size]
+[color=#666660]Investigative Reporter — Financial Crime & Corporate Accountability[/color]
+
+─────────────────────────────────────────────────
+
+[color=#444440]Sarah covers financial crime, corporate malfeasance, and data privacy. She has been reporting for The Signal since 2021 and has broken several high-profile stories involving corporate fraud and regulatory failure.
+
+Before joining The Signal, she spent six years at a national broadsheet and two years as a researcher for a parliamentary select committee on financial services oversight.
+
+She is a fellow of the Reuters Institute for the Study of Journalism.[/color]
+
+─────────────────────────────────────────────────
+
+[b]Recent work[/b]
+
+[color=#444440]· Data brokers and the quiet trade in your medical history
+· The compliance consultancy that wasn't: how audit firms become cover stories
+· Who owns your financial records? The answer is more complicated than you'd think[/color]
+
+─────────────────────────────────────────────────
+
+[b]Secure contact[/b]
+
+[color=#444440]If you have information and you're not sure what to do with it — reach out. Everything is treated with the strictest confidence. I do not share sources. I do not store identifying metadata.
+
+PGP key: [color=#888880]4A2F · 9C3E · 71AD · B052 · 3F9A · 1D4C · 88BE · 7F21 · 3904 · A1CB[/color][/color]
+
+[bgcolor=#e8f0e8]
+[color=#166534][b]SecureDrop (Tor required):[/b][/color]
+[color=#166534][url=thesignaldrop4k2j.onion][color=#1a6bb5]thesignaldrop4k2j.onion[/color][/url][/color]
+[color=#888880][font_size=11]This link only resolves over the Tor network. If you are not using Tor, it will not connect.[/font_size][/color]
+[/bgcolor]
+
+[color=#444440][i]\"If you have something — reach out. You don't have to face it alone.\"[/i][/color]
+
+[/indent]
+
+[color=#aaaaaa][font_size=10]The Signal · Independent journalism · Not affiliated with any government or corporate entity · © 2024[/font_size][/color]
+
+[/color][/bgcolor]"

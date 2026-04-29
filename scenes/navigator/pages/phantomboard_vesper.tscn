@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0e0e12][color=#aaaacc]
+
+[table=2]
+[cell][bgcolor=#14141c][color=#6666cc][b]  PhantomBoard  [/b][/color][/bgcolor][/cell]
+[cell][color=#555577]  [url=phantomboard4w9z.onion]← Back[/url]   Private thread   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#14141c]
+[color=#555577][font_size=11]Private thread · Between: vesper, [your handle] · Introduced by: cipher[/font_size][/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#16161e]
+[color=#6666cc][b]vesper[/b][/color]  [color=#444466]·  3 days ago[/color]
+
+[color=#aaaacc]Cipher says you're looking for background on a name.
+
+D. Kane. Daniel Marcus Kane.
+
+I know the name. Government-adjacent. Early 2000s. The agency isn't one that gets named in public — you won't find it in a registry. He left, or was made to leave, around 2011. The details aren't something people talk about.
+
+What I can tell you: the people who worked with him don't speak fondly of him. And they don't speak at all, usually.
+
+He knows how to make things disappear. People. Records. Problems.
+
+That's all I've got. Be careful with this one.[/color]
+
+[color=#444466]— vesper[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Reply[/b]
+
+[bgcolor=#14141c]
+[url=phantomboard4w9z.onion/thread/vesper/reply-dig][color=#aaaacc]→ \"Do you know what he did in the eight years between leaving government and Helix?\"[/color][/url]
+
+[color=#333344]──────[/color]
+
+[url=phantomboard4w9z.onion/thread/vesper/reply-thanks][color=#aaaacc]→ \"Understood. Thank you.\"[/color][/url]
+[/bgcolor]
+
+[/indent]
+
+[color=#333344][font_size=10]PhantomBoard · Invitation only · No logs kept · PGP-authenticated sessions[/font_size][/color]
+
+[/color][/bgcolor]"

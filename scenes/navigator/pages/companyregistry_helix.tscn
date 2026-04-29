@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f0f4f8][color=#1a202c]
+
+[table=2]
+[cell][bgcolor=#1a3a5c][color=#ffffff][b]  CompanyRegistry.gov  [/b][/color][/bgcolor][/cell]
+[cell][color=#4a6080]  [url=companyregistry.gov]Home[/url]   [url=companyregistry.gov/search?q=helix+solutions]Search results[/url][/color][/cell]
+[/table]
+
+[indent]
+[font_size=18][b]Helix Solutions Ltd.[/b][/font_size]
+[color=#166534][b]● Active[/b][/color]   [color=#4a6080]Company number: 11884762[/color]
+
+─────────────────────────────────────────────────
+
+[table=2]
+[cell]
+[b]Company type[/b]
+[color=#4a6080]Private limited company[/color]
+[/cell]
+[cell]
+[b]Incorporated[/b]
+[color=#4a6080]14 March 2019[/color]
+[/cell]
+[/table]
+
+[table=2]
+[cell]
+[b]Registered office[/b]
+[color=#4a6080]Meridian House, 14 Canary Lane, London EC2[/color]
+[/cell]
+[cell]
+[b]Nature of business[/b]
+[color=#4a6080]Financial data management & compliance consulting[/color]
+[/cell]
+[/table]
+
+─────────────────────────────────────────────────
+
+[b]Directors[/b]
+
+[bgcolor=#ffffff]
+[table=2]
+[cell][b]Richard James Holt[/b]
+[color=#4a6080]Director · Date of birth: June 1982[/color][/cell]
+[cell][color=#4a6080]Appointed: 14/03/2019[/color][/cell]
+[/table]
+[/bgcolor]
+
+[bgcolor=#f9fafb]
+[table=2]
+[cell][b]Sandra Marie Vane[/b]
+[color=#4a6080]Director · Date of birth: November 1979[/color][/cell]
+[cell][color=#4a6080]Appointed: 14/03/2019[/color][/cell]
+[/table]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Shareholders[/b]
+
+[bgcolor=#ffffff]
+[table=2]
+[cell][b][url=companyregistry.gov/company/09941123][color=#1a6bb5]Holt-Vane Holdings Ltd.[/color][/url][/b]
+[color=#4a6080]100% ordinary shares · Company number: 09941123[/color][/cell]
+[cell][color=#4a6080]Registered: British Virgin Islands[/color][/cell]
+[/table]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Accounts[/b]
+
+[table=2]
+[cell][color=#4a6080]Last accounts filed[/color]
+[color=#1a202c]31 December 2024[/color][/cell]
+[cell][color=#4a6080]Filing status[/color]
+[color=#166534]Filed on time[/color][/cell]
+[/table]
+
+[url=companyregistry.gov/company/11884762/accounts][color=#1a6bb5]View annual accounts (PDF) →[/color][/url]
+
+[/indent]
+
+[color=#6a8099][font_size=10]CompanyRegistry.gov · Crown Copyright · Companies registered in England & Wales · Data updated daily[/font_size][/color]
+
+[/color][/bgcolor]"

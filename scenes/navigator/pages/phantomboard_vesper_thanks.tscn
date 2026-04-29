@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0e0e12][color=#aaaacc]
+
+[table=2]
+[cell][bgcolor=#14141c][color=#6666cc][b]  PhantomBoard  [/b][/color][/bgcolor][/cell]
+[cell][color=#555577]  [url=phantomboard4w9z.onion/thread/vesper]← Thread[/url]   Private thread   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#16161e]
+[color=#6666cc][b]vesper[/b][/color]  [color=#444466]·  just now[/color]
+
+[color=#aaaacc]Good luck. You'll need it.[/color]
+
+[color=#444466]— vesper[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#1c1c24][color=#555577][font_size=11]  vesper has closed this thread.  [/font_size][/color][/bgcolor]
+
+[/indent]
+
+[color=#333344][font_size=10]PhantomBoard · Invitation only · No logs kept · PGP-authenticated sessions[/font_size][/color]
+
+[/color][/bgcolor]"

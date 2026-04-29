@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f0f4f8][color=#1a202c]
+
+[table=2]
+[cell][bgcolor=#1a3a5c][color=#ffffff][b]  CompanyRegistry.gov  [/b][/color][/bgcolor][/cell]
+[cell][color=#4a6080]  [url=companyregistry.gov]Home[/url]   [url=companyregistry.gov/search?q=helix+solutions]Search results[/url][/color][/cell]
+[/table]
+
+[indent]
+[font_size=18][b]Holt-Vane Holdings Ltd.[/b][/font_size]
+[color=#166534][b]● Active[/b][/color]   [color=#4a6080]Company number: 09941123[/color]
+
+─────────────────────────────────────────────────
+
+[table=2]
+[cell]
+[b]Company type[/b]
+[color=#4a6080]Private limited company[/color]
+[/cell]
+[cell]
+[b]Incorporated[/b]
+[color=#4a6080]22 November 2018[/color]
+[/cell]
+[/table]
+
+[table=2]
+[cell]
+[b]Registered office[/b]
+[color=#4a6080]PO Box 4471, Road Town, Tortola
+British Virgin Islands[/color]
+[/cell]
+[cell]
+[b]Nature of business[/b]
+[color=#4a6080]Holding company — management fee income[/color]
+[/cell]
+[/table]
+
+─────────────────────────────────────────────────
+
+[b]Directors[/b]
+
+[bgcolor=#ffffff]
+[table=2]
+[cell][b]Nominee Director Services Ltd.[/b]
+[color=#4a6080]Corporate director · Nominee arrangement[/color][/cell]
+[cell][color=#4a6080]Appointed: 22/11/2018[/color][/cell]
+[/table]
+[/bgcolor]
+
+[bgcolor=#fff3cd]
+[color=#856404][font_size=12]  ⚠  Nominee director arrangement in use. True beneficial owner not disclosed under BVI registration rules.  [/font_size][/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Shareholders[/b]
+
+[bgcolor=#ffffff]
+[color=#4a6080]Shareholder information not publicly disclosed.
+BVI registered entities are not required to file beneficial ownership with UK Companies House.[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Accounts[/b]
+
+[color=#4a6080]Minimal disclosure — BVI registered entity.
+No full accounts filed with UK registry.[/color]
+
+[/indent]
+
+[color=#6a8099][font_size=10]CompanyRegistry.gov · Crown Copyright · Companies registered in England & Wales · Data updated daily[/font_size][/color]
+
+[/color][/bgcolor]"

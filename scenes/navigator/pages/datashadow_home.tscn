@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0d0d0d][color=#c8c8c8]
+
+[table=2]
+[cell][bgcolor=#1a0a0a][color=#cc3333][b]  DataShadow Market  [/b][/color][/bgcolor][/cell]
+[cell][color=#666666]  Browse   Search   My Account   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#1a1a1a]
+[font_size=11][color=#888888]You are browsing over Tor. Your connection is encrypted and anonymised. Proceed with discretion.[/color][/font_size]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Browse by category[/b]
+
+[color=#888888]
+· [url=datashadow7x3k.onion/category/identity][color=#cc8833]Identity Data[/color][/url]     [font_size=11]847 listings[/font_size]
+· [url=datashadow7x3k.onion/category/financial][color=#cc8833]Financial Records[/color][/url]  [font_size=11]1,204 listings[/font_size]
+· [url=datashadow7x3k.onion/category/medical][color=#cc8833]Medical Records[/color][/url]    [font_size=11]391 listings[/font_size]
+· [url=datashadow7x3k.onion/category/corporate][color=#cc8833]Corporate Data[/color][/url]   [font_size=11]562 listings[/font_size]
+[/color]
+
+─────────────────────────────────────────────────
+
+[b]Featured sellers[/b]
+
+[bgcolor=#1a1a1a]
+[color=#cc8833][b][url=datashadow7x3k.onion/seller/archivst]archivst[/url][/b][/color]  [color=#888888]★★★★☆ · 47 transactions · Verified[/color]
+[color=#666666]Specialist in corporate and financial datasets. UK focus. High accuracy rating.[/color]
+[/bgcolor]
+
+[color=#333333]──────[/color]
+
+[bgcolor=#1a1a1a]
+[color=#cc8833][b]d4tatr4de[/b][/color]  [color=#888888]★★★☆☆ · 12 transactions[/color]
+[color=#666666]Mixed identity and financial data. Variable quality reported.[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[color=#444444][font_size=11]DataShadow operates outside all national jurisdictions. Use of this marketplace is at your own risk.[/font_size][/color]
+
+[/indent]
+
+[color=#333333][font_size=10]DataShadow · Established 2021 · PGP verification required for high-value transactions[/font_size][/color]
+
+[/color][/bgcolor]"

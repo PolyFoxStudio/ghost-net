@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0a0f0a][color=#aaccaa]
+
+[table=2]
+[cell][bgcolor=#0f1a0f][color=#44aa44][b]  BVI Leak Database  [/b][/color][/bgcolor][/cell]
+[cell][color=#446644]  [url=bvileak2023.onion]Home[/url]   Search   About   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[font_size=14][b]Search results for: \"holt-vane\"[/b][/font_size]
+[color=#446644]1 result found.[/color]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#141f14]
+[b][color=#44aa44]Holt-Vane Holdings Ltd.[/color][/b]
+[table=2]
+[cell][color=#446644]BVI Registration[/color]
+[color=#aaccaa]BVI-447821[/color][/cell]
+[cell][color=#446644]PO Box[/color]
+[color=#aaccaa]4471, Road Town, Tortola[/color][/cell]
+[/table]
+[table=2]
+[cell][color=#446644]Beneficial owner[/color]
+[color=#888888][REDACTED in source data][/color][/cell]
+[cell][color=#446644]Associated entities[/color]
+[color=#aaccaa]Helix Solutions Ltd. (UK)[/color][/cell]
+[/table]
+
+[color=#446644]Additional associated entity:[/color]
+[bgcolor=#0f1a0f]
+[color=#44aa44][b]VaultPay Processing Ltd.[/b][/color] [color=#446644](BVI)[/color]
+[color=#aaccaa]Also registered: vaultpay-offshore.net[/color]
+[color=#888888]Registration date: 09 January 2020[/color]
+[/bgcolor]
+
+[bgcolor=#1f2a10][color=#88aa44][font_size=11]  ⚠  VaultPay Processing Ltd. flagged in FinCEN supplementary dataset as associated with suspicious transaction patterns (ref: FCN-2023-0441).  [/font_size][/color][/bgcolor]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[color=#446644]Cross-reference: [url=companyregistry.gov/company/09941123][color=#44aa44]Holt-Vane Holdings on CompanyRegistry.gov →[/color][/url][/color]
+
+[/indent]
+
+[color=#224422][font_size=10]BVI Leak Database · Public interest disclosure · No logs · Anonymous access only[/font_size][/color]
+
+[/color][/bgcolor]"

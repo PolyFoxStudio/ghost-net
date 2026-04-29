@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#ffffff][color=#0f1419]
+
+[table=2]
+[cell][bgcolor=#1d9bf0][color=#ffffff][b]  Pulse  [/b][/color][/bgcolor]  [color=#536471]Home   Explore   Notifications   Messages[/color][/cell]
+[cell][color=#536471]                              [url=pulse.social/nadia_webb][color=#1d9bf0]@nadia_webb ▾[/color][/url][/cell]
+[/table]
+
+[indent]
+[bgcolor=#b6cde0][color=#b6cde0]............................................................[/color][/bgcolor]
+
+[b][font_size=18]Nadia Webb[/font_size][/b]
+[color=#536471]@nadia_webb[/color]
+
+[color=#0f1419]Data nerd. Coffee dependent. London.[/color]
+
+[color=#536471]Joined April 2018 · 312 Following · 89 Followers[/color]
+
+─────────────────────────────────────────────────
+
+[b]Posts[/b]
+
+[bgcolor=#f7f9f9]
+[b]Nadia Webb[/b] [color=#536471]@nadia_webb · 50 days ago[/color]
+
+[color=#0f1419]Long week. Ready for the weekend. 🍷[/color]
+
+[color=#536471]♡ 4   ↺ 0   💬 0[/color]
+[/bgcolor]
+
+[color=#e2e8f0]──────[/color]
+
+[bgcolor=#f7f9f9]
+[b]Nadia Webb[/b] [color=#536471]@nadia_webb · 58 days ago[/color]
+
+[color=#0f1419]Finally tried that ramen place on Brick Lane. 10/10 would recommend to anyone within walking distance.[/color]
+
+[color=#536471]♡ 11   ↺ 2   💬 2[/color]
+[/bgcolor]
+
+[color=#e2e8f0]──────[/color]
+
+[bgcolor=#f7f9f9]
+[b]Nadia Webb[/b] [color=#536471]@nadia_webb · 71 days ago[/color]
+
+[color=#0f1419]Anyone else find that the more you understand how data compliance works, the more anxious you get? Just me?[/color]
+
+[color=#536471]♡ 6   ↺ 0   💬 1[/color]
+[color=#536471]  └ @techgirl_ldn: haha yes, welcome to the club[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#fff3cd][color=#856404]  ⚠  Older posts may have been deleted. Run [b]wayback pulse.social/nadia_webb[/b] to check the cache.  [/color][/bgcolor]
+
+[/indent]
+
+[color=#aaaaaa][font_size=10]Pulse · Terms of Service · Privacy Policy · © 2024 Pulse Inc.[/font_size][/color]
+
+[/color][/bgcolor]"

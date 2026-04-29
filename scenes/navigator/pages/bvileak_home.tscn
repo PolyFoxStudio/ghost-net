@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0a0f0a][color=#aaccaa]
+
+[table=2]
+[cell][bgcolor=#0f1a0f][color=#44aa44][b]  BVI Leak Database  [/b][/color][/bgcolor][/cell]
+[cell][color=#446644]  Search   About   Contact   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#0f1a0f][color=#446644][font_size=11]  This database contains 214,000 leaked records from BVI company registrations. Published in the public interest. No personal data beyond that already in the public domain is held here.  [/font_size][/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Search the BVI Leak Database[/b]
+
+[bgcolor=#141f14][color=#aaccaa]
+  [b]Search:[/b] _______________________________________________   [bgcolor=#0f1a0f][color=#44aa44]  Search  [/color][/bgcolor]
+[/color][/bgcolor]
+
+[color=#446644]Search by: company name · director name · PO Box · registration number[/color]
+
+─────────────────────────────────────────────────
+
+[color=#446644][font_size=11]This resource is maintained by an anonymous collective of journalists, researchers, and transparency advocates. Data was obtained and verified independently.[/font_size][/color]
+
+[url=bvileak2023.onion/search?q=holt-vane][color=#44aa44]→ Search: Holt-Vane Holdings[/color][/url]
+
+[/indent]
+
+[color=#224422][font_size=10]BVI Leak Database · Public interest disclosure · No logs · Anonymous access only[/font_size][/color]
+
+[/color][/bgcolor]"

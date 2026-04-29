@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0e0e12][color=#aaaacc]
+
+[table=2]
+[cell][bgcolor=#14141c][color=#6666cc][b]  PhantomBoard  [/b][/color][/bgcolor][/cell]
+[cell][color=#555577]  OpSec   Tools   Intel   Contacts   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#14141c][color=#555577][font_size=11]  Members-only forum. Access by introduction only. Lurking is logged.  [/font_size][/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Sections[/b]
+
+[color=#666688]
+· OpSec          [font_size=11][color=#444466]General operational security discussion[/color][/font_size]
+· Tools          [font_size=11][color=#444466]Tool reviews, releases, vulnerability discussion[/color][/font_size]
+· Intel          [font_size=11][color=#444466]Information exchange — members only[/color][/font_size]
+· Contacts       [font_size=11][color=#444466]Introductions, verified contacts[/color][/font_size]
+[/color]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#1c1c24]
+[color=#6666cc][b]You have 1 unread private thread.[/b][/color]
+[url=phantomboard4w9z.onion/thread/vesper][color=#aaaacc]→ Open thread from vesper[/color][/url]
+[/bgcolor]
+
+[/indent]
+
+[color=#333344][font_size=10]PhantomBoard · Invitation only · No logs kept · PGP-authenticated sessions[/font_size][/color]
+
+[/color][/bgcolor]"

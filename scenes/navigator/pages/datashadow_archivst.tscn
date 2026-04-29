@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#0d0d0d][color=#c8c8c8]
+
+[table=2]
+[cell][bgcolor=#1a0a0a][color=#cc3333][b]  DataShadow Market  [/b][/color][/bgcolor][/cell]
+[cell][color=#666666]  [url=datashadow7x3k.onion]Browse[/url]   Search   My Account   [color=#cc3333]● Tor Connected[/color][/cell]
+[/table]
+
+[indent]
+[b][font_size=16][color=#cc8833]archivst[/color][/font_size][/b]
+[color=#888888]Verified seller · Active since March 2023 · ★★★★☆ (47 transactions)[/color]
+
+[bgcolor=#1a1a1a][color=#666666][font_size=11]  Seller note: \"All data sourced ethically. Fresh. Verified accurate as of Q4 2024.\"  [/font_size][/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Active listings (14)[/b]
+
+[bgcolor=#1a1a1a]
+[color=#cc8833][b][LOT-001] UK Corporate Client Dataset — Financial Records[/b][/color]
+[color=#c8c8c8]Comprehensive financial and personal data for ~2,400 individuals associated with a mid-size UK compliance consultancy. Includes names, NI numbers, bank sort codes, salary data, and annual audit summaries.[/color]
+[color=#888888]Posted: 8 months ago[/color]
+[table=2]
+[cell][color=#aaaaaa]Price:[/color] [color=#cc8833]0.8 BTC[/color][/cell]
+[cell][color=#aaaaaa]Format:[/color] [color=#888888]CSV / encrypted ZIP[/color][/cell]
+[/table]
+[/bgcolor]
+
+[color=#333333]──────[/color]
+
+[bgcolor=#1a1a1a]
+[color=#cc8833][b][LOT-002] UK Corporate Client Dataset — HR Records[/b][/color]
+[color=#c8c8c8]Employee records for same source organisation. Performance reviews, contract terms, absence data, and internal disciplinary notes for 47 staff members.[/color]
+[color=#888888]Posted: 8 months ago[/color]
+[table=2]
+[cell][color=#aaaaaa]Price:[/color] [color=#cc8833]0.4 BTC[/color][/cell]
+[cell][color=#aaaaaa]Format:[/color] [color=#888888]CSV / encrypted ZIP[/color][/cell]
+[/table]
+[/bgcolor]
+
+[color=#333333]──────[/color]
+
+[bgcolor=#1a1a1a]
+[color=#666666][LOT-003 through LOT-014] [Similar listings — financial and personal data from multiple client datasets][/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#1f1a10][color=#cc8833][font_size=11]  ⚠  Run [b]phantom --trace archivst[/b] in the terminal to attempt to identify this seller.  [/font_size][/color][/bgcolor]
+
+[/indent]
+
+[color=#333333][font_size=10]DataShadow · Established 2021 · PGP verification required for high-value transactions[/font_size][/color]
+
+[/color][/bgcolor]"

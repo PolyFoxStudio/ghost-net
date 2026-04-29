@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f0f4f8][color=#1a202c]
+
+[table=2]
+[cell][bgcolor=#1a3a5c][color=#ffffff][b]  CompanyRegistry.gov  [/b][/color][/bgcolor][/cell]
+[cell][color=#4a6080]  [url=companyregistry.gov]Home[/url]   Search   Help   Contact[/color][/cell]
+[/table]
+
+[indent]
+[font_size=20][b]Search the UK Company Register[/b][/font_size]
+
+[color=#4a6080]Search by company name, registration number, or director name.[/color]
+
+[bgcolor=#ffffff][color=#1a202c]
+  [b]Search:[/b] _______________________________________________   [bgcolor=#1a3a5c][color=#ffffff]  Search  [/color][/bgcolor]
+[/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[b]Quick links[/b]
+
+[color=#4a6080]
+· [url=companyregistry.gov/search?q=helix+solutions][color=#1a6bb5]Search: Helix Solutions[/color][/url]
+· File annual accounts
+· Register a new company
+· Report a dissolved company
+[/color]
+
+[/indent]
+
+[color=#6a8099][font_size=10]CompanyRegistry.gov · Crown Copyright · Companies registered in England & Wales · Data updated daily[/font_size][/color]
+
+[/color][/bgcolor]"

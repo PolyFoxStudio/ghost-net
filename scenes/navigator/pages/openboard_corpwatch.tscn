@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#ffffff][color=#1c1c1c]
+
+[table=2]
+[cell][bgcolor=#ff4500][color=#ffffff][b]  OpenBoard  [/b][/color][/bgcolor]  [color=#666666]Home   Popular   Communities   Chat[/color][/cell]
+[cell][color=#666666]                              [url=openboard.net/r/corporatewatch][color=#ff4500]r/corporatewatch[/color][/url][/cell]
+[/table]
+
+[indent]
+[bgcolor=#ff4500][color=#ffffff][b]  r/corporatewatch  [/b][/color][/bgcolor]
+
+[b][font_size=16]r/corporatewatch[/font_size][/b]
+[color=#666666]A space for discussing corporate wrongdoing, sharing experiences, and supporting whistleblowers. Anonymous posting encouraged. No employer names without verifiable sources.
+
+14,200 members · 34 online[/color]
+
+[color=#888888][font_size=11]Created 2018 · Moderated by u/watchdog_admin, u/thetransparencyproject[/font_size][/color]
+
+─────────────────────────────────────────────────
+
+[b]Recent posts[/b]
+
+[bgcolor=#f6f7f8]
+[b]u/anon_92847[/b] [color=#666666]· 3 days ago[/color]
+[b]My company \"misplaced\" three years of payroll records before an audit. Normal?[/b]
+[color=#888888]247 upvotes · 84 comments[/color]
+[/bgcolor]
+
+[color=#e0e0e0]──────[/color]
+
+[bgcolor=#f6f7f8]
+[b]u/compliance_ghost[/b] [color=#666666]· 6 days ago[/color]
+[b]Whistleblower protections in the UK — a practical guide (updated 2024)[/b]
+[color=#888888]1.2k upvotes · 312 comments[/color]
+[/bgcolor]
+
+[color=#e0e0e0]──────[/color]
+
+[bgcolor=#f6f7f8]
+[b]u/throwaway_fintech[/b] [color=#666666]· 11 days ago[/color]
+[b]Financial services firm I worked at had a whole layer of \"compliance\" that was designed to hide things from auditors, not flag them. Anyone else?[/b]
+[color=#888888]891 upvotes · 201 comments[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#fff3cd][color=#856404]  ⚠  Some older posts have been removed. Run [b]wayback openboard.net/r/corporatewatch[/b] to check the cache.  [/color][/bgcolor]
+
+[/indent]
+
+[color=#aaaaaa][font_size=10]OpenBoard · User-generated content · Moderated community · © 2024 OpenBoard Inc.[/font_size][/color]
+
+[/color][/bgcolor]"

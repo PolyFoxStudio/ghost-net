@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f5f0e8][color=#1c1c1c]
+
+[table=2]
+[cell][bgcolor=#8a7a60][color=#ffffff][b]  WaybackCache  [/b][/color][/bgcolor]  [color=#6b5f4e]Archived snapshot of openboard.net/r/corporatewatch[/color][/cell]
+[cell][color=#6b5f4e]Snapshot date: 47 days ago[/color][/cell]
+[/table]
+
+[bgcolor=#e8e0d0][color=#5a4e3a][font_size=12]  📦  You are viewing a cached version of this page. Content may differ from the live version.  [/font_size][/color][/bgcolor]
+
+[indent]
+[b]Posts (as of snapshot)[/b]
+
+[bgcolor=#ede8df]
+[b]u/nadia_webb[/b] [color=#6b5f4e]· 47 days ago[/color]
+
+[b]Anyone else working somewhere the data just... doesn't add up?[/b]
+
+[color=#1c1c1c]Has anyone else worked for a company where the audit data just... doesn't add up? Asking for a friend. (Not asking for a friend.)[/color]
+
+[color=#6b5f4e]3 upvotes · 1 comment[/color]
+
+[bgcolor=#e0d8cc]
+[color=#6b5f4e]└ u/[deleted] · [i]be careful what you poke at.[/i][/color]
+[color=#8a8070][font_size=11]  └ [comment since deleted][/font_size][/color]
+[/bgcolor]
+[/bgcolor]
+
+[color=#c8bfb0]──────[/color]
+
+[bgcolor=#ede8df]
+[b]u/anon_watchdog[/b] [color=#6b5f4e]· 51 days ago[/color]
+[b]UK whistleblower was dismissed after raising concerns about data irregularities. Update thread.[/b]
+[color=#6b5f4e]412 upvotes · 97 comments[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#d4c9b8][color=#5a4e3a][font_size=12]  📌  1 post present in this snapshot has since been deleted from the live community.  [/font_size][/color][/bgcolor]
+
+[/indent]
+
+[color=#9a8f7e][font_size=10]WaybackCache · Archived web content · Snapshot taken 47 days ago[/font_size][/color]
+
+[/color][/bgcolor]"

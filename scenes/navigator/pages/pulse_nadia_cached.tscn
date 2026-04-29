@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f5f0e8][color=#0f1419]
+
+[table=2]
+[cell][bgcolor=#8a7a60][color=#ffffff][b]  WaybackCache  [/b][/color][/bgcolor]  [color=#6b5f4e]Archived snapshot of pulse.social/nadia_webb[/color][/cell]
+[cell][color=#6b5f4e]Snapshot date: 63 days ago[/color][/cell]
+[/table]
+
+[bgcolor=#e8e0d0][color=#5a4e3a][font_size=12]  📦  You are viewing a cached version of this page. Content may differ from the live version.  [/font_size][/color][/bgcolor]
+
+[indent]
+[b][font_size=18]Nadia Webb[/font_size][/b]
+[color=#6b5f4e]@nadia_webb[/color]
+
+[color=#0f1419]Data nerd. Coffee dependent. London.[/color]
+
+[color=#6b5f4e]Joined April 2018 · 312 Following · 89 Followers[/color]
+
+─────────────────────────────────────────────────
+
+[b]Posts (as of snapshot)[/b]
+
+[bgcolor=#ede8df]
+[b]Nadia Webb[/b] [color=#6b5f4e]@nadia_webb · 58 days ago[/color]
+
+[color=#0f1419]Finally tried that ramen place on Brick Lane. 10/10 would recommend to anyone within walking distance.[/color]
+
+[color=#6b5f4e]♡ 11   ↺ 2   💬 2[/color]
+[/bgcolor]
+
+[color=#c8bfb0]──────[/color]
+
+[bgcolor=#ede8df]
+[b]Nadia Webb[/b] [color=#6b5f4e]@nadia_webb · 68 days ago[/color]
+
+[color=#5a4e3a][i]↺ Retweeted[/i][/color]
+
+[bgcolor=#e0d8cc]
+[color=#0f1419][b]The Signal[/b] [color=#6b5f4e]@thesignal_press[/color]
+[url=thesignal.press][color=#1d6fb5]\"Whistleblower protections in the UK: what employees need to know\" →[/color][/url][/color]
+[/bgcolor]
+
+[color=#0f1419][i]Worth reading.[/i][/color]
+
+[color=#6b5f4e]♡ 2   ↺ 1   💬 0[/color]
+[/bgcolor]
+
+[color=#c8bfb0]──────[/color]
+
+[bgcolor=#ede8df]
+[b]Nadia Webb[/b] [color=#6b5f4e]@nadia_webb · 71 days ago[/color]
+
+[color=#0f1419]Anyone else find that the more you understand how data compliance works, the more anxious you get? Just me?[/color]
+
+[color=#6b5f4e]♡ 6   ↺ 0   💬 1[/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[bgcolor=#d4c9b8][color=#5a4e3a][font_size=12]  📌  1 post present in this snapshot has since been deleted from the live profile.  [/font_size][/color][/bgcolor]
+
+[/indent]
+
+[color=#9a8f7e][font_size=10]WaybackCache · Archived web content · Snapshot taken 63 days ago[/font_size][/color]
+
+[/color][/bgcolor]"

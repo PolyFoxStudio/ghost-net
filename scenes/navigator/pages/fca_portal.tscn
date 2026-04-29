@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3]
+[sub_resource type="GDScript" id="1"]
+script/source = "extends MarginContainer\nfunc _ready():\n\t$RichTextLabel.meta_clicked.connect(func(meta): GlobalSignals.emit_signal(\"navigator_navigate\", str(meta)))\n"
+[node name="Page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("1")
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[bgcolor=#f0f4f8][color=#1a202c]
+
+[table=2]
+[cell][bgcolor=#00205b][color=#ffffff][b]  Financial Conduct Authority  [/b][/color][/bgcolor][/cell]
+[cell][color=#4a6080]  [url=fca-securereport.gov.uk]Home[/url]   About   Guidance   Contact[/color][/cell]
+[/table]
+
+[indent]
+[bgcolor=#00205b][color=#ffffff]
+[font_size=14][b]Secure Reporting Portal[/b][/font_size]
+[font_size=11]Report financial crime, market abuse, or regulatory misconduct[/font_size]
+[/color][/bgcolor]
+
+─────────────────────────────────────────────────
+
+[color=#1a202c]All reports are handled in strict confidence. You may report anonymously. We do not share your identity with third parties without your explicit consent.
+
+Reports submitted here are reviewed by the FCA's Intelligence Division. Where evidence meets the threshold for investigation, cases are escalated to the Enforcement Division.[/color]
+
+─────────────────────────────────────────────────
+
+[b]Anonymous Report Form[/b]
+
+[bgcolor=#ffffff]
+[color=#4a6080]Nature of misconduct[/color]
+[bgcolor=#f0f4f8][color=#888888]  Select type...  ▾  [/color][/bgcolor]
+
+[color=#4a6080]Organisation involved[/color]
+[bgcolor=#f0f4f8][color=#888888]  Enter company name or registration number  [/color][/bgcolor]
+
+[color=#4a6080]Description of misconduct[/color]
+[bgcolor=#f0f4f8][color=#888888]  Describe what you have witnessed or discovered...  [/color][/bgcolor]
+
+[color=#4a6080]Evidence upload[/color] [color=#888888](max 2GB — supports PDF, ZIP, documents)[/color]
+[bgcolor=#f0f4f8][color=#1a6bb5]  + Attach file  [/color][/bgcolor]
+
+[color=#4a6080]Contact details[/color] [color=#888888](optional — leave blank to remain anonymous)[/color]
+[bgcolor=#f0f4f8][color=#888888]  Email or secure contact  [/color][/bgcolor]
+
+[bgcolor=#00205b][color=#ffffff][b]  [url=fca_submit_check]Submit Report →[/url]  [/b][/color][/bgcolor]
+
+[color=#888888][font_size=11]For your protection, we recommend submitting over Tor if anonymity is required. Submissions from standard connections may include metadata.[/font_size][/color]
+[/bgcolor]
+
+─────────────────────────────────────────────────
+
+[color=#4a6080]Not sure if your information is relevant? [url=fca-securereport.gov.uk/guidance][color=#1a6bb5]Read our submission guidance →[/color][/url][/color]
+
+[/indent]
+
+[color=#6a8099][font_size=10]Financial Conduct Authority · 12 Endeavour Square, London E20 1JN · Authorised and regulated · Crown Copyright[/font_size][/color]
+
+[/color][/bgcolor]"
