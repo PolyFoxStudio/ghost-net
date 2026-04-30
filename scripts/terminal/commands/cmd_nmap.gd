@@ -43,4 +43,4 @@ func execute(args: Array, context: Dictionary):
 		out2 += "\nNmap done: 1 IP address (1 host up) scanned in 2.48 seconds"
 		return CommandResult.new(out2)
 		
-	return CommandResult.new("nmap: arguments not recognized")
+	return CommandResult.new("nmap: unrecognised flag. Try nmap -sn <target> or nmap -sV <target>", false)
