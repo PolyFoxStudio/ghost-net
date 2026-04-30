@@ -471,6 +471,46 @@ func _get_beat_messages(beat_id: String) -> Array:
 				PLMessage.new("marcus", "i'm going to go for a walk", beat_id),
 				PLMessage.new("marcus", "i'll be fine", beat_id)
 			]
+		"beat_16":
+			var threshold = GameState.get_cipher_threshold()
+			var msgs = []
+			if threshold == "high":
+				msgs.append(PLMessage.new("cipher", "hey", beat_id))
+				msgs.append(PLMessage.new("cipher", "you going dark again after this", beat_id, 3.0))
+				msgs.append(PLMessage.new("cipher", "you don't have to answer that", beat_id, 2.0))
+				msgs.append(PLMessage.new("cipher", "i just", beat_id))
+				msgs.append(PLMessage.new("cipher", "ghostnet needs its ghost", beat_id))
+				msgs.append(PLMessage.new("cipher", "that's just a fact", beat_id))
+				msgs.append(PLMessage.new("cipher", "that's how the software works", beat_id))
+				
+				if GameState.beat_02_choice == "watermark":
+					msgs.append(PLMessage.new("cipher", "i kept thinking about the watermark while you were in there", beat_id, 3.0))
+					msgs.append(PLMessage.new("cipher", "three days and i almost didn't put it in", beat_id))
+					msgs.append(PLMessage.new("cipher", "thought it was too much", beat_id))
+					msgs.append(PLMessage.new("cipher", "i'm glad i did", beat_id))
+				else:
+					msgs.append(PLMessage.new("cipher", "you used proxychains the whole time didn't you", beat_id, 3.0))
+					msgs.append(PLMessage.new("cipher", "i know you did", beat_id))
+					msgs.append(PLMessage.new("cipher", "i'm not going to make a thing of it", beat_id))
+					
+				msgs.append(PLMessage.new("cipher", "don't disappear again", beat_id, 3.0))
+				msgs.append(PLMessage.new("cipher", "i mean it", beat_id))
+				
+				if GameState.marcus_emotional_state >= 0:
+					msgs.append(PLMessage.new("cipher", "the husband", beat_id, 3.0))
+					msgs.append(PLMessage.new("cipher", "is he okay", beat_id))
+			elif threshold == "mid":
+				msgs.append(PLMessage.new("cipher", "hey", beat_id))
+				msgs.append(PLMessage.new("cipher", "you did good work", beat_id))
+				msgs.append(PLMessage.new("cipher", "i mean it", beat_id))
+				msgs.append(PLMessage.new("cipher", "get some sleep", beat_id, 3.0))
+				msgs.append(PLMessage.new("cipher", "ghostnet will still be here when you wake up", beat_id))
+				msgs.append(PLMessage.new("cipher", "i'll be here when you need the next one", beat_id, 3.0))
+			else:
+				msgs.append(PLMessage.new("cipher", "you did it", beat_id))
+				msgs.append(PLMessage.new("cipher", "i'm glad you came back", beat_id, 5.0))
+				msgs.append(PLMessage.new("cipher", "even if it was just for this", beat_id))
+			return msgs
 	return []
 
 func _show_choices_for_beat(beat_id: String) -> void:
