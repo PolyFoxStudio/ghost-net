@@ -148,61 +148,60 @@ func _get_beat_messages(beat_id: String) -> Array:
 			]
 		"beat_01":
 			return [
-				PLMessage.new("cipher", "GHOST.", beat_id),
-				PLMessage.new("cipher", "you're actually back", beat_id),
-				PLMessage.new("cipher", "okay i'm fine i'm being normal", beat_id),
-				PLMessage.new("cipher", "i read your last message by the way", beat_id),
-				PLMessage.new("ghost", "I know. I'm sorry I didn't reply.", beat_id, 1.0),
-				PLMessage.new("cipher", "...", beat_id),
-				PLMessage.new("cipher", "don't worry about it", beat_id),
-				PLMessage.new("cipher", "you're here now", beat_id),
-				PLMessage.new("cipher", "tell me about the woman", beat_id)
+				PLMessage.new("cipher", "GHOST.", beat_id, 0.8),
+				PLMessage.new("cipher", "you're actually back", beat_id, 1.2),
+				PLMessage.new("cipher", "okay i'm fine i'm being normal", beat_id, 2.0),
+				PLMessage.new("cipher", "i read your last message by the way", beat_id, 0.5),
+				PLMessage.new("ghost", "I know. I'm sorry I didn't reply.", beat_id, 1.5),
+				PLMessage.new("cipher", "...", beat_id, 3.0),
+				PLMessage.new("cipher", "don't worry about it", beat_id, 1.5),
+				PLMessage.new("cipher", "you're here now", beat_id, 2.0),
+				PLMessage.new("cipher", "tell me about the woman", beat_id, 1.0)
 			]
 		"beat_01_A":
 			return [
-				PLMessage.new("cipher", "helix solutions", beat_id),
-				PLMessage.new("cipher", "give me two minutes", beat_id),
-				PLMessage.new("cipher", "okay so", beat_id, 4.0),
-				PLMessage.new("cipher", "their public footprint is very clean", beat_id),
-				PLMessage.new("cipher", "which is interesting", beat_id),
-				PLMessage.new("cipher", "companies that do legitimate compliance work", beat_id),
-				PLMessage.new("cipher", "don't usually scrub this hard", beat_id),
-				PLMessage.new("cipher", "i want to help with this one", beat_id),
-				PLMessage.new("cipher", "actually — i've been working on something", beat_id),
-				PLMessage.new("cipher", "for a while now", beat_id),
-				PLMessage.new("cipher", "i was going to give it to you eventually anyway", beat_id),
-				PLMessage.new("cipher", "this feels like the right time", beat_id)
+				PLMessage.new("cipher", "helix solutions", beat_id, 1.0),
+				PLMessage.new("cipher", "give me two minutes", beat_id, 4.0),
+				PLMessage.new("cipher", "okay so", beat_id, 0.8),
+				PLMessage.new("cipher", "their public footprint is very clean", beat_id, 1.0),
+				PLMessage.new("cipher", "which is interesting", beat_id, 1.5),
+				PLMessage.new("cipher", "companies that do legitimate compliance work\ndon't usually scrub this hard", beat_id, 2.0),
+				PLMessage.new("cipher", "i want to help with this one", beat_id, 1.5),
+				PLMessage.new("cipher", "actually — i've been working on something", beat_id, 1.0),
+				PLMessage.new("cipher", "for a while now", beat_id, 0.8),
+				PLMessage.new("cipher", "i was going to give it to you eventually anyway", beat_id, 1.2),
+				PLMessage.new("cipher", "this feels like the right time", beat_id, 1.0)
 			]
 		"beat_01_B":
 			return [
-				PLMessage.new("cipher", "six days is a long time", beat_id),
-				PLMessage.new("cipher", "police won't move until it's too late, they never do", beat_id),
-				PLMessage.new("cipher", "alright. i'm in.", beat_id),
-				PLMessage.new("cipher", "i've got something for you actually", beat_id),
-				PLMessage.new("cipher", "been sitting on it for a while", beat_id)
+				PLMessage.new("cipher", "six days is a long time", beat_id, 1.2),
+				PLMessage.new("cipher", "police won't move until it's too late, they never do", beat_id, 1.5),
+				PLMessage.new("cipher", "alright. i'm in.", beat_id, 2.0),
+				PLMessage.new("cipher", "i've got something for you actually", beat_id, 1.0),
+				PLMessage.new("cipher", "been sitting on it for a while", beat_id, 1.0)
 			]
 		"beat_01_C":
 			return [
-				PLMessage.new("cipher", "okay", beat_id),
-				PLMessage.new("cipher", "fair enough", beat_id),
-				PLMessage.new("cipher", "i've got a toolkit ready", beat_id),
-				PLMessage.new("cipher", "actually it's more than a toolkit", beat_id)
+				PLMessage.new("cipher", "okay", beat_id, 0.8),
+				PLMessage.new("cipher", "fair enough", beat_id, 2.0),
+				PLMessage.new("cipher", "i've got a toolkit ready", beat_id, 1.0),
+				PLMessage.new("cipher", "actually it's more than a toolkit", beat_id, 1.0)
 			]
 		"beat_01_merge":
 			return [
-				PLMessage.new("cipher", "i'm going to send you something", beat_id),
-				PLMessage.new("cipher", "it's. okay so.", beat_id),
-				PLMessage.new("cipher", "i built it over the last couple of years", beat_id),
-				PLMessage.new("cipher", "properly built it. not just scripts.", beat_id),
-				PLMessage.new("cipher", "a whole environment", beat_id),
-				PLMessage.new("cipher", "i named it GhostNet", beat_id),
-				PLMessage.new("cipher", "before you say anything", beat_id),
-				PLMessage.new("cipher", "the name is load-bearing", beat_id),
-				PLMessage.new("cipher", "technically", beat_id),
-				PLMessage.new("ghost", "You named your operating system after me.", beat_id, 0.5),
-				PLMessage.new("cipher", "...our operating system", beat_id),
-				PLMessage.new("cipher", "i think you'll find", beat_id),
-				PLMessage.new("cipher", "anyway. installing now. give it a minute.", beat_id)
+				PLMessage.new("cipher", "i'm going to send you something", beat_id, 1.0),
+				PLMessage.new("cipher", "it's. okay so.", beat_id, 1.5),
+				PLMessage.new("cipher", "i built it over the last couple of years", beat_id, 1.0),
+				PLMessage.new("cipher", "properly built it. not just scripts.", beat_id, 0.8),
+				PLMessage.new("cipher", "a whole environment", beat_id, 2.0),
+				PLMessage.new("cipher", "i named it GhostNet", beat_id, 1.2),
+				PLMessage.new("cipher", "before you say anything", beat_id, 0.8),
+				PLMessage.new("cipher", "the name is load-bearing", beat_id, 0.6),
+				PLMessage.new("cipher", "technically", beat_id, 1.0),
+				PLMessage.new("ghost", "You named your operating system after me.", beat_id, 2.0),
+				PLMessage.new("cipher", "...our operating system", beat_id, 3.0),
+				PLMessage.new("cipher", "i think you'll find", beat_id, 2.0),
+				PLMessage.new("cipher", "anyway. installing now. give it a minute.", beat_id, 1.0)
 			]
 		"beat_02":
 			return [
@@ -497,6 +496,11 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 		GameState.adjust_cipher_score(choice["score"])
 	else:
 		GameState.adjust_marcus_state(choice["score"])
+	
+	if choice["next"].begins_with("beat_02_"):
+		if choice["next"] == "beat_02_A": GameState.beat_02_choice = "watermark"
+		elif choice["next"] == "beat_02_B": GameState.beat_02_choice = "good"
+		elif choice["next"] == "beat_02_C": GameState.beat_02_choice = "tools"
 	
 	if choice["next"] == "beat_04_A" or choice["next"] == "beat_04_B":
 		GameState.set_flag("marcus_mentioned_diane", true)

@@ -1,101 +1,85 @@
-extends PanelContainer
-	
-@onready var clock_label = $HBoxContainer/StatusIndicators/ClockLabel
-@onready var conn_indicator = $HBoxContainer/StatusIndicators/ConnectionIndicator
-@onready var trace_indicator = $HBoxContainer/StatusIndicators/TraceIndicator
+extends ColorRect
 
 @onready var term_btn = $HBoxContainer/AppLaunchers/TerminalBtn
 @onready var nav_btn = $HBoxContainer/AppLaunchers/NavigatorBtn
-@onready var notes_btn = $HBoxContainer/AppLaunchers/NotesBtn
-@onready var files_btn = $HBoxContainer/AppLaunchers/FilesBtn
 @onready var pl_btn = $HBoxContainer/AppLaunchers/PhantomLinkBtn
-
-@onready var min_tray = $HBoxContainer/MinimisedTray
-
-var _min_buttons: Dictionary = {}
+@onready var player_label = $HBoxContainer/PlayerLabel
 
 var term_scene = preload("res://scenes/desktop/apps/TerminalWindow.tscn")
 var nav_scene = preload("res://scenes/desktop/apps/NavigatorWindow.tscn")
-var notes_scene = preload("res://scenes/desktop/apps/NotesWindow.tscn")
-var files_scene = preload("res://scenes/desktop/apps/FilesWindow.tscn")
 var pl_scene = preload("res://scenes/desktop/apps/PhantomLinkWindow.tscn")
 
-func _ready():
-	var timer = Timer.new()
-	timer.wait_time = 1.0
-	timer.autostart = true
-	timer.timeout.connect(_update_clock)
-	add_child(timer)
-	_update_clock()
-	
-	GlobalSignals.machine_connected.connect(_on_connected)
-	GlobalSignals.machine_disconnected.connect(_on_disconnected)
-	GlobalSignals.tier3_triggered.connect(_on_trace_triggered)
-	GlobalSignals.trace_completed.connect(_on_trace_ended)
-	if GlobalSignals.has_signal("cloak_expired"):
-		GlobalSignals.cloak_expired.connect(_on_trace_ended)
-	
+var unread_count = 0
+
+func _ready() -> void:
 	term_btn.pressed.connect(func(): WindowManager.open_window(term_scene, "TERMINAL"))
 	nav_btn.pressed.connect(func(): WindowManager.open_window(nav_scene, "NAVIGATOR"))
-	notes_btn.pressed.connect(func(): WindowManager.open_window(notes_scene, "NOTES"))
-	files_btn.pressed.connect(func(): WindowManager.open_window(files_scene, "FILES"))
-	pl_btn.pressed.connect(func(): WindowManager.open_window(pl_scene, "PHANTOMLINK"))
+	pl_btn.pressed.connect(func(): 
+		WindowManager.open_window(pl_scene, "PHANTOMLINK")
+		unread_count = 0
+		_update_pl_btn()
+	)
 	
+	if GameState.player_name != "":
+		player_label.text = "%s / ghost" % GameState.player_name
+	else:
+		player_label.text = "unknown / ghost"
+		
 	if GlobalSignals.has_signal("phantomlink_message_received"):
 		GlobalSignals.phantomlink_message_received.connect(_on_pl_message)
+	if GlobalSignals.has_signal("window_restored"):
+		GlobalSignals.window_restored.connect(_on_window_restored)
+	
+	if GlobalSignals.has_signal("window_focused"):
+		GlobalSignals.window_focused.connect(_on_window_focused)
+	if GlobalSignals.has_signal("window_unfocused"):
+		GlobalSignals.window_unfocused.connect(_on_window_unfocused)
 
-	GlobalSignals.window_minimised.connect(_on_window_minimised)
-	GlobalSignals.window_restored.connect(_on_window_restored)
-	GlobalSignals.window_closed.connect(_on_window_closed)
+	_set_button_active(term_btn, false)
+	_set_button_active(nav_btn, false)
+	_set_button_active(pl_btn, false)
 
-func _on_window_minimised(app_name: String):
-	if _min_buttons.has(app_name): return
-	var btn = Button.new()
-	btn.text = "[ %s ]" % app_name.to_upper()
-	btn.add_theme_font_size_override("font_size", 11)
-	btn.add_theme_color_override("font_color", Color("#c0c0c0"))
-	btn.add_theme_color_override("font_hover_color", Color("#00ff41"))
-	var sb = StyleBoxEmpty.new()
+func _set_button_active(btn: Button, active: bool) -> void:
+	var sb = StyleBoxFlat.new()
+	sb.bg_color = Color.TRANSPARENT
+	
+	if active:
+		sb.border_width_left = 2
+		sb.border_color = Color("#00ff41")
+		btn.add_theme_color_override("font_color", Color("#e0e0e0"))
+	else:
+		sb.border_width_left = 0
+		btn.add_theme_color_override("font_color", Color("#888888"))
+		
 	btn.add_theme_stylebox_override("normal", sb)
 	btn.add_theme_stylebox_override("hover", sb)
 	btn.add_theme_stylebox_override("pressed", sb)
 	btn.add_theme_stylebox_override("focus", sb)
-	btn.pressed.connect(func(): WindowManager.restore_window(app_name))
-	min_tray.add_child(btn)
-	_min_buttons[app_name] = btn
 
-func _on_window_restored(app_name: String):
+func _on_window_focused(app_name: String) -> void:
+	if app_name == "TERMINAL": _set_button_active(term_btn, true)
+	elif app_name == "NAVIGATOR": _set_button_active(nav_btn, true)
+	elif app_name == "PHANTOMLINK": _set_button_active(pl_btn, true)
+
+func _on_window_unfocused(app_name: String) -> void:
+	if app_name == "TERMINAL": _set_button_active(term_btn, false)
+	elif app_name == "NAVIGATOR": _set_button_active(nav_btn, false)
+	elif app_name == "PHANTOMLINK": _set_button_active(pl_btn, false)
+
+func _on_pl_message(_thread_id: String, _beat_id: String) -> void:
+	unread_count += 1
+	_update_pl_btn()
+
+func _on_window_restored(app_name: String) -> void:
 	if app_name == "PHANTOMLINK":
-		pl_btn.text = pl_btn.text.replace("● ", "")
-	
-	if _min_buttons.has(app_name):
-		_min_buttons[app_name].queue_free()
-		_min_buttons.erase(app_name)
+		unread_count = 0
+		_update_pl_btn()
 
-func _on_window_closed(app_name: String):
-	if _min_buttons.has(app_name):
-		_min_buttons[app_name].queue_free()
-		_min_buttons.erase(app_name)
+func _update_pl_btn() -> void:
+	if unread_count > 0:
+		pl_btn.text = "[✉ PHANTOMLINK (%d)]" % unread_count
+	else:
+		pl_btn.text = "[✉ PHANTOMLINK]"
 
-func _update_clock():
-	var time = Time.get_time_dict_from_system()
-	clock_label.text = "%02d:%02d:%02d" % [time.hour, time.minute, time.second]
-
-func _on_connected(machine):
-	conn_indicator.text = "◉ %s" % machine.hostname
-	conn_indicator.add_theme_color_override("font_color", Color("#00ff41"))
-
-func _on_disconnected(_machine):
-	conn_indicator.text = "◉ LOCAL"
-	conn_indicator.add_theme_color_override("font_color", Color("#4a4a4a"))
-
-func _on_trace_triggered(_machine):
-	trace_indicator.show()
-
-func _on_trace_ended(_machine):
-	trace_indicator.hide()
-	
-func _on_pl_message(thread_id: String, beat_id: String):
-	if pl_btn.text.find("●") == -1:
-		pl_btn.text = "● " + pl_btn.text
-	
+func _process(_delta: float) -> void:
+	pass

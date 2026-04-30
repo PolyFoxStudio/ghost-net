@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://topbar_uid"]
+
+[ext_resource type="Script" path="res://scripts/desktop/top_bar.gd" id="1_tb"]
+
+[node name="TopBar" type="ColorRect"]
+custom_minimum_size = Vector2(0, 28)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+script = ExtResource("1_tb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="MarginStart" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="BrandLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 11
+text = "GhostNet"
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClockLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 11
+text = "00:00"
+vertical_alignment = 1
+
+[node name="AlertHBox" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="AlertDot" type="ColorRect" parent="HBoxContainer/AlertHBox"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+size_flags_vertical = 4
+color = Color(0, 1, 0.254902, 0.4)
+
+[node name="AlertLabel" type="Label" parent="HBoxContainer/AlertHBox"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "STEALTH"
+vertical_alignment = 1
+
+[node name="MarginEnd" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2

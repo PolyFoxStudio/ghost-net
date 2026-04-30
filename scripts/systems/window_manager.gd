@@ -58,14 +58,22 @@ func bring_to_front(window: Control):
 			var w = _windows[app_name]
 			if is_instance_valid(w) and w.has_method("set_focused"):
 				w.set_focused(false)
+				GlobalSignals.window_unfocused.emit(app_name)
 		# Also dim any viewer windows not in _windows dict
 		for child in _window_layer.get_children():
 			if child.has_method("set_focused"):
 				child.set_focused(false)
+				if child.has_method("get_app_name"):
+					GlobalSignals.window_unfocused.emit(child.get_app_name())
+		
 		_window_layer.move_child(window, _window_layer.get_child_count() - 1)
 		window.show()
+		
+		var app_name_focused = window.app_name if "app_name" in window else "UNKNOWN"
+		
 		if window.has_method("set_focused"):
 			window.set_focused(true)
+			GlobalSignals.window_focused.emit(app_name_focused)
 		if window.has_method("grab_focus_internal"):
 			window.grab_focus_internal()
 

@@ -17,6 +17,13 @@ var countermeasure_tiers: Dictionary = {}
 
 var current_act: int = 1
 
+var player_name: String = ""
+var wallpaper_default: bool = false
+var intro_completed: bool = false
+var beat_02_choice: String = ""
+var phantomlink_unread: int = 0
+var alert_level: String = "STEALTH"
+
 func set_flag(key: String, value: Variant = true) -> void:
 	flags[key] = value
 	emit_signal("flag_set", key)
@@ -60,16 +67,20 @@ func save() -> void:
 		"cipher_score": cipher_score,
 		"marcus_score": marcus_score,
 		"countermeasure_tiers": countermeasure_tiers,
-		"current_act": current_act
+		"current_act": current_act,
+		"player_name": player_name,
+		"wallpaper_default": wallpaper_default,
+		"intro_completed": intro_completed,
+		"beat_02_choice": beat_02_choice
 	}
-	var file := FileAccess.open("user://ghostnet_save.json", FileAccess.WRITE)
+	var file := FileAccess.open("user://gamestate.json", FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(data))
 		file.close()
 
 func load_save() -> void:
-	if not FileAccess.file_exists("user://ghostnet_save.json"): return
-	var file := FileAccess.open("user://ghostnet_save.json", FileAccess.READ)
+	if not FileAccess.file_exists("user://gamestate.json"): return
+	var file := FileAccess.open("user://gamestate.json", FileAccess.READ)
 	if file:
 		var parsed = JSON.parse_string(file.get_as_text())
 		file.close()
@@ -80,3 +91,7 @@ func load_save() -> void:
 			marcus_score = data.get("marcus_score", 0)
 			countermeasure_tiers = data.get("countermeasure_tiers", {})
 			current_act = data.get("current_act", 1)
+			player_name = data.get("player_name", "")
+			wallpaper_default = data.get("wallpaper_default", false)
+			intro_completed = data.get("intro_completed", false)
+			beat_02_choice = data.get("beat_02_choice", "")

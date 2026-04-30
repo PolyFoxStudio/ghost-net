@@ -26,7 +26,15 @@ func _ready():
 		$DesktopIcons.show()
 		$WindowLayer.show()
 		_setup_desktop()
-		GlobalSignals.phantomlink_beat_trigger.emit("beat_00b")
+		if GameState.get_flag("intro_just_finished", false):
+			GameState.set_flag("intro_just_finished", false)
+			WindowManager.open_window(pl_scene, "PHANTOMLINK")
+			GlobalSignals.phantomlink_beat_trigger.emit("beat_02")
+		else:
+			# Not just finished intro, but we should restore state if any
+			# Since save/load isn't fully implemented for PhantomLink yet,
+			# just open Terminal.
+			pass
 	)
 
 func _setup_desktop():
@@ -45,7 +53,12 @@ func _setup_desktop():
 	GlobalSignals.senet_unlocked.connect(_on_senet_unlocked)
 	GlobalSignals.senet_unlocked.connect(func(): GlobalSignals.phantomlink_beat_trigger.emit("beat_05"))
 
-	WindowManager.open_window(term_scene, "TERMINAL")
+	if not GameState.get_flag("intro_just_finished", false):
+		WindowManager.open_window(term_scene, "TERMINAL")
+
+func _process(_delta: float) -> void:
+	if has_node("Watermark"):
+		$Watermark.visible = not GameState.wallpaper_default
 
 func _setup_desktop_icons():
 	var icons_container = $DesktopIcons

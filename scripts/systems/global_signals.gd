@@ -18,6 +18,8 @@ signal cloak_expired(machine: MachineResource)
 signal window_minimised(app_name: String)
 signal window_restored(app_name: String)
 signal window_closed(app_name: String)
+signal window_focused(app_name: String)
+signal window_unfocused(app_name: String)
 
 signal command_executed(command: String, args: Array)
 

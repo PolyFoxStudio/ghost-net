@@ -46,15 +46,21 @@ func _ready():
 	_play_boot()
 
 func _play_boot():
-	# Actually sequence them properly
 	output.clear()
+	var is_abbrev = GameState.intro_completed and not GameState.get_flag("intro_just_finished", false)
 	var last_delay = 0.0
 	for i in BOOT_LINES.size():
 		var line = BOOT_LINES[i]
 		var wait = line["delay"] - last_delay
 		last_delay = line["delay"]
+		
+		# Faster boot if intro already completed
 		if wait > 0:
-			await get_tree().create_timer(wait).timeout
+			if is_abbrev:
+				await get_tree().create_timer(wait * 0.2).timeout
+			else:
+				await get_tree().create_timer(wait).timeout
+		
 		var display = line["text"]
 		if "  OK  " in display:
 			display = display.replace("[  OK  ]", "[color=#00ff41][  OK  ][/color]")
@@ -64,8 +70,10 @@ func _play_boot():
 			display = "[color=#ffffff][b]" + display + "[/b][/color]"
 		output.append_text(display + "\n")
 		
-	# Pause so player can read
-	await get_tree().create_timer(0.8).timeout
+	if is_abbrev:
+		await get_tree().create_timer(0.2).timeout
+	else:
+		await get_tree().create_timer(0.8).timeout
 	
 	# Fill loading bar in its own label — no screen clearing
 	var bar_width = 30
@@ -74,10 +82,14 @@ func _play_boot():
 		var empty = " ".repeat(bar_width - i)
 		var pct = int((float(i) / bar_width) * 100)
 		loading_bar.text = "[" + filled + empty + "]  %d%%" % pct
-		await get_tree().create_timer(0.04).timeout
+		if not is_abbrev:
+			await get_tree().create_timer(0.04).timeout
 	
 	# Hold so player can read
-	await get_tree().create_timer(1.5).timeout
+	if is_abbrev:
+		await get_tree().create_timer(0.5).timeout
+	else:
+		await get_tree().create_timer(1.5).timeout
 	
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 0.8)

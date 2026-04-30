@@ -1,157 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://exxxx"]
-	
-	[ext_resource type="Script" path="res://scripts/desktop/taskbar.gd" id="1_xxxxx"]
-	
-	[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taskbar"]
-	bg_color = Color(0.05098, 0.05098, 0.05098, 1)
-	border_width_bottom = 1
-	border_color = Color(0, 1, 0.2549, 0.3)
-	
-	[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
-	
-	[node name="Taskbar" type="PanelContainer"]
-	custom_minimum_size = Vector2(0, 36)
-	anchors_preset = 10
-	anchor_right = 1.0
-	grow_horizontal = 2
-	theme_override_styles/panel = SubResource("StyleBoxFlat_taskbar")
-	script = ExtResource("1_xxxxx")
-	
-	[node name="HBoxContainer" type="HBoxContainer" parent="."]
-	layout_mode = 2
-	theme_override_constants/separation = 16
-	
-	[node name="SpacerStart" type="Control" parent="HBoxContainer"]
-	custom_minimum_size = Vector2(8, 0)
-	layout_mode = 2
-	
-	[node name="BrandLabel" type="Label" parent="HBoxContainer"]
-	custom_minimum_size = Vector2(90, 0)
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 13
-	text = "[G] GHOSTNET
-v2.3.1"
-	autowrap_mode = 0
-	
-	[node name="Separator" type="VSeparator" parent="HBoxContainer"]
-	layout_mode = 2
-	
-	[node name="AppLaunchers" type="HBoxContainer" parent="HBoxContainer"]
-	layout_mode = 2
-	theme_override_constants/separation = 16
-	
-	[node name="TerminalBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 12
-	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
-	text = "⬛ TERMINAL"
-	
-	[node name="NavigatorBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 12
-	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
-	text = "🌐 NAVIGATOR"
-	
-	[node name="NotesBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 12
-	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
-	text = "📋 NOTES"
-	
-	[node name="FilesBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 12
-	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
-	text = "📁 FILES"
-	
-	[node name="PhantomLinkBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_colors/font_hover_color = Color(0, 1, 0.2549, 1)
-	theme_override_font_sizes/font_size = 12
-	theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/hover = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/pressed = SubResource("StyleBoxEmpty_btn")
-	theme_override_styles/normal = SubResource("StyleBoxEmpty_btn")
-	text = "💬 PHANTOMLINK"
-	
-	[node name="MinimisedTray" type="HBoxContainer" parent="HBoxContainer"]
-	layout_mode = 2
-	size_flags_horizontal = 3
-	
-	[node name="Spacer" type="Control" parent="HBoxContainer"]
-	layout_mode = 2
-	size_flags_horizontal = 3
-	
-	[node name="StatusIndicators" type="HBoxContainer" parent="HBoxContainer"]
-	layout_mode = 2
-	theme_override_constants/separation = 16
-	
-	[node name="CPULabel" type="Label" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
-	theme_override_font_sizes/font_size = 12
-	text = "CPU 12%"
-	
-	[node name="RAMLabel" type="Label" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
-	theme_override_font_sizes/font_size = 12
-	text = "RAM 1.2GB"
-	
-	[node name="Sep1" type="VSeparator" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	
-	[node name="TraceIndicator" type="Label" parent="HBoxContainer/StatusIndicators"]
-	visible = false
-	layout_mode = 2
-	theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
-	theme_override_font_sizes/font_size = 12
-	text = "⚠ TRACE"
-	
-	[node name="ConnectionIndicator" type="Label" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
-	theme_override_font_sizes/font_size = 12
-	text = "◉ LOCAL"
-	
-	[node name="Sep2" type="VSeparator" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	
-	[node name="DateLabel" type="Label" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.2902, 0.2902, 0.2902, 1)
-	theme_override_font_sizes/font_size = 11
-	text = "SAT 25 APR"
-	
-	[node name="ClockLabel" type="Label" parent="HBoxContainer/StatusIndicators"]
-	layout_mode = 2
-	theme_override_colors/font_color = Color(0.75294, 0.75294, 0.75294, 1)
-	theme_override_font_sizes/font_size = 13
-	text = "00:00:00"
-	
-	[node name="SpacerEnd" type="Control" parent="HBoxContainer"]
-	custom_minimum_size = Vector2(8, 0)
-	layout_mode = 2
-	
+[gd_scene load_steps=3 format=3 uid="uid://taskbar_uid"]
+
+[ext_resource type="Script" path="res://scripts/desktop/taskbar.gd" id="1_tb"]
+
+[node name="Taskbar" type="ColorRect"]
+custom_minimum_size = Vector2(0, 36)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+script = ExtResource("1_tb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="MarginStart" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="AppLaunchers" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TerminalBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "[■ TERMINAL]"
+flat = true
+
+[node name="NavigatorBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "[◈ NAVIGATOR]"
+flat = true
+
+[node name="PhantomLinkBtn" type="Button" parent="HBoxContainer/AppLaunchers"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_font_sizes/font_size = 12
+text = "[✉ PHANTOMLINK]"
+flat = true
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.533333, 0.533333, 0.533333, 1)
+theme_override_font_sizes/font_size = 11
+text = "unknown / ghost"
+vertical_alignment = 1
+
+[node name="MarginEnd" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
