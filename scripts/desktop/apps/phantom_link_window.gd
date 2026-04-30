@@ -172,9 +172,12 @@ func _process_message_queue(msgs: Array, thread_id: String, beat_id: String) -> 
 		# After Beat 10 completes, start timers for Beat 10b (file drop) and Beat 10c (idle check)
 		_start_beat10b_timer()
 		_start_beat10c_timer()
+	elif beat_id in ["beat_04_A", "beat_04_B", "beat_04_C"]:
+		# After Beat 04 completes, start timer for Beat 11 (Marcus idle check)
+		_start_beat11_timer()
 
 func _get_beat_thread(beat_id: String) -> String:
-	if beat_id.begins_with("beat_04") or beat_id.begins_with("beat_13") or beat_id.begins_with("beat_15"): return "marcus"
+	if beat_id.begins_with("beat_04") or beat_id.begins_with("beat_11") or beat_id.begins_with("beat_13") or beat_id.begins_with("beat_15"): return "marcus"
 	return "cipher"
 
 func _get_beat_messages(beat_id: String) -> Array:
@@ -350,6 +353,55 @@ func _get_beat_messages(beat_id: String) -> Array:
 				PLMessage.new("marcus", "thank you for being straight with me", beat_id),
 				PLMessage.new("marcus", "i'll be here if you need anything", beat_id),
 				PLMessage.new("marcus", "anything at all", beat_id)
+			]
+		"beat_11":
+			return [
+				PLMessage.new("marcus", "i'm sorry to message again", beat_id, 0.0),
+				PLMessage.new("marcus", "i know you said you'd be in touch", beat_id, 2.0),
+				PLMessage.new("marcus", "it's been four days since we spoke", beat_id, 1.5),
+				PLMessage.new("marcus", "i'm not — i'm fine. i'm okay.", beat_id, 2.0),
+				PLMessage.new("marcus", "i just. is there anything?", beat_id, 2.5),
+				PLMessage.new("marcus", "anything at all?", beat_id, 1.0),
+				PLMessage.new("marcus", "even if it's small.", beat_id, 1.5),
+				PLMessage.new("marcus", "i keep going back and forth between thinking she's okay and thinking she's not", beat_id, 3.0),
+				PLMessage.new("marcus", "and the not knowing is the worst part", beat_id, 2.0),
+				PLMessage.new("marcus", "i just need to know you're still looking", beat_id, 2.5)
+			]
+		"beat_11_A":
+			return [
+				PLMessage.new("marcus", "okay", beat_id),
+				PLMessage.new("marcus", "thank you", beat_id),
+				PLMessage.new("marcus", "that's enough", beat_id),
+				PLMessage.new("marcus", "that's enough for now", beat_id, 1.5),
+				PLMessage.new("marcus", GameState.player_name, beat_id),
+				PLMessage.new("marcus", "she used to leave little notes around the flat", beat_id),
+				PLMessage.new("marcus", "not important ones. just like reminders. shopping lists.", beat_id),
+				PLMessage.new("marcus", "there's one on the fridge right now", beat_id),
+				PLMessage.new("marcus", "it starts as a grocery list", beat_id),
+				PLMessage.new("marcus", "milk, coffee, the good bread from the turkish place", beat_id),
+				PLMessage.new("marcus", "and then halfway down she's crossed something out", beat_id),
+				PLMessage.new("marcus", "it looks like a name", beat_id),
+				PLMessage.new("marcus", "i can't read what it says. she crossed it out hard.", beat_id),
+				PLMessage.new("marcus", "i keep looking at it", beat_id),
+				PLMessage.new("marcus", "i haven't taken any of them down", beat_id),
+				PLMessage.new("marcus", "is that weird", beat_id),
+				PLMessage.new("marcus", "you don't have to answer that", beat_id),
+				PLMessage.new("marcus", "fuck i'm sorry. that wasn't a useful thing to tell you.", beat_id)
+			]
+		"beat_11_B":
+			return [
+				PLMessage.new("marcus", "okay", beat_id),
+				PLMessage.new("marcus", "okay i trust you", beat_id),
+				PLMessage.new("marcus", "just", beat_id),
+				PLMessage.new("marcus", "when you're ready", beat_id),
+				PLMessage.new("marcus", "i'm here", beat_id)
+			]
+		"beat_11_C":
+			return [
+				PLMessage.new("marcus", "right", beat_id),
+				PLMessage.new("marcus", "yeah", beat_id),
+				PLMessage.new("marcus", "of course", beat_id, 3.0),
+				PLMessage.new("marcus", "sorry for messaging", beat_id)
 			]
 		"beat_05":
 			return [
@@ -579,6 +631,12 @@ func _show_choices_for_beat(beat_id: String) -> void:
 			{"text": "Got everything. One question — was there anyone at Helix she trusted? Anyone she talked about?", "next": "beat_04_B", "score": 0, "target": "marcus"},
 			{"text": "I'll be honest with you. I can't promise anything. But I'll look.", "next": "beat_04_C", "score": -1, "target": "marcus"}
 		]
+	elif beat_id == "beat_11":
+		choices = [
+			{"text": "I'm still looking. I've found a lot. I just need a little more time.", "next": "beat_11_A", "score": 1, "target": "marcus"},
+			{"text": "There's something here. I'm not ready to tell you what yet. But there's something.", "next": "beat_11_B", "score": 0, "target": "marcus"},
+			{"text": "I'll be in touch when there's something worth saying.", "next": "beat_11_C", "score": -1, "target": "marcus"}
+		]
 	elif beat_id == "beat_13":
 		choices = [
 			{"text": "I have leads. I'm following them. Don't do anything reckless.", "next": "beat_13_A", "score": 1, "target": "marcus"},
@@ -629,6 +687,10 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 	# Reset Beat 10c idle timer if player interacts with Cipher thread
 	if choice["target"] == "cipher" and not GameState.get_flag("beat_10c_sent"):
 		GameState.set_flag("beat_10c_sent", true)
+	
+	# Reset Beat 11 idle timer if player interacts with Marcus thread
+	if choice["target"] == "marcus" and not GameState.get_flag("beat_11_sent"):
+		GameState.set_flag("beat_11_sent", true)
 	
 	if choice["target"] == "cipher":
 		GameState.adjust_cipher_score(choice["score"])
@@ -762,3 +824,21 @@ func _fire_beat10c() -> void:
 	]
 	
 	_process_message_queue(msgs, "cipher", "beat_10c")
+
+# ── Beat 11 — Marcus Idle Check ────────────────────────────────
+func _start_beat11_timer() -> void:
+	if GameState.get_flag("beat_11_sent"):
+		return
+	
+	await get_tree().create_timer(45.0).timeout
+	
+	if GameState.get_flag("beat_11_sent"):
+		return  # player already interacted — cancel
+	
+	_fire_beat11()
+
+func _fire_beat11() -> void:
+	GameState.set_flag("beat_11_sent", true)
+	
+	# Queue to Marcus thread with player choice at the end
+	trigger_beat("beat_11")
