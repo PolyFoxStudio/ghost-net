@@ -5,9 +5,6 @@ signal flag_set(flag_name: String)
 
 var flags: Dictionary = {}
 
-var cipher_score: int = 0
-var marcus_score: int = 0
-
 var cipher_relationship: int = 0
 var cipher_relationship_score: int = 0   # range -10 to +10
 var marcus_emotional_state: int = 0      # range -5 to +5
@@ -34,12 +31,6 @@ func get_flag(key: String, default: Variant = false) -> Variant:
 func has_flag(flag_name: String) -> bool:
 	return flags.get(flag_name, false) == true
 
-func modify_cipher(amount: int) -> void:
-	cipher_score = clampi(cipher_score + amount, -3, 3)
-
-func modify_marcus(amount: int) -> void:
-	marcus_score = clampi(marcus_score + amount, -3, 3)
-
 func adjust_cipher_score(delta: int) -> void:
 	cipher_relationship_score = clampi(cipher_relationship_score + delta, -10, 10)
 	cipher_relationship = cipher_relationship_score
@@ -64,8 +55,8 @@ func set_act(act: int) -> void:
 func save() -> void:
 	var data: Dictionary = {
 		"flags": flags,
-		"cipher_score": cipher_score,
-		"marcus_score": marcus_score,
+		"cipher_relationship_score": cipher_relationship_score,
+		"marcus_emotional_state": marcus_emotional_state,
 		"countermeasure_tiers": countermeasure_tiers,
 		"current_act": current_act,
 		"player_name": player_name,
@@ -87,8 +78,9 @@ func load_save() -> void:
 		if typeof(parsed) == TYPE_DICTIONARY:
 			var data: Dictionary = parsed
 			flags = data.get("flags", {})
-			cipher_score = data.get("cipher_score", 0)
-			marcus_score = data.get("marcus_score", 0)
+			cipher_relationship_score = data.get("cipher_relationship_score", 0)
+			cipher_relationship = cipher_relationship_score
+			marcus_emotional_state = data.get("marcus_emotional_state", 0)
 			countermeasure_tiers = data.get("countermeasure_tiers", {})
 			current_act = data.get("current_act", 1)
 			player_name = data.get("player_name", "")

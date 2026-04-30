@@ -21,8 +21,8 @@ class PLMessage:
 		delay = d
 
 var threads_data: Dictionary = {
-	"cipher": {"messages": [], "unread": false, "button": null},
-	"marcus": {"messages": [], "unread": false, "button": null}
+	"cipher": {"messages": [], "unread": false, "button": null, "choices": []},
+	"marcus": {"messages": [], "unread": false, "button": null, "choices": []}
 }
 
 var current_thread: String = "cipher"
@@ -73,6 +73,25 @@ func _on_thread_selected(thread_id: String) -> void:
 	threads_data[thread_id]["unread"] = false
 	_update_thread_buttons()
 	_render_history(thread_id)
+	
+	# Update choices
+	for child in choice_panel.get_children():
+		child.queue_free()
+	
+	var active_choices = threads_data[thread_id]["choices"]
+	if active_choices.is_empty():
+		choice_panel.hide()
+		compose_area.show()
+	else:
+		compose_area.hide()
+		choice_panel.show()
+		for idx in range(active_choices.size()):
+			var choice: Dictionary = active_choices[idx]
+			var btn: Button = Button.new()
+			btn.text = choice["text"]
+			btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			btn.pressed.connect(func(): _resolve_player_choice(choice))
+			choice_panel.add_child(btn)
 
 func _update_thread_buttons() -> void:
 	for tid in threads_data:
@@ -129,6 +148,8 @@ func _process_message_queue(msgs: Array, thread_id: String, beat_id: String) -> 
 	
 	if beat_id == "beat_00b":
 		trigger_beat("beat_01")
+	elif beat_id in ["beat_01_A", "beat_01_B", "beat_01_C"]:
+		trigger_beat("beat_01_merge")
 	elif beat_id == "beat_01_merge":
 		pass
 
@@ -472,25 +493,37 @@ func _show_choices_for_beat(beat_id: String) -> void:
 
 	if choices.is_empty(): return
 	
-	compose_area.hide()
-	choice_panel.show()
-	for child in choice_panel.get_children():
-		child.queue_free()
+	var thread_id = choices[0]["target"]
+	threads_data[thread_id]["choices"] = choices
 	
-	for idx in range(choices.size()):
-		var choice: Dictionary = choices[idx]
-		var btn: Button = Button.new()
-		btn.text = choice["text"]
-		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		btn.pressed.connect(func(): _resolve_player_choice(choice))
-		choice_panel.add_child(btn)
+	if thread_id == current_thread:
+		compose_area.hide()
+		choice_panel.show()
+		for child in choice_panel.get_children():
+			child.queue_free()
+		
+		for idx in range(choices.size()):
+			var choice: Dictionary = choices[idx]
+			var btn: Button = Button.new()
+			btn.text = choice["text"]
+			btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			btn.pressed.connect(func(): _resolve_player_choice(choice))
+			choice_panel.add_child(btn)
+	else:
+		# Flash unread badge since new choices are waiting
+		threads_data[thread_id]["unread"] = true
+		_update_thread_buttons()
 
 func _resolve_player_choice(choice: Dictionary) -> void:
-	choice_panel.hide()
-	compose_area.show()
+	var thread_id = choice["target"]
+	threads_data[thread_id]["choices"] = []
+	
+	if thread_id == current_thread:
+		choice_panel.hide()
+		compose_area.show()
 	
 	var msg: PLMessage = PLMessage.new("ghost", choice["text"], "player")
-	_append_message(msg, current_thread)
+	_append_message(msg, choice["target"])
 	
 	if choice["target"] == "cipher":
 		GameState.adjust_cipher_score(choice["score"])
@@ -508,9 +541,6 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 		GameState.set_flag("marcus_warned_about_helix", true)
 	
 	trigger_beat(choice["next"])
-	
-	if choice["next"].begins_with("beat_01_"):
-		trigger_beat("beat_01_merge")
 	
 	if choice["next"].begins_with("beat_02_"):
 		trigger_beat("beat_04")

@@ -54,8 +54,8 @@ func _run_sequence() -> void:
 	await get_tree().create_timer(3.0).timeout
 	_hide_typing()
 	
-	await _marcus("I know we haven't spoken in a long time.\nI know that's on me as much as anything.", 23, 13, 1500)
-	await _marcus("But I didn't know who else to call.\n\nI keep thinking Jess would have known what to do.\nShe always knew what to do.", 23, 13, 1000)
+	await _marcus("I know we haven't spoken in a long time.\nI know that's on me as much as anything.", 23, 13, 5500)
+	await _marcus("But I didn't know who else to call.\n\nI keep thinking Jess would have known what to do.\nShe always knew what to do.", 23, 13, 3000)
 	
 	await _marcus("I'm sorry. That wasn't fair.\nI just need help.\nWill you help me?", 23, 13, 5000)
 	
@@ -65,7 +65,7 @@ func _run_sequence() -> void:
 	await get_tree().create_timer(3.0).timeout
 	_hide_typing()
 	
-	await _ghost("Send me everything you have.", 23, 14, 800)
+	await _ghost("Send me everything you have.", 23, 14, 1800)
 	
 	await _marcus("Thank you.", 23, 14, 2000)
 	

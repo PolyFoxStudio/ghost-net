@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://predesktop"]
+[gd_scene format=3 uid="uid://predesktop"]
 
-[ext_resource type="Script" path="res://scripts/intro/pre_desktop.gd" id="1_pre"]
-[ext_resource type="PackedScene" path="res://scenes/desktop/apps/TerminalWindow.tscn" id="2_term"]
-[ext_resource type="PackedScene" path="res://scenes/desktop/apps/PhantomLinkWindow.tscn" id="3_pl"]
+[ext_resource type="Script" uid="uid://cu6bkpsksy7q3" path="res://scripts/intro/pre_desktop.gd" id="1_pre"]
+[ext_resource type="PackedScene" uid="uid://bxxxx" path="res://scenes/desktop/apps/TerminalWindow.tscn" id="2_term"]
+[ext_resource type="PackedScene" uid="uid://phantomlink" path="res://scenes/desktop/apps/PhantomLinkWindow.tscn" id="3_pl"]
 
-[node name="PreDesktop" type="Control"]
+[node name="PreDesktop" type="Control" unique_id=482307653]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pre")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=733047780]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0392157, 0.0392157, 0.0392157, 1)
 
-[node name="Windows" type="Control" parent="."]
+[node name="Windows" type="Control" parent="." unique_id=1028976037]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,21 +30,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TerminalWindow" parent="Windows" instance=ExtResource("2_term")]
+[node name="TerminalWindow" parent="Windows" unique_id=1670647704 instance=ExtResource("2_term")]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 50.0
 offset_right = 650.0
 offset_bottom = 450.0
 
-[node name="PhantomLinkWindow" parent="Windows" instance=ExtResource("3_pl")]
+[node name="PhantomLinkWindow" parent="Windows" unique_id=1695274229 instance=ExtResource("3_pl")]
 layout_mode = 0
 offset_left = 700.0
 offset_top = 100.0
 offset_right = 1400.0
 offset_bottom = 700.0
 
-[node name="DownloadPanel" type="PanelContainer" parent="."]
+[node name="DownloadPanel" type="PanelContainer" parent="." unique_id=1234072941]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -59,17 +59,17 @@ offset_bottom = -50.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DownloadPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DownloadPanel" unique_id=802062547]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="DownloadPanel/VBoxContainer"]
+[node name="Label" type="Label" parent="DownloadPanel/VBoxContainer" unique_id=1562811268]
 layout_mode = 2
 text = "[↓] GhostNet v2.3.1 — receiving from cipher@phantomlink"
 
-[node name="ProgressBar" type="ProgressBar" parent="DownloadPanel/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="DownloadPanel/VBoxContainer" unique_id=291150521]
 layout_mode = 2
 
-[node name="InstallBtn" type="Button" parent="DownloadPanel/VBoxContainer"]
+[node name="InstallBtn" type="Button" parent="DownloadPanel/VBoxContainer" unique_id=2035473226]
 layout_mode = 2
 text = "[install]"

@@ -31,10 +31,8 @@ func _ready():
 			WindowManager.open_window(pl_scene, "PHANTOMLINK")
 			GlobalSignals.phantomlink_beat_trigger.emit("beat_02")
 		else:
-			# Not just finished intro, but we should restore state if any
-			# Since save/load isn't fully implemented for PhantomLink yet,
-			# just open Terminal.
-			pass
+			# TODO: When save/load is fully implemented, this should restore the last open app instead of defaulting to Terminal
+			WindowManager.open_window(term_scene, "TERMINAL")
 	)
 
 func _setup_desktop():
@@ -52,9 +50,6 @@ func _setup_desktop():
 	# Listen for SENET unlock signal
 	GlobalSignals.senet_unlocked.connect(_on_senet_unlocked)
 	GlobalSignals.senet_unlocked.connect(func(): GlobalSignals.phantomlink_beat_trigger.emit("beat_05"))
-
-	if not GameState.get_flag("intro_just_finished", false):
-		WindowManager.open_window(term_scene, "TERMINAL")
 
 func _process(_delta: float) -> void:
 	if has_node("Watermark"):

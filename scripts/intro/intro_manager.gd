@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 func _skip_intro() -> void:
 	_skipping = true
 	if GameState.player_name == "":
-		GameState.player_name = "Ghost"
+		GameState.player_name = "unknown"
 	_go_to_desktop()
 
 func _go_to_desktop() -> void:
