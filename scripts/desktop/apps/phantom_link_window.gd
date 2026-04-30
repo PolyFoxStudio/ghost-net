@@ -170,7 +170,7 @@ func _process_message_queue(msgs: Array, thread_id: String, beat_id: String) -> 
 		pass
 
 func _get_beat_thread(beat_id: String) -> String:
-	if beat_id.begins_with("beat_04") or beat_id.begins_with("beat_13"): return "marcus"
+	if beat_id.begins_with("beat_04") or beat_id.begins_with("beat_13") or beat_id.begins_with("beat_15"): return "marcus"
 	return "cipher"
 
 func _get_beat_messages(beat_id: String) -> Array:
@@ -472,6 +472,41 @@ func _get_beat_messages(beat_id: String) -> Array:
 				PLMessage.new("marcus", "i'm going to go for a walk", beat_id),
 				PLMessage.new("marcus", "i'll be fine", beat_id)
 			]
+		"beat_15":
+			return [
+				PLMessage.new("marcus", "you found her", beat_id),
+				PLMessage.new("marcus", "you actually found her", beat_id),
+				PLMessage.new("marcus", "i don't know what to say", beat_id),
+				PLMessage.new("marcus", "thank you", beat_id),
+				PLMessage.new("marcus", "i mean it", beat_id),
+				PLMessage.new("marcus", "thank you", beat_id)
+			]
+		"beat_15_A":
+			var msgs: Array = []
+			msgs.append(PLMessage.new("marcus", "i knew something was wrong", beat_id))
+			msgs.append(PLMessage.new("marcus", "i should have pushed harder", beat_id))
+			msgs.append(PLMessage.new("marcus", "but at least now we know", beat_id))
+			msgs.append(PLMessage.new("marcus", "at least now i can bring her home", beat_id))
+			
+			if GameState.is_convergence_high():
+				msgs.append(PLMessage.new("marcus", "and tell whoever helped you… thank you", beat_id, 1.8))
+				msgs.append(PLMessage.new("marcus", "from both of us", beat_id))
+			
+			return msgs
+		"beat_15_B":
+			return [
+				PLMessage.new("marcus", "i need to call her family", beat_id),
+				PLMessage.new("marcus", "and i need to sit down", beat_id),
+				PLMessage.new("marcus", "i'll be okay", beat_id),
+				PLMessage.new("marcus", "thank you for telling me", beat_id)
+			]
+		"beat_15_C":
+			return [
+				PLMessage.new("marcus", "okay", beat_id),
+				PLMessage.new("marcus", "okay", beat_id, 3.0),
+				PLMessage.new("marcus", "i need some time", beat_id),
+				PLMessage.new("marcus", "but thank you", beat_id)
+			]
 		"beat_16":
 			var threshold = GameState.get_cipher_threshold()
 			var msgs = []
@@ -497,8 +532,8 @@ func _get_beat_messages(beat_id: String) -> Array:
 				msgs.append(PLMessage.new("cipher", "don't disappear again", beat_id, 3.0))
 				msgs.append(PLMessage.new("cipher", "i mean it", beat_id))
 				
-				if GameState.marcus_emotional_state >= 0:
-					msgs.append(PLMessage.new("cipher", "the husband", beat_id, 3.0))
+				if GameState.is_convergence_mid():
+					msgs.append(PLMessage.new("cipher", "the husband", beat_id, 1.5))
 					msgs.append(PLMessage.new("cipher", "is he okay", beat_id))
 			elif threshold == "mid":
 				msgs.append(PLMessage.new("cipher", "hey", beat_id))
@@ -545,6 +580,12 @@ func _show_choices_for_beat(beat_id: String) -> void:
 			{"text": "I have leads. I'm following them. Don't do anything reckless.", "next": "beat_13_A", "score": 1, "target": "marcus"},
 			{"text": "Don't contact Helix.", "next": "beat_13_B", "score": 0, "target": "marcus"},
 			{"text": "I'll tell you when I have something.", "next": "beat_13_C", "score": -1, "target": "marcus"}
+		]
+	elif beat_id == "beat_15":
+		choices = [
+			{"text": "I found evidence. She was trying to blow the whistle. They stopped her.", "next": "beat_15_A", "score": 1, "target": "marcus"},
+			{"text": "She's dead. I'm sorry.", "next": "beat_15_B", "score": 0, "target": "marcus"},
+			{"text": "She didn't make it. I have the evidence she was trying to protect.", "next": "beat_15_C", "score": -1, "target": "marcus"}
 		]
 
 	if choices.is_empty(): return
