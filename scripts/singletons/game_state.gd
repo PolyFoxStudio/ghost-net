@@ -43,6 +43,12 @@ func get_cipher_threshold() -> String:
 	elif cipher_relationship_score >= -2: return "mid"
 	else: return "low"
 
+func is_convergence_high() -> bool:
+	return cipher_relationship_score >= 5 and marcus_emotional_state >= 2
+
+func is_convergence_mid() -> bool:
+	return cipher_relationship_score >= 5 and marcus_emotional_state >= 0
+
 func get_tier(target_ip: String) -> int:
 	return countermeasure_tiers.get(target_ip, 0)
 

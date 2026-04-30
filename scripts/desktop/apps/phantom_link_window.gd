@@ -168,6 +168,10 @@ func _process_message_queue(msgs: Array, thread_id: String, beat_id: String) -> 
 		trigger_beat("beat_01_merge")
 	elif beat_id == "beat_01_merge":
 		pass
+	elif beat_id == "beat_10":
+		# After Beat 10 completes, start timers for Beat 10b (file drop) and Beat 10c (idle check)
+		_start_beat10b_timer()
+		_start_beat10c_timer()
 
 func _get_beat_thread(beat_id: String) -> String:
 	if beat_id.begins_with("beat_04") or beat_id.begins_with("beat_13") or beat_id.begins_with("beat_15"): return "marcus"
@@ -622,6 +626,10 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 	var msg: PLMessage = PLMessage.new("ghost", choice["text"], "player")
 	_append_message(msg, choice["target"])
 	
+	# Reset Beat 10c idle timer if player interacts with Cipher thread
+	if choice["target"] == "cipher" and not GameState.get_flag("beat_10c_sent"):
+		GameState.set_flag("beat_10c_sent", true)
+	
 	if choice["target"] == "cipher":
 		GameState.adjust_cipher_score(choice["score"])
 	else:
@@ -649,3 +657,108 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 	
 	if choice["next"].begins_with("beat_02_"):
 		trigger_beat("beat_04")
+
+# ── Beat 10b — Silent File Drop ────────────────────────────────
+func _start_beat10b_timer() -> void:
+	await get_tree().create_timer(30.0).timeout
+	_drop_beat10b_file()
+
+func _drop_beat10b_file() -> void:
+	if not GameState.is_convergence_mid():  # cipher_relationship_score >= 5
+		return
+	if GameState.get_flag("beat_10b_dropped"):
+		return
+	GameState.set_flag("beat_10b_dropped", true)
+	
+	var machine: MachineResource = NetworkManager.get_machine("127.0.0.1")
+	if not machine: 
+		return
+	
+	# Find the ghost home directory
+	var ghost_dir: FileNode = LocalMachineSetup.find_node_in_fs(machine.filesystem, "ghost")
+	if not ghost_dir: 
+		return
+	
+	# Drop note_for_ghost.txt in /home/ghost/
+	var note: FileNode = FileNode.new()
+	note.name = "note_for_ghost.txt"
+	note.type = FileNode.FILE
+	note.content = _get_beat10b_note_content()
+	ghost_dir.add_child(note)
+	
+	# Drop partial log in /tmp/
+	var tmp_dir: FileNode = LocalMachineSetup.find_or_create_dir(machine.filesystem, "tmp")
+	if not tmp_dir:
+		return
+	var partial: FileNode = FileNode.new()
+	partial.name = "kc_trace_partial.log"
+	partial.type = FileNode.FILE
+	partial.content = _get_beat10b_partial_log_content()
+	tmp_dir.add_child(partial)
+
+func _get_beat10b_note_content() -> String:
+	return """ghost —
+
+if you're reading this i'm already offline. which i hate.
+
+the kane trace is almost done. i was pulling his comms metadata when i noticed the ping. gave me time to close cleanly. i think.
+
+i left a partial map in /tmp/kc_trace_partial.log — it's incomplete but it should narrow down where they're routing security operations. might save you an hour.
+
+also i know you won't ask but i'm fine. this isn't the first time i've had to drop off the grid for a bit. it won't be the last.
+
+finish it.
+
+— c
+
+p.s. seriously though. proxychains.
+
+p.p.s. you still run nmap without -sV first. i've seen the logs. please."""
+
+func _get_beat10b_partial_log_content() -> String:
+	return """[TRACE PARTIAL — kc_comms — auto-export on disconnect]
+timestamp: [REDACTED]
+target: kane, director — helix solutions ltd
+method: metadata correlation via smtp relay
+status: INCOMPLETE — session terminated early
+
+routing hops identified: 3 of est. 7
+  hop_01: 10.0.1.1   [helix internal gateway]
+  hop_02: 185.220.x.x [tor exit — netherlands]
+  hop_03: [UNRESOLVED]
+
+notes: security ops likely routing through hop_02 subnet.
+	   cross-reference with nmap scan of 10.0.1.x range.
+	   — c"""
+
+# ── Beat 10c — Cipher Idle Check ────────────────────────────────
+func _start_beat10c_timer() -> void:
+	if GameState.get_cipher_threshold() == "low":
+		return
+	if GameState.get_flag("beat_10c_sent"):
+		return
+	
+	await get_tree().create_timer(45.0).timeout
+	
+	if GameState.get_flag("beat_10c_sent"):
+		return  # player interacted — cancel
+	
+	_fire_beat10c()
+
+func _fire_beat10c() -> void:
+	GameState.set_flag("beat_10c_sent", true)
+	
+	# Queue to Cipher thread, no player choice
+	var msgs: Array[PLMessage] = [
+		PLMessage.new("cipher", "hey", "beat_10c", 0.0),
+		PLMessage.new("cipher", "just checking you're still there", "beat_10c", 1.5),
+		PLMessage.new("cipher", "you go quiet when things get heavy", "beat_10c", 4.0),
+		PLMessage.new("cipher", "i've noticed that", "beat_10c", 1.0),
+		PLMessage.new("cipher", "it's fine. i know it's how you work.", "beat_10c", 1.5),
+		PLMessage.new("cipher", "i just", "beat_10c", 2.0),
+		PLMessage.new("cipher", "you don't have to do that here", "beat_10c", 1.5),
+		PLMessage.new("cipher", "i'm not going anywhere", "beat_10c", 2.5),
+		PLMessage.new("cipher", "okay. carry on. ignore me.", "beat_10c", 3.0),
+	]
+	
+	_process_message_queue(msgs, "cipher", "beat_10c")
