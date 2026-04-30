@@ -2,7 +2,7 @@ extends RefCounted
 
 func execute(args: Array, context: Dictionary):
 	if args.size() == 0:
-		return CommandResult.new("nmap: missing arguments", false)
+		return CommandResult.new("nmap: no target specified\n\nUsage:\n  nmap -sn <target>      Discover live hosts\n  nmap -sV <target>      Scan open ports and services\n\nExample:\n  nmap -sn 185.220.101.0\n  nmap -sV 185.220.101.47", false)
 	
 	var ip = args[args.size() - 1]
 	
