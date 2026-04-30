@@ -6,6 +6,12 @@ func execute(args: Array, context: Dictionary):
 	
 	var ip = args[args.size() - 1]
 	
+	if GameState.get_flag("helix_alert_elevated") and ip in HelixConfig.HELIX_IPS:
+		if not GameState.get_flag("helix_warning_shown"):
+			if context.has("terminal") and context.terminal:
+				context.terminal.print_output("[color=#ff6b35]WARNING: Elevated network monitoring detected on target.[/color]")
+			GameState.set_flag("helix_warning_shown", true)
+	
 	if "-sn" in args:
 		if context.has("terminal"):
 			await context.terminal.get_tree().create_timer(1.5).timeout

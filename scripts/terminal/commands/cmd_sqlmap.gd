@@ -15,6 +15,12 @@ func execute(args: Array, context: Dictionary):
 	if ":" in ip:
 		ip = ip.split(":")[0]
 		
+	if GameState.get_flag("helix_alert_elevated") and ip in HelixConfig.HELIX_IPS:
+		if not GameState.get_flag("helix_warning_shown"):
+			if context.has("terminal") and context.terminal:
+				context.terminal.print_output("[color=#ff6b35]WARNING: Elevated network monitoring detected on target.[/color]")
+			GameState.set_flag("helix_warning_shown", true)
+		
 	var m = NetworkManager.get_machine(ip)
 	if not m or not m.is_scanned:
 		return CommandResult.new("[CRITICAL] target seems down", false)

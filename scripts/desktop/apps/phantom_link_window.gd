@@ -590,6 +590,11 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 		if choice["next"] == "beat_02_A": GameState.beat_02_choice = "watermark"
 		elif choice["next"] == "beat_02_B": GameState.beat_02_choice = "good"
 		elif choice["next"] == "beat_02_C": GameState.beat_02_choice = "tools"
+		
+	if choice["next"] == "beat_12_C":
+		for ip in HelixConfig.HELIX_IPS:
+			GameState.increment_tier(ip)
+		GameState.set_flag("helix_alert_elevated", true)
 	
 	if choice["next"] == "beat_04_A" or choice["next"] == "beat_04_B":
 		GameState.set_flag("marcus_mentioned_diane", true)

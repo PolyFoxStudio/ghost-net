@@ -22,6 +22,14 @@ func adjust_cipher_score(delta: int) -> void:
 func adjust_marcus_state(delta: int) -> void:
 	marcus_emotional_state = clampi(marcus_emotional_state + delta, -5, 5)
 
+func increment_tier(ip: String) -> void:
+	if NetworkManager:
+		var m = NetworkManager.get_machine(ip)
+		if m:
+			m.failed_attempts += 1
+			if CountermeasureManager:
+				CountermeasureManager.check(m)
+
 func get_cipher_threshold() -> String:
 	if cipher_relationship_score >= 5: return "high"
 	elif cipher_relationship_score >= -2: return "mid"
