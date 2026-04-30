@@ -33,6 +33,12 @@ func _ready():
 		else:
 			# TODO: When save/load is fully implemented, this should restore the last open app instead of defaulting to Terminal
 			WindowManager.open_window(term_scene, "TERMINAL")
+			
+		if not GameState.get_flag("beat_03_complete", false):
+			get_tree().create_timer(10.0).timeout.connect(func():
+				if not GameState.get_flag("beat_03_complete", false):
+					GlobalSignals.phantomlink_beat_trigger.emit("beat_03")
+			)
 	)
 
 func _setup_desktop():

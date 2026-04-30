@@ -136,6 +136,7 @@ func _append_message_ui(msg: PLMessage) -> void:
 	message_history.append_text(bb)
 
 func trigger_beat(beat_id: String) -> void:
+	if beat_id == "beat_03" and GameState.get_flag("beat_03_complete", false): return
 	var msgs: Array = _get_beat_messages(beat_id)
 	if msgs.is_empty(): return
 	var thread_id: String = _get_beat_thread(beat_id)
@@ -529,9 +530,9 @@ func _show_choices_for_beat(beat_id: String) -> void:
 		]
 	elif beat_id == "beat_03":
 		choices = [
-			{"text": "I know you know. Just use it.", "next": "beat_03_A", "score": 0, "target": "cipher"},
-			{"text": "Understood. What else is in the toolkit?", "next": "beat_03_B", "score": 1, "target": "cipher"},
-			{"text": "Noted.", "next": "beat_03_C", "score": -1, "target": "cipher"}
+			{"text": "I know how proxychains works.", "next": "beat_03_A", "score": 0, "target": "cipher"},
+			{"text": "Noted. Anything else I should know?", "next": "beat_03_B", "score": 1, "target": "cipher"},
+			{"text": "...", "next": "beat_03_C", "score": -1, "target": "cipher"}
 		]
 	elif beat_id == "beat_04":
 		choices = [
@@ -595,9 +596,10 @@ func _resolve_player_choice(choice: Dictionary) -> void:
 	if choice["next"] == "beat_13_B":
 		GameState.set_flag("marcus_warned_about_helix", true)
 	
+	if choice["next"].begins_with("beat_03_"):
+		GameState.set_flag("beat_03_complete", true)
+		
 	trigger_beat(choice["next"])
 	
 	if choice["next"].begins_with("beat_02_"):
 		trigger_beat("beat_04")
-		var t = get_tree().create_timer(30.0)
-		t.timeout.connect(func(): trigger_beat("beat_03"))
