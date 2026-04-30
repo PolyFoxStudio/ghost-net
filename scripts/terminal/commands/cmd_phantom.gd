@@ -2,10 +2,24 @@ extends RefCounted
 
 func execute(args: Array, context: Dictionary) -> CommandResult:
 	if args.is_empty():
-		return CommandResult.new("phantom v0.9.7 — by Cipher\nUsage: phantom [--trace | --wipe | --ping | --cloak | --map] [target]", false)
+		return CommandResult.new("usage: phantom --help", false)
 
 	var flag = args[0]
 	var target = args[1] if args.size() > 1 else ""
+
+	if flag == "--help":
+		var help_text = """PHANTOM v2.1 — Cipher Systems
+Anti-forensics and network intelligence toolkit.
+For Ghost's eyes only.
+
+  phantom --trace <ip>       Map route to target, identify intermediate hops
+  phantom --ping <ip>        Silent host check — leaves no trace on target
+  phantom --cloak            Mask active session from intrusion detection
+  phantom --wipe             Purge local session logs and forensic traces
+  phantom --map              Render network topology from existing scan data
+
+Type phantom --help to show this reference again."""
+		return CommandResult.new(help_text, true)
 
 	if flag == "--trace":
 		if "kane" in target.to_lower() or "d.kane" in target.to_lower():

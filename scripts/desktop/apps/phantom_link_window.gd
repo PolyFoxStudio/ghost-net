@@ -21,8 +21,8 @@ class PLMessage:
 		delay = d
 
 var threads_data: Dictionary = {
-	"cipher": {"messages": [], "unread": false, "button": null, "choices": []},
-	"marcus": {"messages": [], "unread": false, "button": null, "choices": []}
+	"cipher": {"messages": [], "unread": false, "button": null, "choices": [], "is_typing": false},
+	"marcus": {"messages": [], "unread": false, "button": null, "choices": [], "is_typing": false}
 }
 
 var current_thread: String = "cipher"
@@ -111,11 +111,14 @@ func _render_history(thread_id: String) -> void:
 	message_history.text = ""
 	for msg in threads_data[thread_id]["messages"]:
 		_append_message_ui(msg)
+	
+	if threads_data[thread_id].get("is_typing", false):
+		message_history.append_text("[color=#555577][font_size=10]" + thread_id + " is typing...[/font_size][/color]\n")
 
 func _append_message(msg: PLMessage, thread_id: String) -> void:
 	threads_data[thread_id]["messages"].append(msg)
 	if thread_id == current_thread:
-		_append_message_ui(msg)
+		_render_history(thread_id)
 	
 	if not _is_focused or thread_id != current_thread:
 		threads_data[thread_id]["unread"] = true
@@ -130,7 +133,7 @@ func _append_message_ui(msg: PLMessage) -> void:
 		bb = "[right][color=#555577][font_size=10]you · just now[/font_size][/color]\n[color=#666688]" + msg.text + "[/color][/right]\n\n"
 	elif msg.speaker == "marcus":
 		bb = "[color=#555577][font_size=10]marcus · just now[/font_size][/color]\n[color=#ccaa88]" + msg.text + "[/color]\n\n"
-	message_history.text += bb
+	message_history.append_text(bb)
 
 func trigger_beat(beat_id: String) -> void:
 	var msgs: Array = _get_beat_messages(beat_id)
@@ -140,8 +143,20 @@ func trigger_beat(beat_id: String) -> void:
 
 func _process_message_queue(msgs: Array, thread_id: String, beat_id: String) -> void:
 	for m in msgs:
-		if m.delay > 0:
-			await get_tree().create_timer(m.delay).timeout
+		var delay_time = m.delay
+		if delay_time <= 0:
+			delay_time = max(1.0, m.text.length() * 0.04) # 40ms per char
+			
+		if m.speaker != "ghost":
+			threads_data[thread_id]["is_typing"] = true
+			if thread_id == current_thread:
+				_render_history(thread_id)
+				
+		await get_tree().create_timer(delay_time).timeout
+		
+		if m.speaker != "ghost":
+			threads_data[thread_id]["is_typing"] = false
+			
 		_append_message(m, thread_id)
 	
 	_show_choices_for_beat(beat_id)

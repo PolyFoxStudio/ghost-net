@@ -1,21 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxxxx"]
-	
-	[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxxxx"]
-	[ext_resource type="PackedScene" path="res://scenes/terminal/Terminal.tscn" id="2_xxxxx"]
-	[ext_resource type="Script" path="res://scripts/desktop/terminal_window.gd" id="3_xxxxx"]
-	
-	[node name="TerminalWindow" instance=ExtResource("1_xxxxx")]
-	script = ExtResource("3_xxxxx")
-	app_name = "TERMINAL"
-	
-	[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
-	text = "TERMINAL"
-	
-	[node name="Terminal" parent="VBoxContainer/AppContainer" index="0" instance=ExtResource("2_xxxxx")]
-	layout_mode = 1
-	anchors_preset = 15
-	anchor_right = 1.0
-	anchor_bottom = 1.0
-	grow_horizontal = 2
-	grow_vertical = 2
-	
+[gd_scene format=3 uid="uid://bxxxx"]
+
+[ext_resource type="PackedScene" uid="uid://df727x" path="res://scenes/desktop/GhostWindow.tscn" id="1_xxxxx"]
+[ext_resource type="PackedScene" uid="uid://cxab3kx6m7d8b" path="res://scenes/terminal/Terminal.tscn" id="2_xxxxx"]
+[ext_resource type="Script" uid="uid://cc267dwny5awa" path="res://scripts/desktop/terminal_window.gd" id="3_xxxxx"]
+
+[node name="TerminalWindow" unique_id=391659248 instance=ExtResource("1_xxxxx")]
+script = ExtResource("3_xxxxx")
+app_name = "TERMINAL"
+
+[node name="WindowTitle" parent="VBoxContainer/TitleBar/HBoxContainer" index="1"]
+text = "TERMINAL"
+
+[node name="Terminal" parent="VBoxContainer/AppContainer" index="0" unique_id=1110346834 instance=ExtResource("2_xxxxx")]
+layout_mode = 1
